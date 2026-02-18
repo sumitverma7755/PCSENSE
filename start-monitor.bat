@@ -3,9 +3,11 @@ echo ========================================
 echo PCSensei AI Price Monitor
 echo ========================================
 echo.
-echo Starting AI-powered price monitoring...
+echo Starting AI-powered daily price monitoring...
 echo.
 
-node price-monitor.js
+pushd "%~dp0backend"
+node price-monitor.js --daily
+popd
 
 pause

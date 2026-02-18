@@ -167,16 +167,39 @@
     </div>
 
     <script>
+        const API_BASE_URL = localStorage.getItem('pcsenseiApiBaseUrl') || 'http://localhost:3001';
+
+        async function fetchSummaryText() {
+            const sources = [
+                `${API_BASE_URL}/api/price-summary`,
+                'logs/price-summary.txt'
+            ];
+
+            for (const source of sources) {
+                try {
+                    const response = await fetch(source, {
+                        headers: { 'Cache-Control': 'no-cache' }
+                    });
+
+                    if (!response.ok) continue;
+                    return await response.text();
+                } catch (_) {
+                    // Try next source.
+                }
+            }
+
+            return null;
+        }
+
         async function loadPriceData() {
             try {
-                const response = await fetch('logs/price-summary.txt');
-                
-                if (!response.ok) {
+                const text = await fetchSummaryText();
+
+                if (!text) {
                     displayNoData();
                     return;
                 }
 
-                const text = await response.text();
                 parseSummary(text);
                 
             } catch (error) {
@@ -239,8 +262,24 @@
             const lines = text.split('\n');
             let html = '';
             let currentCategory = '';
+            const ignoredLinePrefixes = [
+                'Summary Statistics:',
+                'Total Updates:',
+                'Price Increases:',
+                'Price Decreases:',
+                'No Change:',
+                'RAM Watch:',
+                'RAM Items Updated:',
+                'Average Change:',
+                'Average Price:'
+            ];
             
             lines.forEach(line => {
+                const trimmedLine = line.trim();
+                if (ignoredLinePrefixes.some(prefix => trimmedLine.startsWith(prefix))) {
+                    return;
+                }
+
                 // Category headers
                 if (line.match(/^[A-Z]+$/)) {
                     currentCategory = line;
@@ -278,9 +317,9 @@
                     <h3>No price data available</h3>
                     <p style="margin-top: 10px;">Run the price monitor to generate updates:</p>
                     <code style="background: #f0f0f0; padding: 10px; display: block; margin: 15px 0; border-radius: 5px;">
-                        node price-monitor.js --once
+                        check-prices-once.bat
                     </code>
-                    <p>Or double-click: <strong>check-prices-once.bat</strong></p>
+                    <p>For automatic daily updates: <strong>setup-daily-price-check.bat 09:00</strong></p>
                 </div>
             `;
             document.getElementById('updatesSection').innerHTML = '';

@@ -138,6 +138,19 @@ class ApiService {
     return scored.sort((a, b) => b.aiScore - a.aiScore || b.price - a.price).slice(0, 3);
   }
 
+  async getLaptopRecommendations(budget, usage, preferences = {}) {
+    return this.recommendLaptop(budget, usage, preferences);
+  }
+
+  formatINR(value) {
+    const amount = Number(value) || 0;
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0,
+    }).format(amount);
+  }
+
   async getDesktopBuild(budget, usage, preferences = {}) {
     const components = await this.getComponents();
     

@@ -1,37 +1,37 @@
-# 🖥️ PCSensei - AI-Powered PC Building Assistant
+﻿# ðŸ–¥ï¸ PCSensei - AI-Powered PC Building Assistant
 
 **Intelligent PC & Laptop Consultant with Real-time Price Monitoring**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen)](https://nodejs.org/)
 [![Price Monitoring](https://img.shields.io/badge/Price%20Updates-Daily-orange)]()
 
 PCSensei is a modern web application that helps users build custom PCs and choose laptops based on their budget, usage requirements, and preferences. Features AI-powered recommendations, compatibility checking, performance predictions, and automatic price monitoring.
 
 ---
 
-## ✨ Features
+## âœ¨ Features
 
-### 🎯 Core Functionality
+### ðŸŽ¯ Core Functionality
 - **Smart Build Generator**: Get personalized PC/Laptop recommendations based on budget and usage
-- **Budget-Based Selection**: From ₹15,000 entry-level to ₹5L+ ultra-high-end builds
+- **Budget-Based Selection**: From â‚¹15,000 entry-level to â‚¹5L+ ultra-high-end builds
 - **Usage Profiles**: Gaming, Content Creation, Coding, Office Work, Student use
 - **Compatibility Checking**: Automatic CPU socket, motherboard, and power supply compatibility
 - **Performance Predictions**: FPS estimates, rendering benchmarks, development metrics
 
-### 🤖 AI Features
+### ðŸ¤– AI Features
 - **AI Chat Assistant**: Ask questions about components and compatibility
 - **Intelligent Price Monitoring**: Automatic daily price updates with market trend analysis
 - **Smart Recommendations**: Multi-factor decision engine for optimal component selection
 
-### 🛡️ Security
+### ðŸ›¡ï¸ Security
 - **Session Management**: 30-minute timeout with auto-logout
 - **Input Validation**: Comprehensive sanitization and XSS protection
 - **Rate Limiting**: Prevents abuse and spam
 - **Authentication**: Secure admin panel with password hashing
 - **Activity Logging**: Complete audit trail
 
-### 📊 Admin Panel
+### ðŸ“Š Admin Panel
 - **Component Management**: CRUD operations for all product categories
 - **Search & Filter**: Real-time search with sorting options
 - **Bulk Operations**: Select and delete multiple items
@@ -39,7 +39,7 @@ PCSensei is a modern web application that helps users build custom PCs and choos
 - **Export/Import**: JSON database backup and restore
 - **Activity Dashboard**: Recent changes and system logs
 
-### 💰 Price Monitoring
+### ðŸ’° Price Monitoring
 - **Automated Updates**: Daily price checks (configurable interval)
 - **Market Analysis**: Considers trends, seasonality, and demand
 - **Price History**: Comprehensive logging of all changes
@@ -48,11 +48,11 @@ PCSensei is a modern web application that helps users build custom PCs and choos
 
 ---
 
-## 🚀 Quick Start
+## ðŸš€ Quick Start
 
 ### Prerequisites
 - **Web Server**: Python 3.x (for local testing) OR any HTTP server
-- **Node.js** (Optional): For price monitoring feature (v14.0.0+)
+- **Node.js** (Backend/API features): v20.0.0+
 - Modern web browser (Chrome, Firefox, Edge, Safari)
 
 ### Installation
@@ -93,50 +93,49 @@ http://localhost:8000/main.html
 ### Admin Panel Access
 
 1. Navigate to: `http://localhost:8000/admin.html`
-2. **Default credentials:**
-   - Username: `admin`
-   - Password: `admin123`
-
-⚠️ **Change default credentials in production!**
+2. Start backend API on `http://localhost:3001`
+3. Configure credentials via environment variables:
+   - `PCSENSEI_ADMIN_USER` (default: `admin`)
+   - `PCSENSEI_ADMIN_PASSWORD` (required)
 
 ---
 
-## 📂 Project Structure
+## ðŸ“‚ Project Structure
 
 ```
 PCSensei/
-├── frontend/                    # User interface (HTML/JS/CSS)
-│   ├── index.html              # Landing page
-│   ├── main.html               # Recommendation wizard
-│   ├── admin.html              # Admin panel
-│   └── price-dashboard.html    # Price tracking UI
-│
-├── backend/                     # Node.js services
-│   ├── api-server.js           # HTTP API server (port 3001)
-│   ├── price-monitor.js        # Price checking engine
-│   ├── add-buy-links.js        # Shopping link generator
-│   ├── update-multi-store-links.js
-│   └── package.json            # Dependencies
-│
-├── shared/                      # Shared resources
-│   ├── data/
-│   │   └── components.json     # Component database (800+ items)
-│   └── logs/
-│       ├── price-updates.log   # JSON format logs
-│       └── price-summary.txt   # Human-readable summary
-│
-├── android/                     # Mobile app (planned)
-│   └── README.md
-│
-└── docs/                        # Documentation
-    ├── AI-IMPROVEMENTS.md
-    ├── README-PRICE-MONITOR.md
-    └── VERCEL-DEPLOY.md
+â”œâ”€â”€ frontend/                    # User interface (HTML/JS/CSS)
+â”‚   â”œâ”€â”€ index.html              # Landing page
+â”‚   â”œâ”€â”€ main.html               # Recommendation wizard
+â”‚   â”œâ”€â”€ admin.html              # Admin panel
+â”‚   â””â”€â”€ price-dashboard.html    # Price tracking UI
+â”‚
+â”œâ”€â”€ backend/                     # Node.js services
+â”‚   â”œâ”€â”€ api-server.js           # HTTP API server (port 3001)
+â”‚   â”œâ”€â”€ price-monitor.js        # Price checking engine
+â”‚   â”œâ”€â”€ add-buy-links.js        # Shopping link generator
+â”‚   â”œâ”€â”€ update-multi-store-links.js
+â”‚   â””â”€â”€ package.json            # Dependencies
+â”‚
+â”œâ”€â”€ shared/                      # Shared resources
+â”‚   â”œâ”€â”€ data/
+â”‚   â”‚   â””â”€â”€ components.json     # Component database (800+ items)
+â”‚   â””â”€â”€ logs/
+â”‚       â”œâ”€â”€ price-updates.log   # JSON format logs
+â”‚       â””â”€â”€ price-summary.txt   # Human-readable summary
+â”‚
+â”œâ”€â”€ android/                     # Mobile app (planned)
+â”‚   â””â”€â”€ README.md
+â”‚
+â””â”€â”€ docs/                        # Documentation
+    â”œâ”€â”€ AI-IMPROVEMENTS.md
+    â”œâ”€â”€ README-PRICE-MONITOR.md
+    â””â”€â”€ VERCEL-DEPLOY.md
 ```
 
 ---
 
-## 🎮 Usage Guide
+## ðŸŽ® Usage Guide
 
 ### For Users
 
@@ -144,7 +143,7 @@ PCSensei/
 2. **Start the wizard**: Click "Start Building"
 3. **Choose form factor**: Desktop PC or Laptop
 4. **Select usage**: Gaming, Content Creation, Coding, etc.
-5. **Set budget**: Use slider (₹15,000 - ₹5,00,000)
+5. **Set budget**: Use slider (â‚¹15,000 - â‚¹5,00,000)
 6. **Set preferences**: CPU (Intel/AMD) and GPU (NVIDIA/AMD) preferences
 7. **Get recommendation**: View complete build with performance metrics
 8. **Ask AI**: Use chat assistant for questions
@@ -163,7 +162,7 @@ PCSensei/
 
 ---
 
-## 🤖 AI Price Monitoring
+## ðŸ¤– AI Price Monitoring
 
 ### Setup
 
@@ -198,6 +197,22 @@ cd backend
 node price-monitor.js
 ```
 
+Daily fixed-time monitoring (default 09:00 local):
+```bash
+cd backend
+node price-monitor.js --daily
+```
+
+Install automatic daily checks with Windows Task Scheduler:
+```bash
+setup-daily-price-check.bat 09:00
+```
+
+Remove it later with:
+```bash
+remove-daily-price-check.bat
+```
+
 ### How It Works
 
 1. **Market Analysis**: Analyzes category-specific trends
@@ -205,7 +220,7 @@ node price-monitor.js
 3. **Demand Patterns**: Considers high/medium/low demand
 4. **Price Bounds**: Limits changes to -5% to +10%
 5. **Database Update**: Automatically updates `components.json`
-6. **Logging**: Creates detailed logs in `logs/` directory
+6. **Logging**: Creates detailed logs in `shared/logs/` (mirrored to `frontend/logs/` and `logs/`)
 
 ### Configuration
 
@@ -243,7 +258,7 @@ async fetchMarketPrice(item, category) {
 
 ---
 
-## 🔐 Security Features
+## ðŸ” Security Features
 
 ### Admin Panel
 - SHA-256 password hashing
@@ -272,58 +287,30 @@ async fetchMarketPrice(item, category) {
 
 ---
 
-## 🎨 Customization
+## Customization
 
 ### Adding Components
 
-**Via Admin Panel:**
+Via Admin Panel:
 1. Login to admin panel
 2. Select category tab
 3. Click "Add New" button
 4. Fill in component details
 5. Save
 
-**Via shared/data/components.json`:
-
-```json
-{
-  "cpus": [
-    {
-      "id": "c101",
-      "name": "New CPU Model",
-      "brand": "Intel",
-      "cores": 16,
-      "socket": "LGA1700",
-      "price": 45000
-    }
-  ]
-}
-```
+Direct JSON edit (source of truth): `shared/data/components.json`
 
 ### Modifying UI
 
-**Colors**: Edit CSS variables in `frontend/main.html` and `frontend/
-**Colors**: Edit CSS variables in `main.html` and `admin.html`
+- Main wizard: `frontend/main.html`
+- Admin panel: `frontend/admin.html`
+- Price dashboard: `frontend/price-dashboard.html`
 
-```css
-:root {
-    --primary-color: #667eea;
-    --accent-color: #764ba2;
-}
-```
-frontend/
-**Budget Range**: Edit in `main.html`:
+### Budget Range
 
-```javascript
-<input type="range" 
-    min="15000"    <!-- Minimum budget -->
-    max="500000"   <!-- Maximum budget -->
-    step="5000">   <!-- Slider increment -->
-```
+Edit slider bounds (`min`, `max`, `step`) in `frontend/main.html`.
 
----
-
-## 📊 Database Structure
+## ðŸ“Š Database Structure
 
 ### Component Categories
 - **Laptops** (104 items): Complete laptop systems
@@ -352,7 +339,7 @@ frontend/
 
 ---
 
-## 🛠️ Development
+## ðŸ› ï¸ Development
 
 ### Local Development
 
@@ -373,27 +360,15 @@ python -m http.server 8000
 
 ### Adding New Features
 
-**Example: New Component Type**
-shared/
-1. Add to `data/components.json`:
-```json
-{
-  "monitors": [
-    {
-      "id": "mon1",
-      "name": "Sample Monitor",
-      "price": 15000
-    }
-  ]
-}
-```
-frontend/admin.html`
-3. Update recommendation engine in `frontend/.html`
-3. Update recommendation engine in `main.html`
+Example workflow for a new category:
+1. Update `shared/data/components.json`
+2. Update admin forms/table rendering in `frontend/admin.html`
+3. Update recommendation logic in `frontend/main.html`
+4. Run backend data sync scripts if needed
 
 ---
 
-## 🐛 Troubleshooting
+## ðŸ› Troubleshooting
 
 ### Common Issues
 
@@ -404,17 +379,17 @@ frontend/admin.html`
 **Issue: Admin panel won't login**
 - **Solution**: Check browser console for errors
 - Clear browser cache and cookies
-- Verify credentials: `admin` / `admin123`
+- Verify backend API is running and `PCSENSEI_ADMIN_PASSWORD` is configured
 
 **Issue: Price monitor not working**
-- **Solution**: Install Node.js 14+ from nodejs.org
+- **Solution**: Install Node.js 20+ from nodejs.org
 - Run: `node --version` to verify
-- Check logs in `logs/` directory
+- Check logs in `shared/logs/` (mirrored to `frontend/logs/` and `logs/`)
 
 **Issue: Components not displaying**
 - **Solution**: Check browser console (F12)
 - Verify HTTP server is running
-- Check `shared/data/components.json` format
+- Check `shared/data/components.json` (and mirrored `frontend/data/components.json`) format
 
 ### Debug Mode
 
@@ -427,7 +402,7 @@ location.reload();
 
 ---
 
-## 📝 API Documentation
+## ðŸ“ API Documentation
 
 ### Main Application Functions
 
@@ -463,7 +438,7 @@ function logout()
 
 ---
 
-## 🤝 Contributing
+## ðŸ¤ Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -481,13 +456,13 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## 📜 License
+## ðŸ“œ License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 Acknowledgments
+## ðŸ™ Acknowledgments
 
 - Built with vanilla JavaScript (no frameworks!)
 - Icons from Font Awesome
@@ -496,7 +471,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📧 Support
+## ðŸ“§ Support
 
 For issues, questions, or suggestions:
 
@@ -506,7 +481,7 @@ For issues, questions, or suggestions:
 
 ---
 
-## 🗺️ Roadmap
+## ðŸ—ºï¸ Roadmap
 
 ### Upcoming Features
 - [ ] User accounts and saved builds
@@ -522,7 +497,7 @@ For issues, questions, or suggestions:
 
 ---
 
-## 📸 Screenshots
+## ðŸ“¸ Screenshots
 
 ### Main Application
 ![Main Interface](https://via.placeholder.com/800x400?text=PCSensei+Main+Interface)
@@ -535,7 +510,7 @@ For issues, questions, or suggestions:
 
 ---
 
-## 💻 Tech Stack
+## ðŸ’» Tech Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **Styling**: Tailwind CSS (CDN)
@@ -546,7 +521,7 @@ For issues, questions, or suggestions:
 
 ---
 
-## 📊 Statistics
+## ðŸ“Š Statistics
 
 - **800+** components in database
 - **5** usage profiles
@@ -557,6 +532,6 @@ For issues, questions, or suggestions:
 
 ---
 
-**Built with ❤️ for PC building enthusiasts**
+**Built with â¤ï¸ for PC building enthusiasts**
 
 *Last updated: November 2025*

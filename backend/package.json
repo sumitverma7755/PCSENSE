@@ -2,12 +2,15 @@
   "name": "pcsensei-price-monitor",
   "version": "1.0.0",
   "description": "AI-powered price monitoring system for PCSensei",
-  "main": "price-monitor.js",
+  "main": "api-server.js",
   "scripts": {
-    "start": "node price-monitor.js",
+    "start": "node api-server.js",
+    "api": "node api-server.js",
     "check-once": "node price-monitor.js --once",
-    "serve": "python -m http.server 8000",
-    "monitor": "node price-monitor.js"
+    "monitor": "node price-monitor.js",
+    "monitor-daily": "node price-monitor.js --daily",
+    "schedule-daily": "node setup-daily-task.js",
+    "unschedule-daily": "node remove-daily-task.js"
   },
   "keywords": [
     "price-monitoring",
@@ -17,6 +20,6 @@
   "author": "PCSensei",
   "license": "MIT",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=20.0.0"
   }
 }

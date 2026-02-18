@@ -1,51 +1,65 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
-// Read the components database
-const data = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'shared', 'data', 'components.json'), 'utf8'));
+const SOURCE_DATA_PATH = path.join(__dirname, '..', 'shared', 'data', 'components.json');
+const MIRROR_DATA_PATHS = [
+    path.join(__dirname, '..', 'data', 'components.json'),
+    path.join(__dirname, '..', 'frontend', 'data', 'components.json')
+];
+
+function writeDatabaseEverywhere(data) {
+    const serialized = JSON.stringify(data, null, 2);
+    const targets = [SOURCE_DATA_PATH, ...MIRROR_DATA_PATHS];
+
+    for (const target of targets) {
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, serialized, 'utf8');
+    }
+}
+
+// Read the component database from the source-of-truth path.
+const data = JSON.parse(fs.readFileSync(SOURCE_DATA_PATH, 'utf8'));
 
 function generateAmazonLink(name, category = '') {
-    // Clean up the name for better search results
     let searchTerm = name.replace(/ \/ /g, ' ').replace(/\//g, ' ');
-    // Add category context for better results
     if (category) {
         searchTerm = `${searchTerm} ${category}`;
     }
-    const encoded = encodeURIComponent(searchTerm);
-    return `https://www.amazon.in/s?k=${encoded}`;
+
+    return `https://www.amazon.in/s?k=${encodeURIComponent(searchTerm)}`;
 }
 
-// Add buy links to all categories
 const categories = {
-    'laptops': 'laptop',
-    'cpus': 'processor',
-    'gpus': 'graphics card',
-    'mobos': 'motherboard',
-    'ram': 'RAM memory',
-    'storage': 'SSD',
-    'psu': 'power supply',
-    'case': 'PC case'
+    laptops: 'laptop',
+    cpus: 'processor',
+    gpus: 'graphics card',
+    mobos: 'motherboard',
+    ram: 'RAM memory',
+    storage: 'SSD',
+    psu: 'power supply',
+    case: 'PC case'
 };
 
 let totalAdded = 0;
 let totalProducts = 0;
 
 for (const [categoryKey, categoryName] of Object.entries(categories)) {
-    if (data[categoryKey]) {
-        for (const item of data[categoryKey]) {
-            totalProducts++;
-            if (!item.buyLink || item.buyLink === '') {
-                item.buyLink = generateAmazonLink(item.name, categoryName);
-                totalAdded++;
-                console.log(`Added link for ${categoryKey}: ${item.name.substring(0, 50)}...`);
-            }
+    if (!Array.isArray(data[categoryKey])) {
+        continue;
+    }
+
+    for (const item of data[categoryKey]) {
+        totalProducts += 1;
+        if (!item.buyLink || item.buyLink === '') {
+            item.buyLink = generateAmazonLink(item.name, categoryName);
+            totalAdded += 1;
+            console.log(`Added link for ${categoryKey}: ${(item.name || '').substring(0, 50)}...`);
         }
     }
 }
 
-// Save the updated database
-fs.writeFileSync('data/components.json', JSON.stringify(data, null, 2), 'utf8');
+writeDatabaseEverywhere(data);
 
-console.log(`\n✅ Successfully added ${totalAdded} Amazon buy links!`);
-console.log(`📦 Total products in database: ${totalProducts}`);
-console.log(`🔗 Products with buy links: ${totalProducts}`);
+console.log(`\nSuccessfully added ${totalAdded} Amazon buy links.`);
+console.log(`Total products in database: ${totalProducts}`);
+console.log('Synchronized shared/data plus frontend/data and root data mirrors.');

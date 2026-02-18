@@ -3,7 +3,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 
 # Logs
 logs/
@@ -37,4 +36,9 @@ __pycache__/
 *.bak
 *.old
 
+# Build outputs
+build/
+**/build/
+
 .gradle/
+.vercel

@@ -1064,12 +1064,30 @@
             if (dbLoaded && db) return db;
             
             try {
-                const response = await fetch(`data/components.json?v=${Date.now()}`, {
-                    headers: { 'Cache-Control': 'no-cache' }
-                });
-                if (!response.ok) throw new Error('Failed to load components database');
-                
-                const data = await response.json();
+                const sources = [
+                    `data/components.json?v=${Date.now()}`,
+                    `http://localhost:3001/api/components?v=${Date.now()}`
+                ];
+
+                let data = null;
+                let lastError = null;
+
+                for (const source of sources) {
+                    try {
+                        const response = await fetch(source, {
+                            headers: { 'Cache-Control': 'no-cache' }
+                        });
+                        if (!response.ok) throw new Error(`Failed to load from ${source}`);
+                        data = await response.json();
+                        break;
+                    } catch (error) {
+                        lastError = error;
+                    }
+                }
+
+                if (!data) {
+                    throw lastError || new Error('Failed to load components database');
+                }
                 
                 // Validate database structure
                 const requiredKeys = ['laptops', 'cpus', 'gpus', 'mobos', 'ram', 'storage', 'psu', 'case'];
@@ -1963,7 +1981,8 @@
                     
                     // Brand preference
                     if (prefs.gpu !== 'Any') {
-                        if (laptop.brand === prefs.gpu) score += 10;
+                        const gpuText = `${laptop.gpu || ''} ${laptop.spec || ''}`.toUpperCase();
+                        if (gpuText.includes(prefs.gpu.toUpperCase())) score += 10;
                     }
                     
                     return { ...laptop, aiScore: score };
@@ -1995,27 +2014,44 @@
             }
 
             // DESKTOP LOGIC
+            const sortedCpus = [...(db.cpus || [])].sort((a, b) => a.price - b.price);
+            const sortedGpus = [...(db.gpus || [])].sort((a, b) => a.price - b.price);
+            const sortedDiscreteGpus = sortedGpus.filter(g => g.price > 0);
+            const sortedMobos = [...(db.mobos || [])].sort((a, b) => a.price - b.price);
+            const sortedRam = [...(db.ram || [])].sort((a, b) => a.price - b.price);
+            const sortedStorage = [...(db.storage || [])].sort((a, b) => a.price - b.price);
+            const sortedPsu = [...(db.psu || [])].sort((a, b) => a.price - b.price);
+            const sortedCases = [...(db.case || [])].sort((a, b) => a.price - b.price);
+            const integratedGpu = sortedGpus.find(g => g.price === 0) || sortedGpus[0];
+
             let cpu, gpu, mobo, ram, storage, psu, userCase;
             let buildReason = "";
 
             if (budget <= 20000) {
-                cpu = db.cpus.find(c => c.name.includes('Athlon')) || db.cpus[0];
-                gpu = db.gpus.find(g => g.price === 0); 
-                mobo = db.mobos.find(m => m.socket === 'AM4' && m.price < 4000) || db.mobos[0];
-                ram = db.ram.find(r => r.price < 1500) || db.ram[0]; 
-                storage = db.storage[0]; 
-                psu = db.psu[0];
-                userCase = db.case[0];
+                cpu = sortedCpus.find(c => c.name.includes('Athlon') && (c.integrated || c.igpu))
+                    || sortedCpus.find(c => c.integrated || c.igpu)
+                    || sortedCpus[0];
+                gpu = integratedGpu;
+                mobo = sortedMobos.find(m => m.socket === cpu.socket && m.price <= budget * 0.22)
+                    || sortedMobos.find(m => m.socket === cpu.socket)
+                    || sortedMobos[0];
+                ram = sortedRam.find(r => r.price <= budget * 0.12)
+                    || sortedRam[0];
+                storage = sortedStorage[0];
+                psu = sortedPsu[0];
+                userCase = sortedCases[0];
                 buildReason = "For this ultra-budget entry point, we used an AMD Athlon APU. It handles web browsing, movies, and office work perfectly for a very low cost.";
             }
             else if (budget < 45000) {
-                cpu = db.cpus.find(c => c.name.includes('5600G')) || db.cpus[0];
-                gpu = db.gpus.find(g => g.price === 0); 
-                mobo = db.mobos.filter(m => m.socket === cpu.socket).sort((a,b) => a.price - b.price)[0];
-                ram = db.ram.find(r => r.name.includes('8GB')) || db.ram[1]; 
-                storage = db.storage[0];
-                psu = db.psu[0];
-                userCase = db.case[0];
+                cpu = sortedCpus.find(c => c.name.includes('5600G'))
+                    || sortedCpus.find(c => c.integrated || c.igpu)
+                    || sortedCpus[0];
+                gpu = integratedGpu;
+                mobo = sortedMobos.find(m => m.socket === cpu.socket) || sortedMobos[0];
+                ram = sortedRam.find(r => r.name.includes('8GB') || r.name.includes('16GB')) || sortedRam[0];
+                storage = sortedStorage[0];
+                psu = sortedPsu[0];
+                userCase = sortedCases[0];
                 buildReason = "Given the tight budget, we selected a Processor with high-performance Integrated Graphics (APU). This allows you to game and work without buying an expensive graphics card right now.";
             } 
             else {
@@ -2080,7 +2116,7 @@
                 cpu = scoredCPUs.sort((a,b) => {
                     if (Math.abs(a.cpuScore - b.cpuScore) > 5) return b.cpuScore - a.cpuScore;
                     return b.price - a.price;
-                })[0] || db.cpus[2];
+                })[0] || sortedCpus.find(c => !c.integrated) || sortedCpus[0];
 
                 let gpuList = db.gpus.filter(g => {
                     const inBudget = g.price <= gpuBudget * 1.3 && g.price >= gpuBudget * 0.5 && g.price > 0;
@@ -2134,9 +2170,10 @@
                 gpu = scoredGPUs.sort((a,b) => {
                     if (Math.abs(a.gpuScore - b.gpuScore) > 5) return b.gpuScore - a.gpuScore;
                     return b.price - a.price;
-                })[0] || db.gpus[1];
+                })[0] || sortedDiscreteGpus[0] || integratedGpu;
 
                 let validMobos = db.mobos.filter(m => m.socket === cpu.socket);
+                if (validMobos.length === 0) validMobos = sortedMobos;
                 validMobos.sort((a,b) => a.price - b.price); // Sort by price ascending
                 
                 if (budget > 300000) {
@@ -2160,8 +2197,8 @@
                 // Smart RAM selection based on motherboard and usage
                 let validRam = db.ram.filter(r => {
                     // Check DDR generation compatibility
-                    if (mobo.name.includes('DDR5')) return r.name.includes('DDR5');
-                    if (mobo.name.includes('DDR4')) return r.name.includes('DDR4');
+                    if ((mobo.type || mobo.name || '').includes('DDR5')) return r.name.includes('DDR5');
+                    if ((mobo.type || mobo.name || '').includes('DDR4')) return r.name.includes('DDR4');
                     return true;
                 });
                 if (validRam.length === 0) validRam = db.ram;
@@ -2195,7 +2232,7 @@
                         ram = targetRam.sort((a, b) => a.price - b.price)[Math.floor(targetRam.length / 2)];
                     }
                 } else {
-                    ram = validRam.sort((a, b) => b.price - a.price)[0];
+                    ram = validRam.sort((a, b) => a.price - b.price)[Math.floor(validRam.length / 2)] || validRam[0];
                 }
                 if (ram.price < 1500) ram = validRam[1] || validRam[0];
 
@@ -2227,7 +2264,7 @@
                     // Choose mid-range option for best value
                     storage = storageOptions.sort((a, b) => a.price - b.price)[Math.floor(storageOptions.length / 2)] || storageOptions[0];
                 } else {
-                    storage = db.storage[2];
+                    storage = sortedStorage[Math.min(2, sortedStorage.length - 1)] || sortedStorage[0];
                 }
 
                 // Intelligent PSU selection based on component power draw
@@ -2271,47 +2308,79 @@
                     psu = validPSUs.sort((a,b) => a.price - b.price)[Math.floor(validPSUs.length / 3)] || validPSUs[0];
                 }
 
-                if (budget > 350000) userCase = db.case[7];
-                else if (budget > 200000) userCase = db.case[6];
-                else if (budget > 100000) userCase = db.case[4];
-                else userCase = db.case[2];
+                userCase = sortedCases.find(c => c.price <= budget * 0.06 && c.price >= budget * 0.03)
+                    || sortedCases[Math.floor(sortedCases.length / 3)]
+                    || sortedCases[0];
 
                 // --- CRITICAL BUDGET CHECK & DOWNGRADE LOGIC ---
                 let totalCost = cpu.price + gpu.price + mobo.price + ram.price + storage.price + psu.price + userCase.price;
-                
-                // If Over Budget, Downgrade GPU first (most expensive part usually)
-                while (totalCost > budget) {
-                    // Try downgrading GPU
-                    let currentGpuIndex = db.gpus.findIndex(g => g.id === gpu.id);
-                    if (currentGpuIndex > 1) { // Don't go below entry discrete
-                        let nextGpu = db.gpus[currentGpuIndex - 1];
-                        if (nextGpu.price < gpu.price) {
-                            gpu = nextGpu;
-                            totalCost = cpu.price + gpu.price + mobo.price + ram.price + storage.price + psu.price + userCase.price;
-                            continue;
+                const getNextCheaper = (currentPart, sortedParts) => {
+                    const currentPrice = currentPart?.price ?? 0;
+                    let candidate = null;
+                    for (const part of sortedParts) {
+                        if ((part?.price ?? 0) < currentPrice) {
+                            candidate = part;
+                        } else {
+                            break;
                         }
                     }
-                    
-                    // If GPU can't go lower or still over budget, try CPU
-                    let currentCpuIndex = db.cpus.findIndex(c => c.id === cpu.id);
-                    if (currentCpuIndex > 2) {
-                         let nextCpu = db.cpus[currentCpuIndex - 1];
-                         // Ensure socket compatibility matches mobo or re-pick mobo
-                         if (nextCpu.socket === mobo.socket && nextCpu.price < cpu.price) {
-                             cpu = nextCpu;
-                             totalCost = cpu.price + gpu.price + mobo.price + ram.price + storage.price + psu.price + userCase.price;
-                             continue;
-                         }
+                    return candidate;
+                };
+                
+                // If Over Budget, Downgrade GPU first (most expensive part usually)
+                let budgetGuard = 0;
+                while (totalCost > budget && budgetGuard < 20) {
+                    let changed = false;
+
+                    const nextGpu = getNextCheaper(gpu, sortedDiscreteGpus);
+                    if (nextGpu && nextGpu.price < gpu.price) {
+                        gpu = nextGpu;
+                        changed = true;
+                    } else {
+                        const sameSocketCpus = sortedCpus.filter(c => !c.integrated && c.socket === mobo.socket);
+                        const nextCpu = getNextCheaper(cpu, sameSocketCpus);
+                        if (nextCpu && nextCpu.price < cpu.price) {
+                            cpu = nextCpu;
+                            changed = true;
+                        }
                     }
 
-                    // Last Resort: Downgrade RAM/Storage/Case to basic
-                    if (ram.price > 2000) ram = validRam[0];
-                    if (storage.price > 3000) storage = db.storage[0];
-                    if (userCase.price > 2000) userCase = db.case[0];
-                    
-                    // Re-calc and break to avoid infinite loop if impossible
+                    if (!changed && ram.price > 2000) {
+                        const nextRam = getNextCheaper(ram, [...validRam].sort((a, b) => a.price - b.price));
+                        if (nextRam) {
+                            ram = nextRam;
+                            changed = true;
+                        }
+                    }
+
+                    if (!changed && storage.price > 3000) {
+                        const nextStorage = getNextCheaper(storage, sortedStorage);
+                        if (nextStorage) {
+                            storage = nextStorage;
+                            changed = true;
+                        }
+                    }
+
+                    if (!changed && userCase.price > 2000) {
+                        const nextCase = getNextCheaper(userCase, sortedCases);
+                        if (nextCase) {
+                            userCase = nextCase;
+                            changed = true;
+                        }
+                    }
+
+                    const cpuTdpNow = parseInt(cpu.tdp?.match(/\d+/)?.[0] || 65);
+                    const gpuTdpNow = parseInt(gpu.tdp?.match(/\d+/)?.[0] || 150);
+                    const requiredNow = Math.ceil((cpuTdpNow + gpuTdpNow + 100) * 1.2);
+                    const validPsuNow = sortedPsu.filter(p => parseInt(p.name.match(/\d+W/)?.[0] || 500) >= requiredNow);
+                    if (validPsuNow.length > 0 && validPsuNow[0].price < psu.price) {
+                        psu = validPsuNow[0];
+                        changed = true;
+                    }
+
                     totalCost = cpu.price + gpu.price + mobo.price + ram.price + storage.price + psu.price + userCase.price;
-                    break; 
+                    if (!changed) break;
+                    budgetGuard++;
                 }
 
                 // Generate intelligent build reasoning with validation
@@ -2320,7 +2389,7 @@
                 
                 // CPU-GPU balance check
                 if (usage === 'gaming') {
-                    const cpuGpuRatio = cpu.price / gpu.price;
+                    const cpuGpuRatio = cpu.price / Math.max(gpu.price, 1);
                     if (cpuGpuRatio > 1.8) warnings.push('CPU is significantly more expensive than GPU - may not be optimal for gaming');
                     if (cpuGpuRatio < 0.25) warnings.push('GPU may experience bottleneck with this CPU at high resolutions');
                 }
@@ -2343,7 +2412,7 @@
                 buildReason += `💻 Core Components:\n`;
                 buildReason += `• CPU: ${cpu.name} (${cpu.cores || 'Multi'}-core${cpu.threads ? ', ' + cpu.threads + ' threads' : ''})\n`;
                 buildReason += `• GPU: ${gpu.name} (${gpu.vram || 'Dedicated graphics'})\n`;
-                buildReason += `• Motherboard: ${mobo.socket} socket with ${mobo.name.includes('DDR5') ? 'DDR5' : 'DDR4'} support\n\n`;
+                buildReason += `• Motherboard: ${mobo.socket} socket with ${(mobo.type || mobo.name || '').includes('DDR5') ? 'DDR5' : 'DDR4'} support\n\n`;
                 
                 if (usage === 'gaming') {
                     buildReason += `🎮 Gaming Performance:\n`;
@@ -2584,7 +2653,7 @@
             if (/compatib|work.*together|match|fit|socket|support/i.test(txt)) {
                 if (state.currentBuild && state.currentBuild.type === 'desktop') {
                     const build = state.currentBuild.data;
-                    return `✅ Compatibility Check for your build:\n\n🔌 CPU-Mobo: ${build.cpu.socket} socket - ✓ Compatible\n💾 RAM-Mobo: DDR${build.mobo.name.includes('DDR5') ? '5' : '4'} - ✓ Compatible\n⚡ PSU: ${build.psu.name} - ✓ Adequate for components\n📦 All components fit standard ATX cases\n\nEverything looks good! Any specific concerns?`;
+                    return `✅ Compatibility Check for your build:\n\n🔌 CPU-Mobo: ${build.cpu.socket} socket - ✓ Compatible\n💾 RAM-Mobo: DDR${(build.mobo.type || build.mobo.name || '').includes('DDR5') ? '5' : '4'} - ✓ Compatible\n⚡ PSU: ${build.psu.name} - ✓ Adequate for components\n📦 All components fit standard ATX cases\n\nEverything looks good! Any specific concerns?`;
                 }
                 return "🔍 To check compatibility, I need to know:\n• CPU socket type (AM4, AM5, LGA1700, etc.)\n• Motherboard chipset\n• RAM generation (DDR4/DDR5)\n• PSU wattage vs. component TDP\n\nGenerate a build first, or tell me your components!";
             }

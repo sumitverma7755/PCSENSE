@@ -1,9 +1,12 @@
 @echo off
 echo ==========================================
-echo   PCSensei - One-time Price Check
+echo   PCSensei - Remove Daily Price Check Task
 echo ==========================================
 echo.
+
 pushd "%~dp0backend"
-node price-monitor.js --once
+node remove-daily-task.js
 popd
+
+echo.
 pause
