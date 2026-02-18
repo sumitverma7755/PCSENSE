@@ -1,12 +1,9 @@
 apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
 react {
-    /* Folders */
-    root = file("../../")
-    reactNativeDir = file("../../node_modules/react-native")
-    codegenDir = file("../../node_modules/@react-native/codegen")
-    cliFile = file("../../node_modules/react-native/cli.js")
+    hermesCommand = "$rootDir/node_modules/react-native/sdks/hermes/build/bin/hermesc"
 }
 
 def enableProguardInReleaseBuilds = false
@@ -14,18 +11,18 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
     ndkVersion rootProject.ext.ndkVersion
-
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.pcsensei"
+
     defaultConfig {
         applicationId "com.pcsensei"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
-
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -34,7 +31,6 @@ android {
             keyPassword 'android'
         }
     }
-
     buildTypes {
         debug {
             signingConfig signingConfigs.debug

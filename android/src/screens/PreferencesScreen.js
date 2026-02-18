@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApiService from '../services/ApiService';
 
@@ -8,6 +8,7 @@ const PreferencesScreen = ({navigation, route}) => {
   const [cpuPref, setCpuPref] = useState('any');
   const [gpuPref, setGpuPref] = useState('any');
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -40,7 +41,7 @@ const PreferencesScreen = ({navigation, route}) => {
         });
       }
     } catch (error) {
-      alert('Error generating recommendations. Please try again.');
+      setErrorMsg('Error generating recommendations. Please check your internet connection and try again.');
       console.error(error);
     } finally {
       setLoading(false);
@@ -48,16 +49,27 @@ const PreferencesScreen = ({navigation, route}) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Set Preferences</Text>
-      <Text style={styles.subtitle}>
-        Choose your preferred brands (optional)
-      </Text>
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>Set Preferences</Text>
+        <Text style={styles.subtitle}>
+          Choose your preferred brands (optional)
+        </Text>
 
-      {buildType === 'desktop' && (
-        <>
-          <Text style={styles.sectionTitle}>CPU Brand</Text>
-          <View style={styles.optionsRow}>
+        {/* Summary Card */}
+        <View style={styles.summaryCard}>
+          <Text style={styles.summaryTitle}>Your Selections</Text>
+          <Text>Build Type: <Text style={styles.summaryValue}>{buildType}</Text></Text>
+          <Text>Usage: <Text style={styles.summaryValue}>{usage}</Text></Text>
+          <Text>Budget: <Text style={styles.summaryValue}>₹{budget}</Text></Text>
+          <Text>CPU Brand: <Text style={styles.summaryValue}>{cpuPref}</Text></Text>
+          <Text>GPU Brand: <Text style={styles.summaryValue}>{gpuPref}</Text></Text>
+        </View>
+
+        {buildType === 'desktop' && (
+          <>
+            <Text style={styles.sectionTitle}>CPU Brand</Text>
+            <View style={styles.optionsRow}>
             <TouchableOpacity
               style={[styles.option, cpuPref === 'any' && styles.selectedOption]}
               onPress={() => setCpuPref('any')}>
@@ -138,6 +150,26 @@ const PreferencesScreen = ({navigation, route}) => {
         )}
       </TouchableOpacity>
     </ScrollView>
+      {/* Loading Overlay */}
+      <Modal visible={loading} transparent animationType="fade">
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator size="large" color="#667eea" />
+          <Text style={styles.loadingText}>Generating recommendations...</Text>
+        </View>
+      </Modal>
+      {/* Error Modal */}
+      <Modal visible={!!errorMsg} transparent animationType="fade" onRequestClose={()=>setErrorMsg('')}>
+        <View style={styles.errorOverlay}>
+          <View style={styles.errorBox}>
+            <Text style={styles.errorTitle}>Error</Text>
+            <Text style={styles.errorMsg}>{errorMsg}</Text>
+            <TouchableOpacity style={styles.errorButton} onPress={()=>setErrorMsg('')}>
+              <Text style={styles.errorButtonText}>Dismiss</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+    </View>
   );
 };
 
@@ -227,6 +259,93 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    shadowColor: '#667eea',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+      loadingOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.25)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 10,
+      },
+      loadingText: {
+        marginTop: 20,
+        fontSize: 18,
+        color: '#667eea',
+        fontWeight: 'bold',
+      },
+      errorOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.35)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 20,
+      },
+      errorBox: {
+        backgroundColor: '#fff',
+        borderRadius: 16,
+        padding: 30,
+        alignItems: 'center',
+        width: '80%',
+        shadowColor: '#333',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 5,
+      },
+      errorTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#e53e3e',
+        marginBottom: 10,
+      },
+      errorMsg: {
+        fontSize: 16,
+        color: '#333',
+        marginBottom: 20,
+        textAlign: 'center',
+      },
+      errorButton: {
+        backgroundColor: '#e53e3e',
+        borderRadius: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+      },
+      errorButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
+      },
+      summaryCard: {
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 20,
+        shadowColor: '#667eea',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 2,
+      },
+      summaryTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#667eea',
+        marginBottom: 8,
+      },
     marginBottom: 30,
   },
   generateButtonText: {

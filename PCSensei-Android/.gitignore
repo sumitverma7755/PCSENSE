@@ -1,0 +1,71 @@
+# Android Build Files
+*.iml
+.gradle
+/local.properties
+/.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.ap_
+*.aab
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# IntelliJ
+*.iml
+.idea/
+
+# Keystore files
+*.jks
+*.keystore
+
+# Android Studio
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+# NDK
+obj/
+.externalNativeBuild/
+
+# Generated files
+bin/
+gen/
+out/
+
+# Lint
+lint-report.html
+lint-report_files/
+lint-results.xml
+
+# Proguard
+proguard/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*~
+*.swp
+*.bak
+

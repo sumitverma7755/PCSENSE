@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Category -->
+        <TextView
+            android:id="@+id/category_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPU"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Component Name -->
+        <TextView
+            android:id="@+id/component_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AMD Ryzen 5 5600X"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Spec -->
+        <TextView
+            android:id="@+id/component_spec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6 cores, 12 threads, 3.7GHz"
+            android:textSize="14sp"
+            android:textColor="?android:textColorSecondary"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Price and Shop Button Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/component_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="₹18,000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#4CAF50" />
+
+            <Button
+                android:id="@+id/shop_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy Now"
+                android:textSize="14sp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
