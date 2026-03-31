@@ -425,7 +425,7 @@
                 
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#" onclick="goHome()" class="text-slate-600 hover:text-blue-600 transition font-medium">Home</a>
-                    <a href="#builder" onclick="startWizard()" class="text-slate-600 hover:text-blue-600 transition font-medium">Builder</a>
+                    <a href="#builder" onclick="openPremiumWizard()" class="text-slate-600 hover:text-blue-600 transition font-medium">Builder</a>
                     <a href="admin.html" class="text-slate-600 hover:text-blue-600 transition font-medium flex items-center gap-1">
                         <i class="fa-solid fa-user-shield"></i> Admin
                     </a>
@@ -623,7 +623,7 @@
                         </div>
                     </div>
                     <div class="text-center mt-10">
-                        <button onclick="startWizard()" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition shadow-lg shadow-blue-500/25">
+                        <button onclick="openPremiumWizard()" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition shadow-lg shadow-blue-500/25">
                             Start now <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -665,7 +665,7 @@
                 
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Guided Builder Mode -->
-                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="startWizard()">
+                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="openPremiumWizard()">
                         <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star"></i> Recommended
                         </div>
@@ -1134,7 +1134,7 @@
                     <div>
                         <h4 class="font-bold mb-4">Build Tools</h4>
                         <ul class="space-y-2 text-slate-400 text-sm">
-                            <li><a href="#" onclick="startWizard()" class="hover:text-white transition">Guided Builder</a></li>
+                            <li><a href="#" onclick="openPremiumWizard()" class="hover:text-white transition">Guided Builder</a></li>
                             <li><a href="#" onclick="startCustomBuilder()" class="hover:text-white transition">Manual Builder</a></li>
                             <li><a href="price-dashboard.html" class="hover:text-white transition">Price Tracker</a></li>
                             <li><a href="#" onclick="toggleAI()" class="hover:text-white transition">Ask an Expert</a></li>
@@ -1719,7 +1719,7 @@
                 return;
             }
             if (route === 'wizard') {
-                startWizard();
+                openPremiumWizard();
                 return;
             }
             if (route === 'custom') {
@@ -1770,6 +1770,10 @@
             document.getElementById('view-results').classList.add('hidden');
             document.getElementById('view-mode-selection').classList.remove('hidden');
             document.getElementById('view-custom-builder').classList.add('hidden');
+        }
+
+        function openPremiumWizard() {
+            window.location.href = '/premium-wizard/index.html';
         }
 
         // Custom Builder State

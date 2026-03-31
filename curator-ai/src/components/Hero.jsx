@@ -4,10 +4,12 @@ import { PlayCircle } from 'lucide-react';
 import mockupImg from '../assets/dashboard-mockup.png';
 
 export default function Hero() {
+  const MotionDiv = motion.div;
+
   return (
     <section className="max-w-7xl mx-auto px-8 mb-32 pt-32">
       <div className="grid lg:grid-cols-12 gap-16 items-center">
-        <motion.div 
+        <MotionDiv 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -26,8 +28,8 @@ export default function Hero() {
               <PlayCircle className="w-5 h-5" /> Watch the Vision
             </button>
           </div>
-        </motion.div>
-        <motion.div 
+        </MotionDiv>
+        <MotionDiv 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -38,7 +40,7 @@ export default function Hero() {
           </div>
           <div className="absolute -top-12 -right-12 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -z-10"></div>
           <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-emerald-700/10 rounded-full blur-3xl -z-10"></div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

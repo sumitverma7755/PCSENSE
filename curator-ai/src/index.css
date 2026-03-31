@@ -1,23 +1,122 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
 
-@layer base {
-  body {
-    @apply bg-surface font-body text-on-surface antialiased selection:bg-emerald-500/30 selection:text-emerald-100;
+:root {
+  --accent-start: #4f8cff;
+  --accent-end: #7c3aed;
+  --surface: rgba(15, 23, 42, 0.58);
+  --stroke: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'SF Pro Text', 'SF Pro Display', 'Segoe UI', sans-serif;
+  color: #e5e7eb;
+  background:
+    radial-gradient(1200px 700px at 10% -20%, rgba(79, 140, 255, 0.35), transparent 60%),
+    radial-gradient(900px 520px at 90% -10%, rgba(124, 58, 237, 0.3), transparent 58%),
+    linear-gradient(180deg, #020617 0%, #060c1a 55%, #050a16 100%);
+}
+
+.saas-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 100%);
+}
+
+.glass-panel {
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(20px);
+}
+
+.glass-chip {
+  background: rgba(15, 23, 42, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.gradient-shell {
+  background-image: linear-gradient(145deg, rgba(148, 163, 184, 0.35), rgba(148, 163, 184, 0.06));
+}
+
+.accent-gradient {
+  background-image: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+}
+
+.wizard-glow {
+  box-shadow:
+    0 20px 55px rgba(2, 6, 23, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 0 0 1px rgba(148, 163, 184, 0.14);
+}
+
+.soft-card {
+  box-shadow:
+    0 28px 65px rgba(2, 6, 23, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 1px rgba(148, 163, 184, 0.4),
+    0 0 0 4px rgba(79, 140, 255, 0.2);
+}
+
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 22px 46px rgba(15, 23, 42, 0.45),
+    0 0 0 1px rgba(79, 140, 255, 0.24);
+}
+
+.selected-glow {
+  box-shadow:
+    0 0 0 1px rgba(79, 140, 255, 0.85),
+    0 0 0 3px rgba(79, 140, 255, 0.25),
+    0 18px 50px rgba(79, 140, 255, 0.28);
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.48;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
   }
 }
 
-.editorial-shadow {
-  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.4);
-}
-.ghost-border {
-  border: 1px solid rgba(16, 185, 129, 0.15);
+.ripple {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: ripple 520ms ease-out forwards;
+  background: rgba(255, 255, 255, 0.82);
 }
 
-details summary::-webkit-details-marker {
-  display: none;
-}
-details[open] .toggle-icon {
-  transform: rotate(180deg);
+.grain-overlay {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.08) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
 }

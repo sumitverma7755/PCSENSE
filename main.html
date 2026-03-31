@@ -68,6 +68,14 @@
             var query = window.location.search || "";
             var hash = window.location.hash || "";
             var target = "/frontend/main.html" + query + hash;
+            try {
+                var params = new URLSearchParams(query);
+                if (params.get("page") === "wizard") {
+                    target = "/premium-wizard/index.html" + hash;
+                }
+            } catch (error) {
+                console.warn("Redirect query parse failed:", error && error.message ? error.message : error);
+            }
             var link = document.getElementById("continue-link");
             if (link) {
                 link.setAttribute("href", target);
