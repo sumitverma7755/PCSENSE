@@ -113,7 +113,8 @@ public class RecommendationEngine {
                 }
 
                 // Lightweight
-                if (laptop.getWeight() > 0 && laptop.getWeight() < 1.5) score += 10;
+                double weight = laptop.getWeightValue();
+                if (weight > 0 && weight < 1.5) score += 10;
                 break;
 
             case "coding":

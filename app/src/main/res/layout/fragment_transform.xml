@@ -1,91 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@drawable/bg_app_shell">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:padding="24dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Build Your PC"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp" />
+            android:orientation="vertical">
 
-        <!-- Budget Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Budget (₹)"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/budget_input"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:text="50000" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:fontFamily="@font/poppins_bold"
+                android:text="PC Builder"
+                android:textColor="@color/text_on_dark"
+                android:textSize="30sp" />
 
-        <!-- Usage Spinner -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Usage"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="18dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Generate balanced recommendations with compatibility checks and live pricing."
+                android:textColor="@color/text_secondary_on_dark"
+                android:textSize="14sp" />
 
-        <Spinner
-            android:id="@+id/usage_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:minHeight="48dp" />
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.PCSensei.FeatureCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <!-- Generate Button -->
-        <Button
-            android:id="@+id/generate_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Generate Recommendation"
-            android:textSize="16sp"
-            android:padding="16dp"
-            android:layout_marginBottom="24dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-        <!-- Loading Bar -->
-        <ProgressBar
-            android:id="@+id/loading_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Budget (Rs.)"
+                        app:boxBackgroundColor="@color/field_surface"
+                        app:boxCornerRadiusBottomEnd="14dp"
+                        app:boxCornerRadiusBottomStart="14dp"
+                        app:boxCornerRadiusTopEnd="14dp"
+                        app:boxCornerRadiusTopStart="14dp"
+                        app:boxStrokeColor="@color/field_stroke"
+                        app:hintTextColor="@color/text_secondary_on_dark">
 
-        <!-- Results Title -->
-        <TextView
-            android:id="@+id/results_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/budget_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_medium"
+                            android:inputType="number"
+                            android:text="50000"
+                            android:textColor="@color/text_on_dark"
+                            android:textColorHint="@color/text_muted_on_dark" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Results RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/results_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:nestedScrollingEnabled="false" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Usage"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="15sp" />
 
-    </LinearLayout>
-</ScrollView>
+                    <Spinner
+                        android:id="@+id/usage_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/bg_spinner_shell"
+                        android:minHeight="48dp"
+                        android:padding="10dp"
+                        android:popupBackground="@color/bottom_nav_surface" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/generate_button"
+                        style="@style/Widget.PCSensei.PrimaryButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:background="@drawable/bg_primary_button_gradient"
+                        android:text="Generate Recommendation"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        app:icon="@drawable/ic_rocket"
+                        app:iconGravity="textStart"
+                        app:iconPadding="8dp"
+                        app:iconTint="@android:color/white" />
+
+                    <ProgressBar
+                        android:id="@+id/loading_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="4dp"
+                        android:visibility="gone" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/builder_loading_shimmer"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_marginTop="14dp"
+                        android:visibility="gone"
+                        shimmer:shimmer_auto_start="false"
+                        shimmer:shimmer_base_alpha="0.32"
+                        shimmer:shimmer_highlight_alpha="0.88">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="22dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_secondary_button_glass" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="22dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_secondary_button_glass" />
+
+                            <View
+                                android:layout_width="220dp"
+                                android:layout_height="22dp"
+                                android:background="@drawable/bg_secondary_button_glass" />
+                        </LinearLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/results_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/text_on_dark"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/empty_state_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/text_secondary_on_dark"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/results_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

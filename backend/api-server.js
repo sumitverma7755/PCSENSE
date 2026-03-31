@@ -3,14 +3,19 @@ const { spawn } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { createV2Api } = require('./platform/v2');
 
 const PORT = Number(process.env.PORT) || 3001;
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 const MAX_LOGIN_ATTEMPTS = 3;
 const LOGIN_BLOCK_MS = 60 * 1000;
 
-const ADMIN_USERNAME = process.env.PCSENSEI_ADMIN_USER || 'sumit';
-const ADMIN_PASSWORD = process.env.PCSENSEI_ADMIN_PASSWORD || 'jipaaji';
+const ADMIN_USERNAME = process.env.PCSENSEI_ADMIN_USER;
+const ADMIN_PASSWORD = process.env.PCSENSEI_ADMIN_PASSWORD;
+const AUTH_CONFIGURED = Boolean(
+    typeof ADMIN_USERNAME === 'string' && ADMIN_USERNAME.trim() &&
+    typeof ADMIN_PASSWORD === 'string' && ADMIN_PASSWORD.trim()
+);
 
 const PATHS = {
     components: path.join(__dirname, '..', 'shared', 'data', 'components.json'),
@@ -19,7 +24,9 @@ const PATHS = {
 
 const sessions = new Map();
 const loginAttempts = new Map();
+const chatSessions = new Map();
 let isPriceCheckRunning = false;
+let v2Api = null;
 
 function setCorsHeaders(req, res) {
     const origin = req.headers.origin;
@@ -165,6 +172,18 @@ function requireAuth(req, res) {
     return { token, ...session };
 }
 
+function getV2Api() {
+    if (!v2Api) {
+        v2Api = createV2Api({
+            PATHS,
+            sendJson,
+            parseBody,
+            requireAuth
+        });
+    }
+    return v2Api;
+}
+
 function timingSafeEqualString(a, b) {
     const aBuffer = crypto.createHash('sha256').update(String(a)).digest();
     const bBuffer = crypto.createHash('sha256').update(String(b)).digest();
@@ -195,10 +214,10 @@ async function handleLogin(req, res) {
         return;
     }
 
-    if (!ADMIN_PASSWORD) {
+    if (!AUTH_CONFIGURED) {
         sendJson(res, 503, {
             success: false,
-            message: 'Admin password is not configured. Set PCSENSEI_ADMIN_PASSWORD in the backend environment.'
+            message: 'Admin auth is not configured. Set PCSENSEI_ADMIN_USER and PCSENSEI_ADMIN_PASSWORD in the backend environment.'
         });
         return;
     }
@@ -354,6 +373,103 @@ function handleComponents(res) {
     }
 }
 
+function createChatSession() {
+    const sessionId = crypto.randomBytes(20).toString('hex');
+    chatSessions.set(sessionId, {
+        createdAt: Date.now(),
+        history: []
+    });
+    return sessionId;
+}
+
+function getBudgetHint(message) {
+    const budgetMatch = message.match(/(?:₹|rs\.?|inr)?\s?(\d{4,7})/i);
+    if (!budgetMatch) {
+        return null;
+    }
+    return Number(budgetMatch[1]);
+}
+
+function generateExpertReply(message) {
+    const text = message.toLowerCase();
+    const budget = getBudgetHint(message);
+
+    if (text.includes('gpu') && budget && budget <= 40000) {
+        return 'For around Rs. 40k, prioritize RTX 4060 or RX 7600 class GPUs and pair with at least 16GB RAM.';
+    }
+
+    if (text.includes('gaming')) {
+        return 'For gaming builds, balance GPU first, then CPU. Tell me your budget and target resolution (1080p/1440p/4K).';
+    }
+
+    if (text.includes('editing') || text.includes('render') || text.includes('4k')) {
+        return 'For creator workloads, prioritize CPU cores, 32GB RAM, and NVMe storage. I can suggest a full parts list if you share budget.';
+    }
+
+    if (text.includes('overheat') || text.includes('temperature')) {
+        return 'Check cooler mounting pressure, thermal paste spread, front intake airflow, and fan curve. I can help you isolate it step-by-step.';
+    }
+
+    if (budget) {
+        return `At about Rs. ${budget.toLocaleString('en-IN')}, you should target a balanced build with strong GPU value and a reliable 80+ PSU.`;
+    }
+
+    return 'Share your budget, use-case, and whether you need desktop or laptop recommendations, and I will suggest a tailored setup.';
+}
+
+async function handleChatSession(req, res) {
+    let body = {};
+    try {
+        body = await parseBody(req);
+    } catch {
+        // tolerate empty body and still create a session
+    }
+
+    const sessionId = createChatSession();
+    const welcomeMessage = `Hi${body.deviceId ? ` (${String(body.deviceId).slice(0, 8)})` : ''}! I am your PCSensei expert. Tell me your budget and use case.`;
+
+    sendJson(res, 200, {
+        success: true,
+        sessionId,
+        welcomeMessage
+    });
+}
+
+async function handleChatMessage(req, res) {
+    let body;
+    try {
+        body = await parseBody(req);
+    } catch (error) {
+        sendJson(res, 400, { success: false, message: error.message });
+        return;
+    }
+
+    const sessionId = typeof body.sessionId === 'string' ? body.sessionId.trim() : '';
+    const message = typeof body.message === 'string' ? body.message.trim() : '';
+
+    if (!sessionId || !chatSessions.has(sessionId)) {
+        sendJson(res, 400, { success: false, message: 'Invalid chat session' });
+        return;
+    }
+
+    if (!message) {
+        sendJson(res, 400, { success: false, message: 'Message is required' });
+        return;
+    }
+
+    const reply = generateExpertReply(message);
+    const state = chatSessions.get(sessionId);
+    state.history.push({ role: 'user', message, at: Date.now() });
+    state.history.push({ role: 'assistant', message: reply, at: Date.now() });
+    chatSessions.set(sessionId, state);
+
+    sendJson(res, 200, {
+        success: true,
+        sessionId,
+        reply
+    });
+}
+
 const server = http.createServer((req, res) => {
     setCorsHeaders(req, res);
 
@@ -363,11 +479,15 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    if (getV2Api().handleRequest(req, res)) {
+        return;
+    }
+
     if (req.url === '/api/health' && req.method === 'GET') {
         sendJson(res, 200, {
             status: 'ok',
             message: 'API server running',
-            authConfigured: Boolean(ADMIN_PASSWORD)
+            authConfigured: AUTH_CONFIGURED
         });
         return;
     }
@@ -407,6 +527,16 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+    if (req.url === '/api/chat/session' && req.method === 'POST') {
+        handleChatSession(req, res);
+        return;
+    }
+
+    if (req.url === '/api/chat/message' && req.method === 'POST') {
+        handleChatMessage(req, res);
+        return;
+    }
+
     sendJson(res, 404, { success: false, message: 'Not found' });
 });
 
@@ -416,7 +546,7 @@ server.listen(PORT, () => {
     console.log(`API server running on http://localhost:${PORT}`);
     console.log('Admin login endpoint: POST /api/admin/login');
     console.log('Price check endpoint (auth): POST /api/run-price-check');
-    if (!ADMIN_PASSWORD) {
-        console.log('WARNING: PCSENSEI_ADMIN_PASSWORD is not set. Admin login will be disabled.');
+    if (!AUTH_CONFIGURED) {
+        console.log('WARNING: PCSENSEI_ADMIN_USER and PCSENSEI_ADMIN_PASSWORD are required. Admin login is disabled.');
     }
 });

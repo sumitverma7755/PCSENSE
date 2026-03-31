@@ -7,4 +7,32 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="pcs_navy_950">#060A18</color>
+    <color name="pcs_navy_900">#0B1022</color>
+    <color name="pcs_navy_800">#121B35</color>
+    <color name="pcs_navy_700">#1A2748</color>
+
+    <color name="pcs_blue_500">#3B82F6</color>
+    <color name="pcs_blue_400">#60A5FA</color>
+    <color name="pcs_purple_500">#8B5CF6</color>
+    <color name="pcs_purple_400">#A78BFA</color>
+    <color name="pcs_emerald_400">#34D399</color>
+
+    <color name="text_on_dark">#FFF8FAFF</color>
+    <color name="text_secondary_on_dark">#FFC7D2FE</color>
+    <color name="text_muted_on_dark">#FF94A3B8</color>
+
+    <color name="glass_card_fill">#331A2444</color>
+    <color name="glass_card_stroke">#66A5B4FF</color>
+    <color name="trust_badge_text">#FF7CF7C7</color>
+
+    <color name="bottom_nav_surface">#D910162D</color>
+    <color name="bottom_nav_stroke">#3D93B6FF</color>
+    <color name="bottom_nav_indicator">#4D5E88FF</color>
+    <color name="bottom_nav_item_active">#FFFFFFFF</color>
+    <color name="bottom_nav_item_inactive">#FF9FB2D7</color>
+
+    <color name="field_surface">#2B111B36</color>
+    <color name="field_stroke">#6A4B6B9A</color>
 </resources>

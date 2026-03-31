@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: PCSensei Platform API
+  version: 2.0.0
+servers:
+  - url: http://localhost:3001
+paths:
+  /api/v2/health:
+    get:
+      summary: Health check for v2 platform API
+      responses:
+        "200":
+          description: Service healthy
+  /api/v2/build:
+    post:
+      summary: Generate AI PC build recommendation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                budget: { type: integer, example: 100000 }
+                purpose: { type: string, example: gaming }
+                resolution: { type: string, example: 1440p }
+                performanceGoal: { type: string, example: fps-first }
+      responses:
+        "200":
+          description: Build response
+  /api/v2/compatibility:
+    post:
+      summary: Validate compatibility for input or generated build
+      responses:
+        "200":
+          description: Compatibility payload
+  /api/v2/fps:
+    post:
+      summary: FPS prediction for generated build
+      responses:
+        "200":
+          description: FPS payload
+  /api/v2/prices:
+    get:
+      summary: Price matrix for a component or recommended build
+      parameters:
+        - in: query
+          name: category
+          schema: { type: string }
+        - in: query
+          name: id
+          schema: { type: string }
+      responses:
+        "200":
+          description: Price comparison
+  /api/v2/featured-builds:
+    get:
+      summary: Curated featured builds
+      responses:
+        "200":
+          description: Featured builds list
+  /api/v2/admin/summary:
+    get:
+      summary: Admin summary metrics
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Admin summary
+  /api/v2/admin/components/upsert:
+    post:
+      summary: Upsert component catalog item
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Upsert status
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+

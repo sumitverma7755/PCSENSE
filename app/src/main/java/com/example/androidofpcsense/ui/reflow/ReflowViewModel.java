@@ -10,7 +10,7 @@ public class ReflowViewModel extends ViewModel {
 
     public ReflowViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is reflow fragment");
+        mText.setValue("Compare desktop and laptop recommendations in one place.");
     }
 
     public LiveData<String> getText() {

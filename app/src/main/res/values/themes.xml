@@ -1,20 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.AndroidOfPcSense" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+    <style name="Theme.AndroidOfPcSense" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pcs_blue_500</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorPrimaryContainer">@color/pcs_navy_700</item>
+        <item name="colorOnPrimaryContainer">@color/text_on_dark</item>
+
+        <item name="colorSecondary">@color/pcs_purple_500</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/pcs_navy_800</item>
+        <item name="colorOnSecondaryContainer">@color/text_on_dark</item>
+
+        <item name="colorSurface">@color/pcs_navy_900</item>
+        <item name="colorOnSurface">@color/text_on_dark</item>
+        <item name="android:colorBackground">@color/pcs_navy_950</item>
+
+        <item name="android:windowBackground">@color/pcs_navy_950</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/pcs_navy_900</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 
-    <style name="Theme.AndroidOfPcSense.NoActionBar">
+    <style name="Theme.AndroidOfPcSense.NoActionBar" parent="Theme.AndroidOfPcSense">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -22,4 +31,39 @@
     <style name="Theme.AndroidOfPcSense.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AndroidOfPcSense.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Widget.PCSensei.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_nav_item_color</item>
+        <item name="itemTextColor">@color/bottom_nav_item_color</item>
+        <item name="itemRippleColor">@color/bottom_nav_ripple_color</item>
+        <item name="itemBackground">@drawable/bg_bottom_nav_item_selector</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemHorizontalTranslationEnabled">false</item>
+    </style>
+
+    <style name="ShapeAppearance.PCSensei.Button" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="Widget.PCSensei.PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.PCSensei.Button</item>
+        <item name="rippleColor">@color/button_ripple_color</item>
+        <item name="android:elevation">10dp</item>
+    </style>
+
+    <style name="Widget.PCSensei.SecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.PCSensei.Button</item>
+        <item name="strokeColor">@color/glass_card_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="rippleColor">@color/button_ripple_color</item>
+    </style>
+
+    <style name="Widget.PCSensei.FeatureCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/glass_card_fill</item>
+        <item name="cardCornerRadius">18dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="strokeColor">@color/glass_card_stroke</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
 </resources>

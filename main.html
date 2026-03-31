@@ -1269,6 +1269,25 @@
             case: null
         };
 
+        function isMobileGpu(gpu) {
+            const name = String(gpu?.name || '').toLowerCase();
+            if (!name) return false;
+
+            if (gpu?.mobile === true) return true;
+            if (name.includes('mobile') || name.includes('laptop') || name.includes('notebook') || name.includes('max-q') || name.includes('max q')) {
+                return true;
+            }
+
+            // Detect common mobile model suffixes like 7600M / A370M / 6850M XT.
+            return /\b(?:rtx|gtx|rx|arc|radeon)\s+[a-z0-9-]*m(?:\b|\s)/i.test(name);
+        }
+
+        function getDesktopGpuPool() {
+            const allGpus = Array.isArray(db?.gpus) ? db.gpus : [];
+            const desktopGpus = allGpus.filter(gpu => !isMobileGpu(gpu));
+            return desktopGpus.length > 0 ? desktopGpus : allGpus;
+        }
+
         async function startCustomBuilder() {
             // Hide all views
             document.getElementById('view-landing').classList.add('hidden');
@@ -1305,7 +1324,8 @@
                 return;
             }
             
-            console.log('Populating dropdowns with', db.cpus.length, 'CPUs and', db.gpus.length, 'GPUs');
+            const desktopGpus = getDesktopGpuPool();
+            console.log('Populating dropdowns with', db.cpus.length, 'CPUs and', desktopGpus.length, 'desktop GPUs');
             
             // CPUs
             const cpuSelect = document.getElementById('select-cpu');
@@ -1325,13 +1345,14 @@
             // GPUs
             const gpuSelect = document.getElementById('select-gpu');
             gpuSelect.innerHTML = '<option value="">Choose a GPU...</option>';
-            db.gpus.forEach((gpu, idx) => {
+            desktopGpus.forEach((gpu) => {
+                const idx = db.gpus.indexOf(gpu);
                 const option = document.createElement('option');
                 option.value = idx;
                 option.textContent = `${gpu.name} - ₹${gpu.price.toLocaleString('en-IN')}`;
                 gpuSelect.appendChild(option);
             });
-            document.getElementById('gpu-count').textContent = `${db.gpus.length} options`;
+            document.getElementById('gpu-count').textContent = `${desktopGpus.length} options`;
 
             // Motherboards
             const moboSelect = document.getElementById('select-mobo');
@@ -1751,12 +1772,14 @@
             else if (type === 'gpu') dbKey = 'gpus';
             else if (type === 'ram') dbKey = 'ram';
             else if (type === 'storage') dbKey = 'storage';
+
+            const sourceItems = type === 'gpu' ? getDesktopGpuPool() : db[dbKey];
             
             // Filter items based on selection
             if (filter === 'All') {
-                items = db[dbKey];
+                items = sourceItems;
             } else {
-                items = db[dbKey].filter(item => {
+                items = sourceItems.filter(item => {
                     const name = item.name || '';
                     const brand = item.brand || '';
                     const spec = item.spec || '';
@@ -2015,14 +2038,15 @@
 
             // DESKTOP LOGIC
             const sortedCpus = [...(db.cpus || [])].sort((a, b) => a.price - b.price);
-            const sortedGpus = [...(db.gpus || [])].sort((a, b) => a.price - b.price);
+            const desktopGpus = getDesktopGpuPool();
+            const sortedGpus = [...desktopGpus].sort((a, b) => a.price - b.price);
             const sortedDiscreteGpus = sortedGpus.filter(g => g.price > 0);
             const sortedMobos = [...(db.mobos || [])].sort((a, b) => a.price - b.price);
             const sortedRam = [...(db.ram || [])].sort((a, b) => a.price - b.price);
             const sortedStorage = [...(db.storage || [])].sort((a, b) => a.price - b.price);
             const sortedPsu = [...(db.psu || [])].sort((a, b) => a.price - b.price);
             const sortedCases = [...(db.case || [])].sort((a, b) => a.price - b.price);
-            const integratedGpu = sortedGpus.find(g => g.price === 0) || sortedGpus[0];
+            const integratedGpu = sortedGpus.find(g => g.price === 0) || sortedGpus[0] || { name: 'Integrated Graphics', price: 0, tier: 'integrated' };
 
             let cpu, gpu, mobo, ram, storage, psu, userCase;
             let buildReason = "";
@@ -2118,15 +2142,15 @@
                     return b.price - a.price;
                 })[0] || sortedCpus.find(c => !c.integrated) || sortedCpus[0];
 
-                let gpuList = db.gpus.filter(g => {
+                let gpuList = desktopGpus.filter(g => {
                     const inBudget = g.price <= gpuBudget * 1.3 && g.price >= gpuBudget * 0.5 && g.price > 0;
                     return inBudget;
                 });
                 
                 if(gpuList.length === 0) {
-                    gpuList = db.gpus.filter(g => g.price > 0 && g.price <= gpuBudget * 1.5);
+                    gpuList = desktopGpus.filter(g => g.price > 0 && g.price <= gpuBudget * 1.5);
                 }
-                if(gpuList.length === 0) gpuList = db.gpus.filter(g => g.price > 0);
+                if(gpuList.length === 0) gpuList = desktopGpus.filter(g => g.price > 0);
                 
                 // Apply brand preference
                 if(prefs.gpu !== 'Any') {

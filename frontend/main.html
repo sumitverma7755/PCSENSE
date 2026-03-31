@@ -1,44 +1,30 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="PCSensei helps you build the best PC or pick the right laptop for your budget with smart recommendations, compatibility checks, and live price insights.">
     <title>PCSensei | Intelligent PC & Laptop Consultant</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
-            crossorigin="anonymous"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0f172a',
-                            accent: '#3b82f6',
-                            glass: 'rgba(15, 23, 42, 0.8)'
-                        }
-                    },
-                    animation: {
-                        'slide-up': 'slideUp 0.5s ease-out',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
+        :root {
+            --brand-ink: #0f172a;
+            --brand-muted: #475569;
+            --brand-accent: #1d4ed8;
+        }
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Sora', sans-serif;
+            letter-spacing: -0.01em;
+        }
         .glass-panel {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
@@ -60,7 +46,7 @@
         }
         .ad-label {
             font-size: 10px;
-            color: #94a3b8;
+            color: #475569;
             margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -229,36 +215,35 @@
         <div id="view-landing" class="block">
             <div class="relative bg-slate-900 h-[600px] overflow-hidden">
                 <div class="absolute inset-0">
-                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-20">
+                    <img src="assets/images/hero-workstation.webp" alt="High-performance desktop PC setup with dual monitors and RGB lighting" width="1600" height="900" fetchpriority="high" class="w-full h-full object-cover opacity-20">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
                 </div>
                 
                 <div class="relative max-w-7xl mx-auto px-4 pt-24 text-center text-white">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium mb-6">
-                        <i class="fa-solid fa-bolt"></i> Trusted by 10,000+ PC Builders in India
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/15 border border-blue-300/30 text-blue-200 text-sm font-medium mb-6">
+                        <i class="fa-solid fa-circle-info"></i> Practical PC recommendations for Indian buyers
                     </div>
                     <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-                        Stop Overpaying for PCs.<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Build Smarter, Save More.</span>
+                        Build the right PC on the first try.
                     </h1>
                     <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-4">
-                        Whether you're a gamer chasing 144 FPS, a creator rendering 4K videos, or a student on a tight budget — we've helped thousands find their perfect setup.
+                        Tell us your budget and use case, and we suggest parts that fit together, stay in budget, and are available in India.
                     </p>
                     <p class="text-md text-slate-400 max-w-2xl mx-auto mb-8">
-                        <i class="fa-solid fa-indian-rupee-sign"></i> Builds from ₹15,000 to ₹5,00,000+ • <i class="fa-solid fa-shop"></i> Compare prices across Amazon, Flipkart, Croma & more • <i class="fa-solid fa-clock"></i> Updated daily
+                        <i class="fa-solid fa-indian-rupee-sign"></i> Rs 15,000 to Rs 5,00,000+ builds  -  <i class="fa-solid fa-shop"></i> Compare major Indian stores  -  <i class="fa-solid fa-clock"></i> Updated daily
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button onclick="showModeSelection()" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-lg transition shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transform hover:scale-105">
-                            <i class="fa-solid fa-rocket"></i> Get Started
+                        <button onclick="showModeSelection()" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-lg transition shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transform hover:scale-105">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Start Building
                         </button>
-                        <button onclick="toggleAI()" class="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl font-bold text-lg transition backdrop-blur-sm flex items-center justify-center gap-2 transform hover:scale-105">
-                            <i class="fa-solid fa-comments"></i> Chat with Expert
+                        <button onclick="toggleAI()" class="px-8 py-4 bg-white text-slate-900 hover:bg-slate-100 border border-white rounded-xl font-bold text-lg transition flex items-center justify-center gap-2 transform hover:scale-105">
+                            <i class="fa-solid fa-comments"></i> Get Build Advice
                         </button>
                     </div>
                     <div class="mt-8 flex items-center justify-center gap-6 text-sm text-slate-400">
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> No signup required</span>
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> 100% free</span>
-                        <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> Works in 30 seconds</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> No sign-up needed</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> Explainable recommendations</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> Built for Indian pricing</span>
                     </div>
                 </div>
             </div>
@@ -274,23 +259,20 @@
                          data-ad-slot="XXXXXXXXXX"
                          data-ad-format="horizontal"
                          data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
                 </div>
             </div>
 
             <!-- Features Grid -->
             <div class="py-16 max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Why 10,000+ Indians Trust PCSensei</h2>
-                    <p class="text-slate-500 max-w-2xl mx-auto">We've spent years understanding the Indian PC market — from Nehru Place deals to Amazon sales. Here's what makes us different.</p>
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Built for real buying decisions</h2>
+                    <p class="text-slate-500 max-w-2xl mx-auto">No hype, no random parts list. We focus on compatibility, real prices, and clear trade-offs.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-gauge-high"></i></div>
                         <h3 class="text-xl font-bold mb-2">Real Performance Numbers</h3>
-                        <p class="text-slate-500 mb-4">No vague promises. We show you actual FPS estimates for GTA V, Valorant, Cyberpunk — games you actually play.</p>
+                        <p class="text-slate-500 mb-4">We show expected FPS and workload results so you know what to expect before spending.</p>
                         <ul class="text-sm text-slate-600 space-y-1">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Benchmark-based estimates</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> 1080p, 1440p & 4K presets</li>
@@ -300,7 +282,7 @@
                     <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-indian-rupee-sign"></i></div>
                         <h3 class="text-xl font-bold mb-2">Indian Prices, Updated Daily</h3>
-                        <p class="text-slate-500 mb-4">We track prices across 6 major Indian retailers. No outdated MRP or US pricing — just what you'll actually pay.</p>
+                        <p class="text-slate-500 mb-4">Prices are tracked from major Indian retailers, so recommendations match what you can actually buy.</p>
                         <ul class="text-sm text-slate-600 space-y-1">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Amazon, Flipkart, Croma</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> MD Computers, Vijay Sales</li>
@@ -310,7 +292,7 @@
                     <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-headset"></i></div>
                         <h3 class="text-xl font-bold mb-2">Expert Help, Not Chatbots</h3>
-                        <p class="text-slate-500 mb-4">Confused about DDR4 vs DDR5? Bottlenecks? Our experts have built 500+ PCs and actually know their stuff.</p>
+                        <p class="text-slate-500 mb-4">Need a second opinion? Ask questions about bottlenecks, upgrades, or component choices in plain language.</p>
                         <ul class="text-sm text-slate-600 space-y-1">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Instant chat support</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Build reviews & troubleshooting</li>
@@ -325,33 +307,33 @@
                 <div class="max-w-7xl mx-auto px-4">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl font-bold text-slate-800 mb-4">How It Works</h2>
-                        <p class="text-slate-500">Get your perfect PC recommendation in under 60 seconds. No tech knowledge required.</p>
+                        <p class="text-slate-500">Answer a few questions and get a build plan with clear reasoning.</p>
                     </div>
                     <div class="grid md:grid-cols-4 gap-6">
                         <div class="text-center">
                             <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-                            <h4 class="font-bold text-slate-800 mb-2">Pick Your Type</h4>
+                            <h3 class="font-bold text-slate-800 mb-2">Pick Your Type</h3>
                             <p class="text-sm text-slate-500">Desktop for power, laptop for portability. We optimize differently for each.</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-                            <h4 class="font-bold text-slate-800 mb-2">Tell Us Your Use</h4>
-                            <p class="text-sm text-slate-500">Gaming? Video editing? Coding? Each needs different specs — we know exactly what.</p>
+                            <h3 class="font-bold text-slate-800 mb-2">Tell Us Your Use</h3>
+                            <p class="text-sm text-slate-500">Gaming, editing, coding, or office work each get a different parts strategy.</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-                            <h4 class="font-bold text-slate-800 mb-2">Set Your Budget</h4>
-                            <p class="text-sm text-slate-500">From ₹15K student builds to ₹5L dream machines. We make every rupee count.</p>
+                            <h3 class="font-bold text-slate-800 mb-2">Set Your Budget</h3>
+                            <p class="text-sm text-slate-500">From entry-level student builds to high-end rigs, we optimize for value.</p>
                         </div>
                         <div class="text-center">
                             <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4"><i class="fa-solid fa-check"></i></div>
-                            <h4 class="font-bold text-slate-800 mb-2">Get Your Build</h4>
-                            <p class="text-sm text-slate-500">Instant recommendation with buy links, performance estimates, and expert reasoning.</p>
+                            <h3 class="font-bold text-slate-800 mb-2">Get Your Build</h3>
+                            <p class="text-sm text-slate-500">Get parts, price links, and a quick explanation of why each choice was made.</p>
                         </div>
                     </div>
                     <div class="text-center mt-10">
                         <button onclick="startWizard()" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-lg transition shadow-lg shadow-blue-500/25">
-                            Start Now — It's Free <i class="fa-solid fa-arrow-right ml-2"></i>
+                            Start now <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
@@ -374,7 +356,7 @@
                             <div class="text-sm text-slate-500">Price Update Frequency</div>
                         </div>
                         <div>
-                            <div class="text-4xl font-bold text-blue-600 mb-1">₹15K-5L</div>
+                            <div class="text-4xl font-bold text-blue-600 mb-1">Rs 15K-5L</div>
                             <div class="text-sm text-slate-500">Budget Range Supported</div>
                         </div>
                     </div>
@@ -383,53 +365,53 @@
         </div>
 
         <!-- View: Mode Selection -->
-        <div id="view-mode-selection" class="hidden min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex items-center justify-center py-20 px-4">
+        <div id="view-mode-selection" class="hidden min-h-screen bg-slate-900 flex items-center justify-center py-20 px-4">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Choose Your Path</h2>
-                    <p class="text-xl text-slate-300">How would you like to build your PC today?</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Choose how you want to build</h2>
+                    <p class="text-xl text-slate-300">Guided flow for speed, or manual flow for full control.</p>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-8">
-                    <!-- AI Wizard Mode -->
-                    <div class="group relative bg-white/10 backdrop-blur-lg border-2 border-white/20 rounded-3xl p-8 hover:border-blue-400 hover:bg-white/15 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-2xl" onclick="startWizard()">
-                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    <!-- Guided Builder Mode -->
+                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="startWizard()">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star"></i> Recommended
                         </div>
-                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-4xl text-white mb-6 group-hover:scale-110 transition-transform">
+                        <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center text-4xl text-white mb-6 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">AI Wizard</h3>
-                        <p class="text-slate-300 mb-6">Answer 4 quick questions and let our AI recommend the perfect build for you. Best for beginners and those who want expert guidance.</p>
-                        <ul class="space-y-2 text-sm text-slate-200 mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Budget-optimized recommendations</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> AI-powered component matching</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Performance estimates included</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Takes ~30 seconds</li>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3">Guided Builder</h3>
+                        <p class="text-slate-600 mb-6">Answer a few questions and get a balanced build recommendation with reasoning.</p>
+                        <ul class="space-y-2 text-sm text-slate-700 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Budget-aware recommendations</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Compatibility-first choices</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Performance estimates included</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Takes ~30 seconds</li>
                         </ul>
                         <div class="bg-blue-600 group-hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold text-center transition flex items-center justify-center gap-2">
-                            Start Wizard <i class="fa-solid fa-arrow-right"></i>
+                            Start guided flow <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
 
-                    <!-- Custom Builder Mode -->
-                    <div class="group relative bg-white/10 backdrop-blur-lg border-2 border-white/20 rounded-3xl p-8 hover:border-purple-400 hover:bg-white/15 transition-all duration-300 cursor-pointer transform hover:scale-105 hover:shadow-2xl" onclick="startCustomBuilder()">
-                        <div class="absolute top-4 right-4 bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    <!-- Manual Builder Mode -->
+                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-slate-500 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="startCustomBuilder()">
+                        <div class="absolute top-4 right-4 bg-slate-700 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-hammer"></i> Advanced
                         </div>
-                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-4xl text-white mb-6 group-hover:scale-110 transition-transform">
+                        <div class="w-20 h-20 bg-slate-800 rounded-2xl flex items-center justify-center text-4xl text-white mb-6 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-sliders"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-3">Custom Builder</h3>
-                        <p class="text-slate-300 mb-6">Handpick every component yourself. Perfect for enthusiasts who know exactly what they want or want to experiment.</p>
-                        <ul class="space-y-2 text-sm text-slate-200 mb-6">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Full control over components</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Browse 800+ parts catalog</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Real-time price tracking</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-400"></i> Compatibility validation</li>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-3">Manual Builder</h3>
+                        <p class="text-slate-600 mb-6">Pick each part yourself and compare options before finalizing your build.</p>
+                        <ul class="space-y-2 text-sm text-slate-700 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Full control over components</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Browse 800+ parts catalog</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Real-time price tracking</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-600"></i> Compatibility validation</li>
                         </ul>
-                        <div class="bg-purple-600 group-hover:bg-purple-500 text-white px-6 py-3 rounded-xl font-bold text-center transition flex items-center justify-center gap-2">
-                            Build Custom PC <i class="fa-solid fa-arrow-right"></i>
+                        <div class="bg-slate-800 group-hover:bg-slate-700 text-white px-6 py-3 rounded-xl font-bold text-center transition flex items-center justify-center gap-2">
+                            Start manual flow <i class="fa-solid fa-arrow-right"></i>
                         </div>
                     </div>
                 </div>
@@ -597,7 +579,7 @@
                                 <div class="border-t border-slate-200 pt-4 mb-4">
                                     <div class="flex justify-between items-center text-lg font-bold">
                                         <span class="text-slate-700">Total Price</span>
-                                        <span class="text-blue-600 price-value" id="custom-total-price">₹0</span>
+                                        <span class="text-blue-600 price-value" id="custom-total-price">â‚¹0</span>
                                     </div>
                                 </div>
 
@@ -607,7 +589,7 @@
                                     </div>
                                 </div>
 
-                                <button onclick="viewCustomBuildSummary()" id="btn-view-custom-build" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white px-6 py-3 rounded-xl font-bold transition transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" disabled>
+                                <button onclick="viewCustomBuildSummary()" id="btn-view-custom-build" class="w-full bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold transition transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" disabled>
                                     <i class="fa-solid fa-eye"></i> View Build Summary
                                 </button>
                                 
@@ -621,10 +603,10 @@
                                     <i class="fa-solid fa-lightbulb"></i> Pro Tips
                                 </div>
                                 <ul class="space-y-1 text-xs">
-                                    <li>• Match CPU socket with motherboard</li>
-                                    <li>• PSU wattage = (CPU TDP + GPU TDP) × 1.5</li>
-                                    <li>• 16GB RAM minimum for gaming</li>
-                                    <li>• SSD for OS, HDD for storage</li>
+                                    <li>â€¢ Match CPU socket with motherboard</li>
+                                    <li>â€¢ PSU wattage = (CPU TDP + GPU TDP) Ã— 1.5</li>
+                                    <li>â€¢ 16GB RAM minimum for gaming</li>
+                                    <li>â€¢ SSD for OS, HDD for storage</li>
                                 </ul>
                             </div>
                         </div>
@@ -703,7 +685,7 @@
                             <input type="range" min="15000" max="500000" step="5000" value="50000" id="budget-range" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" oninput="updateBudget(this.value)">
                             <div class="text-center">
                                 <div class="price-value">
-                                    <span class="text-4xl font-bold text-blue-600"><span style="font-size: 0.7em; opacity: 0.8;">₹</span><span id="budget-val">50,000</span></span>
+                                    <span class="text-4xl font-bold text-blue-600"><span style="font-size: 0.7em; opacity: 0.8;">â‚¹</span><span id="budget-val">50,000</span></span>
                                 </div>
                                 <p class="text-slate-400 mt-2 text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-info-circle"></i> We'll find the best <span id="budget-type-text">PC</span> within this limit.</p>
                             </div>
@@ -753,7 +735,7 @@
             <div class="bg-slate-900 text-white py-12 px-4">
                 <div class="max-w-7xl mx-auto text-center">
                     <h2 class="text-3xl font-bold mb-2">Your Recommendation</h2>
-                    <p class="text-slate-400">Optimized for <span id="res-usage" class="text-white font-bold capitalize">Gaming</span> • Budget: <span id="res-budget"></span></p>
+                    <p class="text-slate-400">Optimized for <span id="res-usage" class="text-white font-bold capitalize">Gaming</span> â€¢ Budget: <span id="res-budget"></span></p>
                 </div>
             </div>
 
@@ -770,7 +752,7 @@
                         </div>
                         <div class="text-right">
                             <div class="text-sm text-slate-500">Estimated Price</div>
-                            <div class="text-3xl font-bold text-slate-900" id="total-price">₹0</div>
+                            <div class="text-3xl font-bold text-slate-900" id="total-price">â‚¹0</div>
                         </div>
                     </div>
 
@@ -808,9 +790,6 @@
                              data-ad-slot="XXXXXXXXXX"
                              data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
                     </div>
                 </div>
 
@@ -840,9 +819,6 @@
                      data-ad-slot="XXXXXXXXXX"
                      data-ad-format="rectangle"
                      data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         </div>
 
@@ -857,29 +833,29 @@
                             </div>
                             <span class="font-bold text-xl">PCSensei</span>
                         </div>
-                        <p class="text-slate-400 text-sm mb-4">Your trusted PC building companion for the Indian market. We help you find the best components at the best prices.</p>
+                        <p class="text-slate-400 text-sm mb-4">Practical recommendations, compatibility checks, and local price references for Indian PC buyers.</p>
                         <div class="flex gap-3">
-                            <a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
-                            <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-discord"></i></a>
+                            <a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" aria-label="PCSensei GitHub repository" title="PCSensei GitHub repository" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" aria-label="PCSensei updates on X" title="PCSensei updates on X" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#" aria-label="PCSensei Discord community" title="PCSensei Discord community" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-discord"></i></a>
                         </div>
                     </div>
                     <div>
                         <h4 class="font-bold mb-4">Build Tools</h4>
                         <ul class="space-y-2 text-slate-400 text-sm">
-                            <li><a href="#" onclick="startWizard()" class="hover:text-white transition">PC Builder Wizard</a></li>
-                            <li><a href="#" onclick="startWizard()" class="hover:text-white transition">Laptop Finder</a></li>
+                            <li><a href="#" onclick="startWizard()" class="hover:text-white transition">Guided Builder</a></li>
+                            <li><a href="#" onclick="startCustomBuilder()" class="hover:text-white transition">Manual Builder</a></li>
                             <li><a href="price-dashboard.html" class="hover:text-white transition">Price Tracker</a></li>
                             <li><a href="#" onclick="toggleAI()" class="hover:text-white transition">Ask an Expert</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 class="font-bold mb-4">Resources</h4>
+                        <h4 class="font-bold mb-4">Project</h4>
                         <ul class="space-y-2 text-slate-400 text-sm">
-                            <li><a href="#" class="hover:text-white transition">Beginner's Guide</a></li>
-                            <li><a href="#" class="hover:text-white transition">Component Glossary</a></li>
-                            <li><a href="#" class="hover:text-white transition">Best Builds 2025</a></li>
-                            <li><a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" class="hover:text-white transition">GitHub (Open Source)</a></li>
+                            <li><a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" class="hover:text-white transition">GitHub Repository</a></li>
+                            <li><a href="https://github.com/sumitverma0008/PCSENSE/issues" target="_blank" rel="noopener" class="hover:text-white transition">Report an Issue</a></li>
+                            <li><a href="price-dashboard.html" class="hover:text-white transition">Price Update Dashboard</a></li>
+                            <li><a href="#" onclick="toggleLiveSupport()" class="hover:text-white transition">Talk to Live Support</a></li>
                         </ul>
                     </div>
                     <div>
@@ -892,11 +868,10 @@
                 </div>
                 <div class="border-t border-slate-800 mt-8 pt-6">
                     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p class="text-slate-400 text-sm">© 2025 PCSensei. Made in India 🇮🇳 for Indian PC builders.</p>
+                        <p class="text-slate-400 text-sm">© 2026 PCSensei. Built for Indian PC builders.</p>
                         <div class="flex gap-6 text-slate-400 text-sm">
-                            <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                            <a href="#" class="hover:text-white transition">Terms of Use</a>
-                            <a href="#" class="hover:text-white transition">Contact</a>
+                            <a href="https://github.com/sumitverma0008/PCSENSE/issues" target="_blank" rel="noopener" class="hover:text-white transition">Support</a>
+                            <a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" class="hover:text-white transition">Source Code</a>
                         </div>
                     </div>
                 </div>
@@ -930,7 +905,7 @@
                 </div>
                 <div>
                     <span class="font-bold block">PC Expert</span>
-                    <span class="text-xs opacity-80">Online • Typically replies instantly</span>
+                    <span class="text-xs opacity-80">Online â€¢ Typically replies instantly</span>
                 </div>
             </div>
             <button onclick="toggleAI()" class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition-all" title="Close chat"><i class="fa-solid fa-times"></i></button>
@@ -940,7 +915,7 @@
             <div class="flex gap-2">
                 <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xs"><i class="fa-solid fa-user-tie"></i></div>
                 <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-sm text-slate-700 max-w-[80%] border border-slate-100">
-                    Hey there! 👋 I'm here to help you build your perfect PC. Got questions about specs, compatibility, or just need a second opinion? Fire away!
+                    Hey there! ðŸ‘‹ I'm here to help you build your perfect PC. Got questions about specs, compatibility, or just need a second opinion? Fire away!
                 </div>
             </div>
         </div>
@@ -962,7 +937,7 @@
                 </div>
                 <div>
                     <h3 class="font-bold text-white">Rahul from PCSensei</h3>
-                    <p class="text-xs text-green-100">Hardware Specialist • Online</p>
+                    <p class="text-xs text-green-100">Hardware Specialist â€¢ Online</p>
                 </div>
             </div>
             <button onclick="toggleLiveSupport()" class="text-white hover:text-green-100" title="Close"><i class="fa-solid fa-times"></i></button>
@@ -973,19 +948,19 @@
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="bg-white rounded-lg p-3 shadow-sm max-w-[80%]">
-                    <p class="text-sm text-slate-700">Hey! 👋 I'm Rahul, been building PCs for about 8 years now. I've helped folks with everything from ₹20K budget builds to crazy ₹4L gaming rigs.</p>
+                    <p class="text-sm text-slate-700">Hey! ðŸ‘‹ I'm Rahul, been building PCs for about 8 years now. I've helped folks with everything from â‚¹20K budget builds to crazy â‚¹4L gaming rigs.</p>
                     <p class="text-sm text-slate-700 mt-2">What's on your mind? I can help with:</p>
                     <ul class="text-xs text-slate-600 mt-2 space-y-1">
-                        <li>• "Is this build any good?" reviews</li>
-                        <li>• Bottleneck & compatibility checks</li>
-                        <li>• Troubleshooting PC issues</li>
-                        <li>• Where to buy in India</li>
+                        <li>â€¢ "Is this build any good?" reviews</li>
+                        <li>â€¢ Bottleneck & compatibility checks</li>
+                        <li>â€¢ Troubleshooting PC issues</li>
+                        <li>â€¢ Where to buy in India</li>
                     </ul>
                     <div class="flex flex-wrap gap-2 mt-3">
                         <button onclick="sendQuickQuestion('Can you check my build?')" class="text-xs bg-green-50 hover:bg-green-100 text-green-700 px-3 py-1.5 rounded-full border border-green-200 transition">Check my build</button>
                         <button onclick="sendQuickQuestion('PC not turning on')" class="text-xs bg-green-50 hover:bg-green-100 text-green-700 px-3 py-1.5 rounded-full border border-green-200 transition">PC not turning on</button>
                         <button onclick="sendQuickQuestion('Is RTX 4060 worth it in 2025?')" class="text-xs bg-green-50 hover:bg-green-100 text-green-700 px-3 py-1.5 rounded-full border border-green-200 transition">Is RTX 4060 worth it?</button>
-                        <button onclick="sendQuickQuestion('Best GPU under 40000?')" class="text-xs bg-green-50 hover:bg-green-100 text-green-700 px-3 py-1.5 rounded-full border border-green-200 transition">Best GPU under ₹40K</button>
+                        <button onclick="sendQuickQuestion('Best GPU under 40000?')" class="text-xs bg-green-50 hover:bg-green-100 text-green-700 px-3 py-1.5 rounded-full border border-green-200 transition">Best GPU under â‚¹40K</button>
                         <button onclick="sendQuickQuestion('My PC is overheating')" class="text-xs bg-green-50 hover:bg-green-100 text-green-700 px-3 py-1.5 rounded-full border border-green-200 transition">Overheating issue</button>
                     </div>
                 </div>
@@ -1059,6 +1034,96 @@
         // --- 1. DATABASE LOADER ---
         let db = null;
         let dbLoaded = false;
+        let adsenseScriptPromise = null;
+
+        function hasRealAdClient(clientId) {
+            return typeof clientId === 'string' && /^ca-pub-\d{8,}$/.test(clientId.trim());
+        }
+
+        function loadAdsenseScript(clientId) {
+            if (!hasRealAdClient(clientId)) {
+                return Promise.resolve(false);
+            }
+            if (window.adsbygoogle) {
+                return Promise.resolve(true);
+            }
+            if (adsenseScriptPromise) {
+                return adsenseScriptPromise;
+            }
+
+            adsenseScriptPromise = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.async = true;
+                script.crossOrigin = 'anonymous';
+                script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(clientId.trim())}`;
+                script.onload = () => resolve(true);
+                script.onerror = () => reject(new Error('Failed to load AdSense script'));
+                document.head.appendChild(script);
+            }).catch((error) => {
+                console.warn('AdSense disabled:', error.message);
+                return false;
+            });
+
+            return adsenseScriptPromise;
+        }
+
+        function tryInitAdSlot(slot) {
+            if (!slot || slot.dataset.adsInitialized === '1') {
+                return;
+            }
+
+            const clientId = slot.dataset.adClient || '';
+            if (!hasRealAdClient(clientId)) {
+                const container = slot.closest('.ad-container');
+                if (container) {
+                    container.style.display = 'none';
+                }
+                return;
+            }
+
+            const slotWidth = slot.getBoundingClientRect().width;
+            if (slotWidth < 200) {
+                return;
+            }
+
+            loadAdsenseScript(clientId).then((loaded) => {
+                if (!loaded || slot.dataset.adsInitialized === '1') {
+                    return;
+                }
+                try {
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    slot.dataset.adsInitialized = '1';
+                } catch (error) {
+                    console.warn('Ad slot init delayed:', error.message);
+                }
+            });
+        }
+
+        function initLazyAds() {
+            const slots = Array.from(document.querySelectorAll('ins.adsbygoogle'));
+            if (slots.length === 0) {
+                return;
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                slots.forEach((slot) => tryInitAdSlot(slot));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    tryInitAdSlot(entry.target);
+                    if (entry.target.dataset.adsInitialized === '1' || !hasRealAdClient(entry.target.dataset.adClient || '')) {
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '200px 0px', threshold: 0.01 });
+
+            slots.forEach((slot) => observer.observe(slot));
+        }
 
         async function loadDb() {
             if (dbLoaded && db) return db;
@@ -1269,6 +1334,25 @@
             case: null
         };
 
+        function isMobileGpu(gpu) {
+            const name = String(gpu?.name || '').toLowerCase();
+            if (!name) return false;
+
+            if (gpu?.mobile === true) return true;
+            if (name.includes('mobile') || name.includes('laptop') || name.includes('notebook') || name.includes('max-q') || name.includes('max q')) {
+                return true;
+            }
+
+            // Detect common mobile model suffixes like 7600M / A370M / 6850M XT.
+            return /\b(?:rtx|gtx|rx|arc|radeon)\s+[a-z0-9-]*m(?:\b|\s)/i.test(name);
+        }
+
+        function getDesktopGpuPool() {
+            const allGpus = Array.isArray(db?.gpus) ? db.gpus : [];
+            const desktopGpus = allGpus.filter(gpu => !isMobileGpu(gpu));
+            return desktopGpus.length > 0 ? desktopGpus : allGpus;
+        }
+
         async function startCustomBuilder() {
             // Hide all views
             document.getElementById('view-landing').classList.add('hidden');
@@ -1305,7 +1389,8 @@
                 return;
             }
             
-            console.log('Populating dropdowns with', db.cpus.length, 'CPUs and', db.gpus.length, 'GPUs');
+            const desktopGpus = getDesktopGpuPool();
+            console.log('Populating dropdowns with', db.cpus.length, 'CPUs and', desktopGpus.length, 'desktop GPUs');
             
             // CPUs
             const cpuSelect = document.getElementById('select-cpu');
@@ -1317,7 +1402,7 @@
             db.cpus.forEach((cpu, idx) => {
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${cpu.name} - ₹${cpu.price.toLocaleString('en-IN')}`;
+                option.textContent = `${cpu.name} - â‚¹${cpu.price.toLocaleString('en-IN')}`;
                 cpuSelect.appendChild(option);
             });
             document.getElementById('cpu-count').textContent = `${db.cpus.length} options`;
@@ -1325,13 +1410,14 @@
             // GPUs
             const gpuSelect = document.getElementById('select-gpu');
             gpuSelect.innerHTML = '<option value="">Choose a GPU...</option>';
-            db.gpus.forEach((gpu, idx) => {
+            desktopGpus.forEach((gpu) => {
+                const idx = db.gpus.indexOf(gpu);
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${gpu.name} - ₹${gpu.price.toLocaleString('en-IN')}`;
+                option.textContent = `${gpu.name} - â‚¹${gpu.price.toLocaleString('en-IN')}`;
                 gpuSelect.appendChild(option);
             });
-            document.getElementById('gpu-count').textContent = `${db.gpus.length} options`;
+            document.getElementById('gpu-count').textContent = `${desktopGpus.length} options`;
 
             // Motherboards
             const moboSelect = document.getElementById('select-mobo');
@@ -1339,7 +1425,7 @@
             db.mobos.forEach((mobo, idx) => {
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${mobo.name} - ₹${mobo.price.toLocaleString('en-IN')}`;
+                option.textContent = `${mobo.name} - â‚¹${mobo.price.toLocaleString('en-IN')}`;
                 moboSelect.appendChild(option);
             });
             document.getElementById('mobo-count').textContent = `${db.mobos.length} options`;
@@ -1350,7 +1436,7 @@
             db.ram.forEach((ram, idx) => {
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${ram.name} - ₹${ram.price.toLocaleString('en-IN')}`;
+                option.textContent = `${ram.name} - â‚¹${ram.price.toLocaleString('en-IN')}`;
                 ramSelect.appendChild(option);
             });
             document.getElementById('ram-count').textContent = `${db.ram.length} options`;
@@ -1361,7 +1447,7 @@
             db.storage.forEach((storage, idx) => {
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${storage.name} - ₹${storage.price.toLocaleString('en-IN')}`;
+                option.textContent = `${storage.name} - â‚¹${storage.price.toLocaleString('en-IN')}`;
                 storageSelect.appendChild(option);
             });
             document.getElementById('storage-count').textContent = `${db.storage.length} options`;
@@ -1372,7 +1458,7 @@
             db.psu.forEach((psu, idx) => {
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${psu.name} - ₹${psu.price.toLocaleString('en-IN')}`;
+                option.textContent = `${psu.name} - â‚¹${psu.price.toLocaleString('en-IN')}`;
                 psuSelect.appendChild(option);
             });
             document.getElementById('psu-count').textContent = `${db.psu.length} options`;
@@ -1383,7 +1469,7 @@
             db.case.forEach((c, idx) => {
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${c.name} - ₹${c.price.toLocaleString('en-IN')}`;
+                option.textContent = `${c.name} - â‚¹${c.price.toLocaleString('en-IN')}`;
                 caseSelect.appendChild(option);
             });
             document.getElementById('case-count').textContent = `${db.case.length} options`;
@@ -1421,7 +1507,7 @@
                 db.mobos.forEach((mobo, idx) => {
                     const option = document.createElement('option');
                     option.value = idx;
-                    option.textContent = `${mobo.name} - ₹${mobo.price.toLocaleString('en-IN')}`;
+                    option.textContent = `${mobo.name} - â‚¹${mobo.price.toLocaleString('en-IN')}`;
                     moboSelect.appendChild(option);
                 });
                 document.getElementById('mobo-count').textContent = `${db.mobos.length} options`;
@@ -1442,7 +1528,7 @@
                     const idx = db.mobos.indexOf(mobo);
                     const option = document.createElement('option');
                     option.value = idx;
-                    option.textContent = `${mobo.name} - ₹${mobo.price.toLocaleString('en-IN')} (${mobo.socket})`;
+                    option.textContent = `${mobo.name} - â‚¹${mobo.price.toLocaleString('en-IN')} (${mobo.socket})`;
                     moboSelect.appendChild(option);
                 });
                 document.getElementById('mobo-count').textContent = `${compatibleMobos.length} compatible with ${cpuSocket}`;
@@ -1486,7 +1572,7 @@
                                 <i class="fa-solid ${comp.icon} text-blue-600"></i>
                                 <span class="font-medium text-slate-700">${comp.label}</span>
                             </div>
-                            <span class="text-slate-900 font-bold">₹${item.price.toLocaleString('en-IN')}</span>
+                            <span class="text-slate-900 font-bold">â‚¹${item.price.toLocaleString('en-IN')}</span>
                         </div>
                     `;
                 }
@@ -1500,7 +1586,7 @@
             }
             
             listEl.innerHTML = html;
-            totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+            totalEl.textContent = `â‚¹${total.toLocaleString('en-IN')}`;
             
             // Calculate and display power consumption
             calculatePowerConsumption();
@@ -1551,7 +1637,7 @@
                             <i class="fa-solid fa-bolt"></i> Power Consumption
                         </div>
                         <div class="text-xs text-blue-700 space-y-1">
-                            ${details.map(d => `<div>• ${d}</div>`).join('')}
+                            ${details.map(d => `<div>â€¢ ${d}</div>`).join('')}
                             <div class="font-bold border-t border-blue-200 pt-1 mt-1">Total: ~${totalWattage}W</div>
                             <div class="text-green-700 font-bold">Recommended PSU: ${recommendedWattage}W+</div>
                         </div>
@@ -1671,14 +1757,14 @@
             // Update results view
             document.getElementById('res-usage').innerText = 'Custom Build';
             const total = Object.values(customBuild).reduce((sum, item) => sum + (item?.price || 0), 0);
-            document.getElementById('res-budget').innerText = '₹' + total.toLocaleString('en-IN');
+            document.getElementById('res-budget').innerText = 'â‚¹' + total.toLocaleString('en-IN');
             
             renderParts({ type: 'desktop', data: state.currentBuild.data });
             
             // Show custom build message
             document.getElementById('build-reasoning').innerHTML = `
                 This is your custom-selected build. All components have been manually chosen by you.<br><br>
-                <strong>Total Cost:</strong> ₹${total.toLocaleString('en-IN')}<br>
+                <strong>Total Cost:</strong> â‚¹${total.toLocaleString('en-IN')}<br>
                 ${customBuild.cpu && customBuild.mobo && customBuild.cpu.socket === customBuild.mobo.socket ? 
                     '<span class="text-green-600"><i class="fa-solid fa-check-circle"></i> CPU and Motherboard are compatible</span>' : 
                     '<span class="text-red-600"><i class="fa-solid fa-exclamation-triangle"></i> Please verify socket compatibility</span>'}
@@ -1751,12 +1837,14 @@
             else if (type === 'gpu') dbKey = 'gpus';
             else if (type === 'ram') dbKey = 'ram';
             else if (type === 'storage') dbKey = 'storage';
+
+            const sourceItems = type === 'gpu' ? getDesktopGpuPool() : db[dbKey];
             
             // Filter items based on selection
             if (filter === 'All') {
-                items = db[dbKey];
+                items = sourceItems;
             } else {
-                items = db[dbKey].filter(item => {
+                items = sourceItems.filter(item => {
                     const name = item.name || '';
                     const brand = item.brand || '';
                     const spec = item.spec || '';
@@ -1784,7 +1872,7 @@
                 const idx = db[dbKey].indexOf(item);
                 const option = document.createElement('option');
                 option.value = idx;
-                option.textContent = `${item.name} - ₹${item.price.toLocaleString('en-IN')}`;
+                option.textContent = `${item.name} - â‚¹${item.price.toLocaleString('en-IN')}`;
                 select.appendChild(option);
             });
             
@@ -1801,12 +1889,12 @@
             productNameEl.textContent = productName;
             
             const stores = [
-                { name: 'Amazon India', key: 'amazon', color: '#FF9900', icon: '🛒' },
-                { name: 'Flipkart', key: 'flipkart', color: '#2874F0', icon: '🛍️' },
-                { name: 'Reliance Digital', key: 'reliance', color: '#E42529', icon: '🏬' },
-                { name: 'Croma', key: 'croma', color: '#8CC63F', icon: '🏪' },
-                { name: 'Vijay Sales', key: 'vijay', color: '#FF6B00', icon: '🛒' },
-                { name: 'MD Computers', key: 'mdcomputers', color: '#0066CC', icon: '💻' }
+                { name: 'Amazon India', key: 'amazon', color: '#FF9900', icon: 'ðŸ›’' },
+                { name: 'Flipkart', key: 'flipkart', color: '#2874F0', icon: 'ðŸ›ï¸' },
+                { name: 'Reliance Digital', key: 'reliance', color: '#E42529', icon: 'ðŸ¬' },
+                { name: 'Croma', key: 'croma', color: '#8CC63F', icon: 'ðŸª' },
+                { name: 'Vijay Sales', key: 'vijay', color: '#FF6B00', icon: 'ðŸ›’' },
+                { name: 'MD Computers', key: 'mdcomputers', color: '#0066CC', icon: 'ðŸ’»' }
             ];
             
             let html = '';
@@ -1927,13 +2015,13 @@
             if (!budget || isNaN(budget)) {
                 validationErrors.push('Invalid budget amount');
             } else if (budget < 15000) {
-                validationErrors.push('Minimum budget is ₹15,000');
+                validationErrors.push('Minimum budget is â‚¹15,000');
             } else if (budget > 10000000) {
-                validationErrors.push('Maximum budget is ₹1,00,00,000');
+                validationErrors.push('Maximum budget is â‚¹1,00,00,000');
             }
             
             if (validationErrors.length > 0) {
-                alert('⚠️ Validation Error:\n\n' + validationErrors.join('\n'));
+                alert('âš ï¸ Validation Error:\n\n' + validationErrors.join('\n'));
                 return;
             }
             
@@ -2000,7 +2088,7 @@
                 const best = topPicks[0];
                 
                 // Generate intelligent reasoning
-                let reasoning = `Based on your ${usage} requirements with a ₹${budget.toLocaleString('en-IN')} budget, `;
+                let reasoning = `Based on your ${usage} requirements with a â‚¹${budget.toLocaleString('en-IN')} budget, `;
                 reasoning += `our AI analyzed ${potentialLaptops.length} laptops and scored them on performance, value, and compatibility. `;
                 reasoning += `The ${best.name} (Score: ${best.aiScore}/100) is our top recommendation because it offers `;
                 if (usage === 'gaming') reasoning += `excellent gaming performance with ${best.spec}.`;
@@ -2015,14 +2103,15 @@
 
             // DESKTOP LOGIC
             const sortedCpus = [...(db.cpus || [])].sort((a, b) => a.price - b.price);
-            const sortedGpus = [...(db.gpus || [])].sort((a, b) => a.price - b.price);
+            const desktopGpus = getDesktopGpuPool();
+            const sortedGpus = [...desktopGpus].sort((a, b) => a.price - b.price);
             const sortedDiscreteGpus = sortedGpus.filter(g => g.price > 0);
             const sortedMobos = [...(db.mobos || [])].sort((a, b) => a.price - b.price);
             const sortedRam = [...(db.ram || [])].sort((a, b) => a.price - b.price);
             const sortedStorage = [...(db.storage || [])].sort((a, b) => a.price - b.price);
             const sortedPsu = [...(db.psu || [])].sort((a, b) => a.price - b.price);
             const sortedCases = [...(db.case || [])].sort((a, b) => a.price - b.price);
-            const integratedGpu = sortedGpus.find(g => g.price === 0) || sortedGpus[0];
+            const integratedGpu = sortedGpus.find(g => g.price === 0) || sortedGpus[0] || { name: 'Integrated Graphics', price: 0, tier: 'integrated' };
 
             let cpu, gpu, mobo, ram, storage, psu, userCase;
             let buildReason = "";
@@ -2118,15 +2207,15 @@
                     return b.price - a.price;
                 })[0] || sortedCpus.find(c => !c.integrated) || sortedCpus[0];
 
-                let gpuList = db.gpus.filter(g => {
+                let gpuList = desktopGpus.filter(g => {
                     const inBudget = g.price <= gpuBudget * 1.3 && g.price >= gpuBudget * 0.5 && g.price > 0;
                     return inBudget;
                 });
                 
                 if(gpuList.length === 0) {
-                    gpuList = db.gpus.filter(g => g.price > 0 && g.price <= gpuBudget * 1.5);
+                    gpuList = desktopGpus.filter(g => g.price > 0 && g.price <= gpuBudget * 1.5);
                 }
-                if(gpuList.length === 0) gpuList = db.gpus.filter(g => g.price > 0);
+                if(gpuList.length === 0) gpuList = desktopGpus.filter(g => g.price > 0);
                 
                 // Apply brand preference
                 if(prefs.gpu !== 'Any') {
@@ -2408,43 +2497,43 @@
                 if (storage.name.includes('Gen4')) highlights.push('PCIe Gen4 NVMe for blazing fast storage');
                 
                 // Build comprehensive reasoning
-                buildReason = `🎯 ${usage.charAt(0).toUpperCase() + usage.slice(1)} Build Complete!\n\n`;
-                buildReason += `💻 Core Components:\n`;
-                buildReason += `• CPU: ${cpu.name} (${cpu.cores || 'Multi'}-core${cpu.threads ? ', ' + cpu.threads + ' threads' : ''})\n`;
-                buildReason += `• GPU: ${gpu.name} (${gpu.vram || 'Dedicated graphics'})\n`;
-                buildReason += `• Motherboard: ${mobo.socket} socket with ${(mobo.type || mobo.name || '').includes('DDR5') ? 'DDR5' : 'DDR4'} support\n\n`;
+                buildReason = `ðŸŽ¯ ${usage.charAt(0).toUpperCase() + usage.slice(1)} Build Complete!\n\n`;
+                buildReason += `ðŸ’» Core Components:\n`;
+                buildReason += `â€¢ CPU: ${cpu.name} (${cpu.cores || 'Multi'}-core${cpu.threads ? ', ' + cpu.threads + ' threads' : ''})\n`;
+                buildReason += `â€¢ GPU: ${gpu.name} (${gpu.vram || 'Dedicated graphics'})\n`;
+                buildReason += `â€¢ Motherboard: ${mobo.socket} socket with ${(mobo.type || mobo.name || '').includes('DDR5') ? 'DDR5' : 'DDR4'} support\n\n`;
                 
                 if (usage === 'gaming') {
-                    buildReason += `🎮 Gaming Performance:\n`;
+                    buildReason += `ðŸŽ® Gaming Performance:\n`;
                     if (gpu.vram) {
                         const vram = parseInt(gpu.vram);
-                        if (vram >= 16) buildReason += `• Excellent 4K gaming with ray tracing\n`;
-                        else if (vram >= 12) buildReason += `• Smooth 1440p-4K gaming experience\n`;
-                        else if (vram >= 8) buildReason += `• Great 1080p-1440p gaming\n`;
-                        else buildReason += `• Solid 1080p gaming performance\n`;
+                        if (vram >= 16) buildReason += `â€¢ Excellent 4K gaming with ray tracing\n`;
+                        else if (vram >= 12) buildReason += `â€¢ Smooth 1440p-4K gaming experience\n`;
+                        else if (vram >= 8) buildReason += `â€¢ Great 1080p-1440p gaming\n`;
+                        else buildReason += `â€¢ Solid 1080p gaming performance\n`;
                     }
                 } else if (usage === 'content') {
-                    buildReason += `🎨 Content Creation:\n`;
-                    buildReason += `• GPU-accelerated rendering and editing\n`;
-                    buildReason += `• Multi-core CPU for fast exports\n`;
+                    buildReason += `ðŸŽ¨ Content Creation:\n`;
+                    buildReason += `â€¢ GPU-accelerated rendering and editing\n`;
+                    buildReason += `â€¢ Multi-core CPU for fast exports\n`;
                 } else if (usage === 'coding') {
-                    buildReason += `👨‍💻 Development:\n`;
-                    buildReason += `• Fast compilation with ${cpu.cores}+ cores\n`;
-                    buildReason += `• Plenty of RAM for VMs and containers\n`;
+                    buildReason += `ðŸ‘¨â€ðŸ’» Development:\n`;
+                    buildReason += `â€¢ Fast compilation with ${cpu.cores}+ cores\n`;
+                    buildReason += `â€¢ Plenty of RAM for VMs and containers\n`;
                 }
                 
                 if (highlights.length > 0) {
-                    buildReason += `\n✨ Key Features:\n`;
-                    highlights.forEach(h => buildReason += `• ${h}\n`);
+                    buildReason += `\nâœ¨ Key Features:\n`;
+                    highlights.forEach(h => buildReason += `â€¢ ${h}\n`);
                 }
                 
-                buildReason += `\n⚡ Power: ${psu.name} (${psuWattage}W) provides ${Math.round((psuWattage/totalTdp - 1) * 100)}% power headroom\n`;
-                buildReason += `💾 Storage: ${storage.name} for fast boot and load times\n`;
-                buildReason += `\n💰 Total: ₹${totalCost.toLocaleString('en-IN')} (${((totalCost/budget)*100).toFixed(1)}% of budget)`;
+                buildReason += `\nâš¡ Power: ${psu.name} (${psuWattage}W) provides ${Math.round((psuWattage/totalTdp - 1) * 100)}% power headroom\n`;
+                buildReason += `ðŸ’¾ Storage: ${storage.name} for fast boot and load times\n`;
+                buildReason += `\nðŸ’° Total: â‚¹${totalCost.toLocaleString('en-IN')} (${((totalCost/budget)*100).toFixed(1)}% of budget)`;
                 
                 if (warnings.length > 0) {
-                    buildReason += `\n\n⚠️ Notes:\n`;
-                    warnings.forEach(w => buildReason += `• ${w}\n`);
+                    buildReason += `\n\nâš ï¸ Notes:\n`;
+                    warnings.forEach(w => buildReason += `â€¢ ${w}\n`);
                 }
             }
 
@@ -2461,7 +2550,7 @@
             document.getElementById('view-wizard').classList.add('hidden');
             document.getElementById('view-results').classList.remove('hidden');
             document.getElementById('res-usage').innerText = state.usage;
-            document.getElementById('res-budget').innerHTML = '<span style="font-size: 0.9em; opacity: 0.9;">₹</span>' + state.budget.toLocaleString('en-IN');
+            document.getElementById('res-budget').innerHTML = '<span style="font-size: 0.9em; opacity: 0.9;">â‚¹</span>' + state.budget.toLocaleString('en-IN');
 
             renderBenchmarks(res);
 
@@ -2489,7 +2578,7 @@
                              </div>
                              <div class="bg-slate-50 p-3 rounded-lg text-sm text-slate-600">
                                 <span class="block text-xs font-bold text-slate-400 uppercase">Est. Price</span>
-                                <span style="font-size: 0.8em; opacity: 0.8;">₹</span>${laptop.price.toLocaleString('en-IN')}
+                                <span style="font-size: 0.8em; opacity: 0.8;">â‚¹</span>${laptop.price.toLocaleString('en-IN')}
                              </div>
                         </div>
                         <button onclick='openShopModal(${JSON.stringify(laptop.shopLinks)}, "${laptop.name.replace(/'/g, "\\'")}")' class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-bold text-sm hover:from-blue-700 hover:to-purple-700 transition shadow-md hover:shadow-lg"><i class="fa-solid fa-store text-lg"></i> Compare & Buy</button>
@@ -2500,7 +2589,7 @@
             } else {
                 const b = res.data;
                 const total = Object.values(b).reduce((acc, part) => acc + part.price, 0);
-                document.getElementById('total-price').innerHTML = '<span style="font-size: 0.7em; opacity: 0.8;">₹</span>' + total.toLocaleString('en-IN');
+                document.getElementById('total-price').innerHTML = '<span style="font-size: 0.7em; opacity: 0.8;">â‚¹</span>' + total.toLocaleString('en-IN');
 
                 const parts = [
                     { type: 'CPU', icon: 'fa-microchip', data: b.cpu },
@@ -2526,7 +2615,7 @@
                         </div>
                         <div class="text-right">
                             <div class="font-bold text-lg ${p.data.price === 0 ? 'text-green-600' : 'text-slate-800'}">
-                                ${p.data.price === 0 ? '<span class="flex items-center gap-1"><i class="fa-solid fa-gift"></i> Included</span>' : '<span class="text-green-600" style="font-size: 14px;">₹</span>' + p.data.price.toLocaleString('en-IN')}
+                                ${p.data.price === 0 ? '<span class="flex items-center gap-1"><i class="fa-solid fa-gift"></i> Included</span>' : '<span class="text-green-600" style="font-size: 14px;">â‚¹</span>' + p.data.price.toLocaleString('en-IN')}
                             </div>
                             ${p.data.price > 0 && p.data.shopLinks ? '<button onclick=\'openShopModal(' + JSON.stringify(p.data.shopLinks) + ', "' + p.data.name.replace(/'/g, "\\'") + '")\' class="inline-flex items-center gap-1 text-xs text-blue-600 font-bold hover:text-blue-700 mt-1 bg-blue-50 px-3 py-1 rounded-full hover:bg-blue-100 transition"><i class="fa-solid fa-store"></i> Compare & Buy</button>' : ''}
                         </div>
@@ -2619,92 +2708,92 @@
             // Greetings
             if (/\b(hello|hi|hey|greetings)\b/.test(txt)) {
                 const greetings = [
-                    "Hey! 👋 Good to have you here. I've been building PCs for years and I'm happy to help. What's on your mind?",
+                    "Hey! ðŸ‘‹ Good to have you here. I've been building PCs for years and I'm happy to help. What's on your mind?",
                     "Hi there! Whether you're building your first PC or upgrading, I've got you covered. What do you need help with?",
-                    "Hey! 🙂 Ready to help you find the perfect setup. Got a specific question or just browsing?"
+                    "Hey! ðŸ™‚ Ready to help you find the perfect setup. Got a specific question or just browsing?"
                 ];
                 return greetings[Math.floor(Math.random() * greetings.length)];
             }
 
             // Budget-related queries
             if (/budget|price|cost|afford|spend|money|expensive|cheap/i.test(txt)) {
-                const budgetMatch = txt.match(/(\d+)k|₹\s*(\d+)|rs\s*(\d+)/);
+                const budgetMatch = txt.match(/(\d+)k|â‚¹\s*(\d+)|rs\s*(\d+)/);
                 if (budgetMatch) {
                     const amount = (parseInt(budgetMatch[1] || budgetMatch[2] || budgetMatch[3]) || 50) * 1000;
                     if (amount < 20000) {
-                        return `Hmm, ₹${amount.toLocaleString('en-IN')} is tight, but not impossible!\n\nHonestly, at this budget I'd suggest:\n• A refurbished ThinkPad (great value)\n• Or an AMD Athlon APU build if desktop\n\nYou won't be gaming, but for browsing, Office work, and light coding — totally doable. Want me to show you a build?`;
+                        return `Hmm, â‚¹${amount.toLocaleString('en-IN')} is tight, but not impossible!\n\nHonestly, at this budget I'd suggest:\nâ€¢ A refurbished ThinkPad (great value)\nâ€¢ Or an AMD Athlon APU build if desktop\n\nYou won't be gaming, but for browsing, Office work, and light coding â€” totally doable. Want me to show you a build?`;
                     } else if (amount < 50000) {
-                        return `₹${amount.toLocaleString('en-IN')} is actually a sweet spot! You've got options.\n\nFor a desktop, the AMD 5600G is brilliant — no graphics card needed, plays most games at 1080p medium.\n\nFor laptop, look at Ryzen 5 models with Vega graphics.\n\nWhat are you mainly going to use it for?`;
+                        return `â‚¹${amount.toLocaleString('en-IN')} is actually a sweet spot! You've got options.\n\nFor a desktop, the AMD 5600G is brilliant â€” no graphics card needed, plays most games at 1080p medium.\n\nFor laptop, look at Ryzen 5 models with Vega graphics.\n\nWhat are you mainly going to use it for?`;
                     } else if (amount < 100000) {
-                        return `Nice budget! ₹${amount.toLocaleString('en-IN')} opens up some really solid builds.\n\nYou're looking at:\n• RTX 4060 territory for gaming\n• i5/Ryzen 5 + decent GPU combo\n• 1080p high settings, easy\n\nGaming, work, or a bit of both?`;
+                        return `Nice budget! â‚¹${amount.toLocaleString('en-IN')} opens up some really solid builds.\n\nYou're looking at:\nâ€¢ RTX 4060 territory for gaming\nâ€¢ i5/Ryzen 5 + decent GPU combo\nâ€¢ 1080p high settings, easy\n\nGaming, work, or a bit of both?`;
                     } else {
-                        return `₹${amount.toLocaleString('en-IN')}+ — now we're talking! 🔥\n\nAt this budget, you can go all out:\n• RTX 4070/4080 for 1440p or 4K\n• Ryzen 7/i7 or even higher\n• DDR5 RAM, fast NVMe storage\n\nAre you going for pure gaming performance, or do you need workstation power too?`;
+                        return `â‚¹${amount.toLocaleString('en-IN')}+ â€” now we're talking! ðŸ”¥\n\nAt this budget, you can go all out:\nâ€¢ RTX 4070/4080 for 1440p or 4K\nâ€¢ Ryzen 7/i7 or even higher\nâ€¢ DDR5 RAM, fast NVMe storage\n\nAre you going for pure gaming performance, or do you need workstation power too?`;
                     }
                 }
                 
                 if (state.budget) {
-                    return `Your budget is ₹${state.budget.toLocaleString('en-IN')} — solid choice.\n\nQuick tip: For gaming, put most money into GPU (around 40%). For editing/rendering, balance CPU and GPU equally.\n\nWant me to break down how I'd spend this budget?`;
+                    return `Your budget is â‚¹${state.budget.toLocaleString('en-IN')} â€” solid choice.\n\nQuick tip: For gaming, put most money into GPU (around 40%). For editing/rendering, balance CPU and GPU equally.\n\nWant me to break down how I'd spend this budget?`;
                 }
                 
-                return "Budget's the most important factor! Here's my rough guide:\n\n• Under ₹30K: APU builds, basic work\n• ₹30-60K: Entry gaming, RTX 4060\n• ₹60-100K: Solid 1080p/1440p gaming\n• ₹100K+: High refresh 1440p or 4K\n\nWhat's your range?";
+                return "Budget's the most important factor! Here's my rough guide:\n\nâ€¢ Under â‚¹30K: APU builds, basic work\nâ€¢ â‚¹30-60K: Entry gaming, RTX 4060\nâ€¢ â‚¹60-100K: Solid 1080p/1440p gaming\nâ€¢ â‚¹100K+: High refresh 1440p or 4K\n\nWhat's your range?";
             }
 
             // Component compatibility
             if (/compatib|work.*together|match|fit|socket|support/i.test(txt)) {
                 if (state.currentBuild && state.currentBuild.type === 'desktop') {
                     const build = state.currentBuild.data;
-                    return `✅ Compatibility Check for your build:\n\n🔌 CPU-Mobo: ${build.cpu.socket} socket - ✓ Compatible\n💾 RAM-Mobo: DDR${(build.mobo.type || build.mobo.name || '').includes('DDR5') ? '5' : '4'} - ✓ Compatible\n⚡ PSU: ${build.psu.name} - ✓ Adequate for components\n📦 All components fit standard ATX cases\n\nEverything looks good! Any specific concerns?`;
+                    return `âœ… Compatibility Check for your build:\n\nðŸ”Œ CPU-Mobo: ${build.cpu.socket} socket - âœ“ Compatible\nðŸ’¾ RAM-Mobo: DDR${(build.mobo.type || build.mobo.name || '').includes('DDR5') ? '5' : '4'} - âœ“ Compatible\nâš¡ PSU: ${build.psu.name} - âœ“ Adequate for components\nðŸ“¦ All components fit standard ATX cases\n\nEverything looks good! Any specific concerns?`;
                 }
-                return "🔍 To check compatibility, I need to know:\n• CPU socket type (AM4, AM5, LGA1700, etc.)\n• Motherboard chipset\n• RAM generation (DDR4/DDR5)\n• PSU wattage vs. component TDP\n\nGenerate a build first, or tell me your components!";
+                return "ðŸ” To check compatibility, I need to know:\nâ€¢ CPU socket type (AM4, AM5, LGA1700, etc.)\nâ€¢ Motherboard chipset\nâ€¢ RAM generation (DDR4/DDR5)\nâ€¢ PSU wattage vs. component TDP\n\nGenerate a build first, or tell me your components!";
             }
 
             // Performance queries
             if (/fps|frame.*rate|perform|benchmark|how.*fast|speed|run/i.test(txt)) {
                 if (txt.includes('4k') || txt.includes('2160p')) {
-                    return "🎮 4K Gaming Performance:\n• RTX 4080+: 60-120 FPS (AAA titles)\n• RTX 4070 Ti: 50-80 FPS (high settings)\n• RTX 4060 Ti: 30-50 FPS (medium settings)\n\nPair with Ryzen 7/i7+ to avoid bottlenecks!\n\nBudget needed: ₹1,50,000+";
+                    return "ðŸŽ® 4K Gaming Performance:\nâ€¢ RTX 4080+: 60-120 FPS (AAA titles)\nâ€¢ RTX 4070 Ti: 50-80 FPS (high settings)\nâ€¢ RTX 4060 Ti: 30-50 FPS (medium settings)\n\nPair with Ryzen 7/i7+ to avoid bottlenecks!\n\nBudget needed: â‚¹1,50,000+";
                 } else if (txt.includes('1440p')) {
-                    return "🎮 1440p Gaming Performance:\n• RTX 4070: 100-144 FPS (AAA titles)\n• RTX 4060 Ti: 80-120 FPS (high settings)\n• RTX 4060: 60-90 FPS (medium-high)\n\nSweet spot for price-performance!\n\nBudget: ₹80,000-₹1,50,000";
+                    return "ðŸŽ® 1440p Gaming Performance:\nâ€¢ RTX 4070: 100-144 FPS (AAA titles)\nâ€¢ RTX 4060 Ti: 80-120 FPS (high settings)\nâ€¢ RTX 4060: 60-90 FPS (medium-high)\n\nSweet spot for price-performance!\n\nBudget: â‚¹80,000-â‚¹1,50,000";
                 } else {
-                    return "🎮 1080p Gaming Performance:\n• RTX 4060: 120-200+ FPS (most games)\n• RTX 4050: 80-120 FPS (high settings)\n• GTX 1650: 50-80 FPS (medium settings)\n\nAll paired with Ryzen 5/i5 or better.\n\nBudget: ₹50,000-₹1,00,000";
+                    return "ðŸŽ® 1080p Gaming Performance:\nâ€¢ RTX 4060: 120-200+ FPS (most games)\nâ€¢ RTX 4050: 80-120 FPS (high settings)\nâ€¢ GTX 1650: 50-80 FPS (medium settings)\n\nAll paired with Ryzen 5/i5 or better.\n\nBudget: â‚¹50,000-â‚¹1,00,000";
                 }
             }
 
             // Specific component queries - GPU
             if (/gpu|graphics.*card|rtx|gtx|radeon|rx|vram|video.*card/i.test(txt)) {
                 if (/4090/i.test(txt)) {
-                    return "🚀 RTX 4090 - The Absolute Beast!\n• VRAM: 24GB GDDR6X\n• Performance: 4K gaming at 120+ FPS\n• Price: ₹1,70,000 - ₹2,00,000\n• TDP: 450W (needs 850W+ PSU)\n\n⚠️ Pair with Ryzen 9 7950X or i9-14900K to avoid bottlenecks!";
+                    return "ðŸš€ RTX 4090 - The Absolute Beast!\nâ€¢ VRAM: 24GB GDDR6X\nâ€¢ Performance: 4K gaming at 120+ FPS\nâ€¢ Price: â‚¹1,70,000 - â‚¹2,00,000\nâ€¢ TDP: 450W (needs 850W+ PSU)\n\nâš ï¸ Pair with Ryzen 9 7950X or i9-14900K to avoid bottlenecks!";
                 } else if (/4080/i.test(txt)) {
-                    return "💎 RTX 4080 - Enthusiast Powerhouse\n• VRAM: 16GB GDDR6X\n• Performance: 4K @ 100+ FPS, 1440p @ 165+ FPS\n• Price: ₹1,10,000 - ₹1,30,000\n• TDP: 320W (needs 750W+ PSU)\n\n✨ Best for 4K gaming without breaking the bank!";
+                    return "ðŸ’Ž RTX 4080 - Enthusiast Powerhouse\nâ€¢ VRAM: 16GB GDDR6X\nâ€¢ Performance: 4K @ 100+ FPS, 1440p @ 165+ FPS\nâ€¢ Price: â‚¹1,10,000 - â‚¹1,30,000\nâ€¢ TDP: 320W (needs 750W+ PSU)\n\nâœ¨ Best for 4K gaming without breaking the bank!";
                 } else if (/4070/i.test(txt)) {
-                    return "⭐ RTX 4070/4070 Ti - Sweet Spot\n• VRAM: 12GB GDDR6X\n• Performance: 1440p @ 120+ FPS, 4K @ 60+ FPS\n• Price: ₹55,000 - ₹75,000\n• TDP: 200-285W (needs 650W PSU)\n\n🎯 Perfect balance of price and performance!";
+                    return "â­ RTX 4070/4070 Ti - Sweet Spot\nâ€¢ VRAM: 12GB GDDR6X\nâ€¢ Performance: 1440p @ 120+ FPS, 4K @ 60+ FPS\nâ€¢ Price: â‚¹55,000 - â‚¹75,000\nâ€¢ TDP: 200-285W (needs 650W PSU)\n\nðŸŽ¯ Perfect balance of price and performance!";
                 } else if (/4060/i.test(txt)) {
-                    return "🎮 RTX 4060/4060 Ti - Value King\n• VRAM: 8GB/16GB GDDR6\n• Performance: 1080p @ 144+ FPS, 1440p @ 80+ FPS\n• Price: ₹32,000 - ₹48,000\n• TDP: 160-170W (needs 550W PSU)\n\n💰 Best value for 1080p-1440p gaming!";
+                    return "ðŸŽ® RTX 4060/4060 Ti - Value King\nâ€¢ VRAM: 8GB/16GB GDDR6\nâ€¢ Performance: 1080p @ 144+ FPS, 1440p @ 80+ FPS\nâ€¢ Price: â‚¹32,000 - â‚¹48,000\nâ€¢ TDP: 160-170W (needs 550W PSU)\n\nðŸ’° Best value for 1080p-1440p gaming!";
                 } else if (/amd|radeon|rx/i.test(txt)) {
-                    return "🔴 AMD Radeon Options:\n• RX 7900 XTX: Competes with RTX 4080 (₹95k-₹1.1L)\n• RX 7800 XT: Between 4070-4070 Ti (₹50k-₹60k)\n• RX 7600: Entry 1080p gaming (₹25k-₹30k)\n\n✨ Great value, excellent rasterization, more VRAM!\n⚠️ Ray tracing not as strong as NVIDIA.";
+                    return "ðŸ”´ AMD Radeon Options:\nâ€¢ RX 7900 XTX: Competes with RTX 4080 (â‚¹95k-â‚¹1.1L)\nâ€¢ RX 7800 XT: Between 4070-4070 Ti (â‚¹50k-â‚¹60k)\nâ€¢ RX 7600: Entry 1080p gaming (â‚¹25k-â‚¹30k)\n\nâœ¨ Great value, excellent rasterization, more VRAM!\nâš ï¸ Ray tracing not as strong as NVIDIA.";
                 } else {
-                    return "🎮 GPU Selection Guide:\n\n💎 Budget:\n• ₹25k-₹35k: RTX 4060, RX 7600 (1080p)\n• ₹40k-₹60k: RTX 4060 Ti, RX 7700 XT (1440p)\n• ₹65k-₹90k: RTX 4070 Ti, RX 7800 XT (1440p-4K)\n• ₹1L+: RTX 4080/4090 (4K ultra)\n\n🎯 Gaming: Prioritize VRAM (8GB min, 12GB+ ideal)\n🎨 Content: 12GB+ for rendering\n\nWhat's your budget and resolution target?";
+                    return "ðŸŽ® GPU Selection Guide:\n\nðŸ’Ž Budget:\nâ€¢ â‚¹25k-â‚¹35k: RTX 4060, RX 7600 (1080p)\nâ€¢ â‚¹40k-â‚¹60k: RTX 4060 Ti, RX 7700 XT (1440p)\nâ€¢ â‚¹65k-â‚¹90k: RTX 4070 Ti, RX 7800 XT (1440p-4K)\nâ€¢ â‚¹1L+: RTX 4080/4090 (4K ultra)\n\nðŸŽ¯ Gaming: Prioritize VRAM (8GB min, 12GB+ ideal)\nðŸŽ¨ Content: 12GB+ for rendering\n\nWhat's your budget and resolution target?";
                 }
             }
 
             // Specific component queries - CPU
             if (/cpu|processor|ryzen|intel|core.*i[3579]|thread|clock.*speed/i.test(txt)) {
                 if (/gaming/i.test(txt)) {
-                    return "🎮 Gaming CPU Recommendations:\n\n⭐ Best: Ryzen 7 7800X3D (₹35k-₹40k)\n• 8 cores, 3D V-Cache = best gaming CPU\n\n💎 Great: i5-14600K or Ryzen 5 7600X (₹25k-₹30k)\n• 6 cores sufficient for most games\n\n💰 Budget: i3-13100F or Ryzen 5 5600 (₹8k-₹12k)\n• Solid 1080p gaming performance\n\n🔑 Gaming needs: 6+ cores, high single-thread speed";
+                    return "ðŸŽ® Gaming CPU Recommendations:\n\nâ­ Best: Ryzen 7 7800X3D (â‚¹35k-â‚¹40k)\nâ€¢ 8 cores, 3D V-Cache = best gaming CPU\n\nðŸ’Ž Great: i5-14600K or Ryzen 5 7600X (â‚¹25k-â‚¹30k)\nâ€¢ 6 cores sufficient for most games\n\nðŸ’° Budget: i3-13100F or Ryzen 5 5600 (â‚¹8k-â‚¹12k)\nâ€¢ Solid 1080p gaming performance\n\nðŸ”‘ Gaming needs: 6+ cores, high single-thread speed";
                 } else if (/content|render|edit|stream/i.test(txt)) {
-                    return "🎨 Content Creation CPU Recommendations:\n\n🚀 Pro: Ryzen 9 7950X or i9-14900K (₹45k-₹60k)\n• 16-24 cores for fast rendering\n\n⭐ Great: Ryzen 7 7700X or i7-14700K (₹30k-₹40k)\n• 8-12 cores, excellent multitasking\n\n💰 Budget: Ryzen 5 7600 (₹18k-₹22k)\n• 6 cores, good for light editing\n\n🔑 Content needs: More cores = faster exports!";
+                    return "ðŸŽ¨ Content Creation CPU Recommendations:\n\nðŸš€ Pro: Ryzen 9 7950X or i9-14900K (â‚¹45k-â‚¹60k)\nâ€¢ 16-24 cores for fast rendering\n\nâ­ Great: Ryzen 7 7700X or i7-14700K (â‚¹30k-â‚¹40k)\nâ€¢ 8-12 cores, excellent multitasking\n\nðŸ’° Budget: Ryzen 5 7600 (â‚¹18k-â‚¹22k)\nâ€¢ 6 cores, good for light editing\n\nðŸ”‘ Content needs: More cores = faster exports!";
                 } else {
-                    return "💻 CPU Selection Guide:\n\n🎮 Gaming: 6-8 cores, high clock speed\n• Ryzen 7800X3D, i5-14600K\n\n🎨 Content: 12-16 cores, multi-thread\n• Ryzen 9 7950X, i9-14900K\n\n💼 Productivity: 8-12 cores, balanced\n• Ryzen 7 7700X, i7-14700K\n\n💰 Budget: 4-6 cores\n• Ryzen 5 5600, i3-13100F\n\nWhat's your primary use case?";
+                    return "ðŸ’» CPU Selection Guide:\n\nðŸŽ® Gaming: 6-8 cores, high clock speed\nâ€¢ Ryzen 7800X3D, i5-14600K\n\nðŸŽ¨ Content: 12-16 cores, multi-thread\nâ€¢ Ryzen 9 7950X, i9-14900K\n\nðŸ’¼ Productivity: 8-12 cores, balanced\nâ€¢ Ryzen 7 7700X, i7-14700K\n\nðŸ’° Budget: 4-6 cores\nâ€¢ Ryzen 5 5600, i3-13100F\n\nWhat's your primary use case?";
                 }
             }
 
             // RAM queries
             if (/ram|memory|ddr4|ddr5|gb.*ram|how.*much.*ram/i.test(txt)) {
-                return "🧠 RAM Recommendations:\n\n🎮 Gaming:\n• 16GB DDR4/DDR5 (minimum)\n• 32GB for AAA titles + multitasking\n• 3200MHz+ DDR4 or 5600MHz+ DDR5\n\n🎨 Content Creation:\n• 32GB minimum (4K editing)\n• 64GB for heavy projects\n• Speed matters less, capacity first\n\n💼 Productivity:\n• 16GB for office work\n• 32GB for VMs/development\n\n💰 Prices:\n• 16GB DDR4: ₹3k-₹5k\n• 32GB DDR5: ₹10k-₹15k";
+                return "ðŸ§  RAM Recommendations:\n\nðŸŽ® Gaming:\nâ€¢ 16GB DDR4/DDR5 (minimum)\nâ€¢ 32GB for AAA titles + multitasking\nâ€¢ 3200MHz+ DDR4 or 5600MHz+ DDR5\n\nðŸŽ¨ Content Creation:\nâ€¢ 32GB minimum (4K editing)\nâ€¢ 64GB for heavy projects\nâ€¢ Speed matters less, capacity first\n\nðŸ’¼ Productivity:\nâ€¢ 16GB for office work\nâ€¢ 32GB for VMs/development\n\nðŸ’° Prices:\nâ€¢ 16GB DDR4: â‚¹3k-â‚¹5k\nâ€¢ 32GB DDR5: â‚¹10k-â‚¹15k";
             }
 
             // Storage queries
             if (/ssd|nvme|storage|hard.*drive|hdd|gen4|m\.2/i.test(txt)) {
-                return "💾 Storage Recommendations:\n\n⚡ Best: PCIe Gen4 NVMe SSD\n• 7000+ MB/s read speeds\n• WD Black SN850X, Samsung 990 Pro\n• ₹6k-₹10k for 1TB\n\n✨ Great: PCIe Gen3 NVMe SSD\n• 3500+ MB/s, excellent value\n• WD Blue SN570, Samsung 980\n• ₹4k-₹6k for 1TB\n\n💰 Budget: SATA SSD\n• 550 MB/s, still way better than HDD\n• ₹2.5k-₹4k for 1TB\n\n📊 Capacity:\n• 500GB: OS + few games\n• 1TB: Recommended minimum\n• 2TB: Ideal for large game libraries";
+                return "ðŸ’¾ Storage Recommendations:\n\nâš¡ Best: PCIe Gen4 NVMe SSD\nâ€¢ 7000+ MB/s read speeds\nâ€¢ WD Black SN850X, Samsung 990 Pro\nâ€¢ â‚¹6k-â‚¹10k for 1TB\n\nâœ¨ Great: PCIe Gen3 NVMe SSD\nâ€¢ 3500+ MB/s, excellent value\nâ€¢ WD Blue SN570, Samsung 980\nâ€¢ â‚¹4k-â‚¹6k for 1TB\n\nðŸ’° Budget: SATA SSD\nâ€¢ 550 MB/s, still way better than HDD\nâ€¢ â‚¹2.5k-â‚¹4k for 1TB\n\nðŸ“Š Capacity:\nâ€¢ 500GB: OS + few games\nâ€¢ 1TB: Recommended minimum\nâ€¢ 2TB: Ideal for large game libraries";
             }
 
             // PSU queries
@@ -2716,20 +2805,20 @@
                     const totalTdp = cpuTdp + gpuTdp + 100;
                     const recommended = Math.ceil(totalTdp * 1.2);
                     
-                    return `⚡ PSU Analysis for Your Build:\n\n📊 Power Requirements:\n• CPU: ${cpuTdp}W\n• GPU: ${gpuTdp}W\n• System: 100W\n• Total: ${totalTdp}W\n\n✅ Recommended: ${recommended}W+ (20% headroom)\n\n🏆 Quality:\n• 80+ Gold: Best value\n• 80+ Platinum: High efficiency\n• Brands: Corsair, Seasonic, EVGA\n\nCurrent PSU: ${build.psu.name}`;
+                    return `âš¡ PSU Analysis for Your Build:\n\nðŸ“Š Power Requirements:\nâ€¢ CPU: ${cpuTdp}W\nâ€¢ GPU: ${gpuTdp}W\nâ€¢ System: 100W\nâ€¢ Total: ${totalTdp}W\n\nâœ… Recommended: ${recommended}W+ (20% headroom)\n\nðŸ† Quality:\nâ€¢ 80+ Gold: Best value\nâ€¢ 80+ Platinum: High efficiency\nâ€¢ Brands: Corsair, Seasonic, EVGA\n\nCurrent PSU: ${build.psu.name}`;
                 }
                 
-                return "⚡ PSU Selection Guide:\n\n🎯 Wattage:\n• Budget build: 450-550W\n• Mid-range: 650-750W\n• High-end: 850W+\n• RTX 4090: 1000W+\n\n🏆 Efficiency:\n• 80+ Bronze: Basic\n• 80+ Gold: Best value ⭐\n• 80+ Platinum: High efficiency\n\n💡 Rule: (CPU TDP + GPU TDP + 100W) × 1.2\n\n✅ Trusted Brands:\nCorsair, Seasonic, EVGA, Cooler Master";
+                return "âš¡ PSU Selection Guide:\n\nðŸŽ¯ Wattage:\nâ€¢ Budget build: 450-550W\nâ€¢ Mid-range: 650-750W\nâ€¢ High-end: 850W+\nâ€¢ RTX 4090: 1000W+\n\nðŸ† Efficiency:\nâ€¢ 80+ Bronze: Basic\nâ€¢ 80+ Gold: Best value â­\nâ€¢ 80+ Platinum: High efficiency\n\nðŸ’¡ Rule: (CPU TDP + GPU TDP + 100W) Ã— 1.2\n\nâœ… Trusted Brands:\nCorsair, Seasonic, EVGA, Cooler Master";
             }
 
             // Laptop specific queries
             if (/laptop|notebook|portable|mobile/i.test(txt)) {
                 if (/gaming.*laptop|laptop.*gaming/i.test(txt)) {
-                    return "🎮 Gaming Laptop Guide:\n\n💎 Premium (₹1.5L+):\n• RTX 4070+, 165Hz screen\n• ASUS ROG, MSI Raider, Legion 7\n\n⭐ Mid-Range (₹80k-₹1.5L):\n• RTX 4060, 144Hz screen\n• Legion 5, TUF A15, Nitro 5\n\n💰 Budget (₹50k-₹80k):\n• RTX 4050/3050, 120Hz\n• Victus, IdeaPad Gaming\n\n🔑 Must-haves:\n• 144Hz+ display\n• 16GB RAM (upgradeable)\n• Good cooling system";
+                    return "ðŸŽ® Gaming Laptop Guide:\n\nðŸ’Ž Premium (â‚¹1.5L+):\nâ€¢ RTX 4070+, 165Hz screen\nâ€¢ ASUS ROG, MSI Raider, Legion 7\n\nâ­ Mid-Range (â‚¹80k-â‚¹1.5L):\nâ€¢ RTX 4060, 144Hz screen\nâ€¢ Legion 5, TUF A15, Nitro 5\n\nðŸ’° Budget (â‚¹50k-â‚¹80k):\nâ€¢ RTX 4050/3050, 120Hz\nâ€¢ Victus, IdeaPad Gaming\n\nðŸ”‘ Must-haves:\nâ€¢ 144Hz+ display\nâ€¢ 16GB RAM (upgradeable)\nâ€¢ Good cooling system";
                 } else if (/productivity|work|office/i.test(txt)) {
-                    return "💼 Productivity Laptop Guide:\n\n🏆 Premium (₹1L+):\n• ThinkPad X1, Dell XPS, MacBook Air M2\n• 16GB+ RAM, 512GB+ SSD\n• 10+ hour battery\n\n⭐ Mid-Range (₹50k-₹1L):\n• ThinkPad E/T series, HP EliteBook\n• 8-16GB RAM, good keyboard\n\n💰 Budget (₹30k-₹50k):\n• IdeaPad, Inspiron, VivoBook\n• 8GB RAM, basic needs\n\n🔑 Priorities:\n• Battery life > Performance\n• Build quality matters\n• Good keyboard & trackpad";
+                    return "ðŸ’¼ Productivity Laptop Guide:\n\nðŸ† Premium (â‚¹1L+):\nâ€¢ ThinkPad X1, Dell XPS, MacBook Air M2\nâ€¢ 16GB+ RAM, 512GB+ SSD\nâ€¢ 10+ hour battery\n\nâ­ Mid-Range (â‚¹50k-â‚¹1L):\nâ€¢ ThinkPad E/T series, HP EliteBook\nâ€¢ 8-16GB RAM, good keyboard\n\nðŸ’° Budget (â‚¹30k-â‚¹50k):\nâ€¢ IdeaPad, Inspiron, VivoBook\nâ€¢ 8GB RAM, basic needs\n\nðŸ”‘ Priorities:\nâ€¢ Battery life > Performance\nâ€¢ Build quality matters\nâ€¢ Good keyboard & trackpad";
                 } else {
-                    return "💻 Laptop vs Desktop:\n\n✅ Choose Laptop if:\n• Need portability\n• College/travel frequently\n• Limited desk space\n\n✅ Choose Desktop if:\n• Gaming/heavy work\n• Need upgradability\n• Better price-performance\n\n🎮 Gaming: Desktop = 30-40% better value\n💼 Work: Laptop = better flexibility\n\nWhat's your priority? Performance or portability?";
+                    return "ðŸ’» Laptop vs Desktop:\n\nâœ… Choose Laptop if:\nâ€¢ Need portability\nâ€¢ College/travel frequently\nâ€¢ Limited desk space\n\nâœ… Choose Desktop if:\nâ€¢ Gaming/heavy work\nâ€¢ Need upgradability\nâ€¢ Better price-performance\n\nðŸŽ® Gaming: Desktop = 30-40% better value\nðŸ’¼ Work: Laptop = better flexibility\n\nWhat's your priority? Performance or portability?";
                 }
             }
 
@@ -2738,44 +2827,44 @@
                 if (state.currentBuild) {
                     if (state.currentBuild.type === 'laptop') {
                         const best = state.currentBuild.data[0];
-                        return `📊 Your Laptop Selection Analysis:\n\n✅ Top Pick: ${best.name}\n• Price: ₹${best.price.toLocaleString('en-IN')}\n• Usage: ${state.usage}\n• Specs: ${best.spec}\n\n${best.aiScore ? `🎯 AI Score: ${best.aiScore}/100` : ''}\n\n💡 This laptop ${best.aiScore > 80 ? 'is an excellent match' : 'fits your needs well'} for ${state.usage} tasks!\n\nWant alternatives or have specific questions?`;
+                        return `ðŸ“Š Your Laptop Selection Analysis:\n\nâœ… Top Pick: ${best.name}\nâ€¢ Price: â‚¹${best.price.toLocaleString('en-IN')}\nâ€¢ Usage: ${state.usage}\nâ€¢ Specs: ${best.spec}\n\n${best.aiScore ? `ðŸŽ¯ AI Score: ${best.aiScore}/100` : ''}\n\nðŸ’¡ This laptop ${best.aiScore > 80 ? 'is an excellent match' : 'fits your needs well'} for ${state.usage} tasks!\n\nWant alternatives or have specific questions?`;
                     } else {
                         const build = state.currentBuild.data;
-                        return `📊 Your Desktop Build Analysis:\n\n✅ Components:\n• CPU: ${build.cpu.name}\n• GPU: ${build.gpu.name}\n• RAM: ${build.ram.name}\n• Storage: ${build.storage.name}\n\n🎯 Usage: ${state.usage}\n💰 Budget: ₹${state.budget.toLocaleString('en-IN')}\n\n✨ This build is optimized for ${state.usage} with balanced performance!\n\nNeed component upgrades or have compatibility questions?`;
+                        return `ðŸ“Š Your Desktop Build Analysis:\n\nâœ… Components:\nâ€¢ CPU: ${build.cpu.name}\nâ€¢ GPU: ${build.gpu.name}\nâ€¢ RAM: ${build.ram.name}\nâ€¢ Storage: ${build.storage.name}\n\nðŸŽ¯ Usage: ${state.usage}\nðŸ’° Budget: â‚¹${state.budget.toLocaleString('en-IN')}\n\nâœ¨ This build is optimized for ${state.usage} with balanced performance!\n\nNeed component upgrades or have compatibility questions?`;
                     }
                 }
-                return "🤔 I can help you build the perfect PC!\n\n1️⃣ Tell me your budget (₹50,000? ₹1,00,000?)\n2️⃣ What's your use case? (Gaming, editing, work?)\n3️⃣ Any brand preferences? (Intel/AMD, NVIDIA/AMD)\n\nOr use the wizard above to generate a build, then I can review it for you!";
+                return "ðŸ¤” I can help you build the perfect PC!\n\n1ï¸âƒ£ Tell me your budget (â‚¹50,000? â‚¹1,00,000?)\n2ï¸âƒ£ What's your use case? (Gaming, editing, work?)\n3ï¸âƒ£ Any brand preferences? (Intel/AMD, NVIDIA/AMD)\n\nOr use the wizard above to generate a build, then I can review it for you!";
             }
 
             // Upgrade queries
             if (/upgrade|improve|better|replace|swap/i.test(txt)) {
-                return "⬆️ Upgrade Priority Guide:\n\n🎮 Gaming PC:\n1. GPU (biggest FPS boost)\n2. CPU (if bottlenecking)\n3. RAM (16GB → 32GB)\n4. Storage (HDD → SSD)\n\n🎨 Content Creation:\n1. RAM (32GB → 64GB)\n2. CPU (more cores)\n3. Storage (larger/faster SSD)\n4. GPU (rendering acceleration)\n\n💡 General Rule:\n• Upgrade GPU every 3-4 years\n• CPU every 5-6 years\n• RAM/Storage as needed\n\nWhat component are you thinking of upgrading?";
+                return "â¬†ï¸ Upgrade Priority Guide:\n\nðŸŽ® Gaming PC:\n1. GPU (biggest FPS boost)\n2. CPU (if bottlenecking)\n3. RAM (16GB â†’ 32GB)\n4. Storage (HDD â†’ SSD)\n\nðŸŽ¨ Content Creation:\n1. RAM (32GB â†’ 64GB)\n2. CPU (more cores)\n3. Storage (larger/faster SSD)\n4. GPU (rendering acceleration)\n\nðŸ’¡ General Rule:\nâ€¢ Upgrade GPU every 3-4 years\nâ€¢ CPU every 5-6 years\nâ€¢ RAM/Storage as needed\n\nWhat component are you thinking of upgrading?";
             }
 
             // Thanks/goodbye
             if (/thank|thanks|appreciate|bye|goodbye/i.test(txt)) {
-                return "😊 You're welcome! Happy building!\n\nFeel free to ask if you have more questions. Good luck with your new PC! 🚀";
+                return "ðŸ˜Š You're welcome! Happy building!\n\nFeel free to ask if you have more questions. Good luck with your new PC! ðŸš€";
             }
 
             // Generic game-specific queries
             if (/fortnite|pubg|valorant|apex|warzone|gta|cyberpunk|minecraft/i.test(txt)) {
                 const game = txt.match(/fortnite|pubg|valorant|apex|warzone|gta|cyberpunk|minecraft/i)?.[0];
                 const specs = {
-                    fortnite: { gpu: 'RTX 4050+', cpu: 'Ryzen 5/i5', ram: '16GB', budget: '₹60k+' },
-                    valorant: { gpu: 'RTX 4050', cpu: 'Ryzen 5/i5', ram: '8GB', budget: '₹50k+' },
-                    cyberpunk: { gpu: 'RTX 4070+', cpu: 'Ryzen 7/i7', ram: '16GB', budget: '₹1.2L+' },
-                    gta: { gpu: 'RTX 4060', cpu: 'Ryzen 5/i5', ram: '16GB', budget: '₹75k+' },
-                    minecraft: { gpu: 'RTX 4050', cpu: 'Ryzen 5/i5', ram: '8GB', budget: '₹45k+' },
-                    warzone: { gpu: 'RTX 4060', cpu: 'Ryzen 5/i5', ram: '16GB', budget: '₹80k+' },
+                    fortnite: { gpu: 'RTX 4050+', cpu: 'Ryzen 5/i5', ram: '16GB', budget: 'â‚¹60k+' },
+                    valorant: { gpu: 'RTX 4050', cpu: 'Ryzen 5/i5', ram: '8GB', budget: 'â‚¹50k+' },
+                    cyberpunk: { gpu: 'RTX 4070+', cpu: 'Ryzen 7/i7', ram: '16GB', budget: 'â‚¹1.2L+' },
+                    gta: { gpu: 'RTX 4060', cpu: 'Ryzen 5/i5', ram: '16GB', budget: 'â‚¹75k+' },
+                    minecraft: { gpu: 'RTX 4050', cpu: 'Ryzen 5/i5', ram: '8GB', budget: 'â‚¹45k+' },
+                    warzone: { gpu: 'RTX 4060', cpu: 'Ryzen 5/i5', ram: '16GB', budget: 'â‚¹80k+' },
                 };
                 
-                const spec = specs[game.toLowerCase()] || { gpu: 'RTX 4060', cpu: 'Ryzen 5/i5', ram: '16GB', budget: '₹70k+' };
+                const spec = specs[game.toLowerCase()] || { gpu: 'RTX 4060', cpu: 'Ryzen 5/i5', ram: '16GB', budget: 'â‚¹70k+' };
                 
-                return `🎮 ${game.charAt(0).toUpperCase() + game.slice(1)} Requirements:\n\n📊 Recommended:\n• GPU: ${spec.gpu}\n• CPU: ${spec.cpu}\n• RAM: ${spec.ram}\n• Budget: ${spec.budget}\n\n✨ For 1080p 144fps+ at high settings!\n\nWant a specific build for this game?`;
+                return `ðŸŽ® ${game.charAt(0).toUpperCase() + game.slice(1)} Requirements:\n\nðŸ“Š Recommended:\nâ€¢ GPU: ${spec.gpu}\nâ€¢ CPU: ${spec.cpu}\nâ€¢ RAM: ${spec.ram}\nâ€¢ Budget: ${spec.budget}\n\nâœ¨ For 1080p 144fps+ at high settings!\n\nWant a specific build for this game?`;
             }
 
             // Fallback with helpful suggestions
-            return "🤔 I'm not sure I understood that completely.\n\n💡 I can help with:\n• 💰 Budget recommendations\n• 🔧 Component selection (CPU, GPU, RAM, etc.)\n• 🎮 Gaming performance estimates\n• ✅ Compatibility checking\n• ⬆️ Upgrade suggestions\n• 💻 Laptop recommendations\n\nTry asking:\n• \"What GPU for ₹50k?\"\n• \"Is my build compatible?\"\n• \"Can it run Cyberpunk?\"\n• \"Should I upgrade my CPU?\"";
+            return "ðŸ¤” I'm not sure I understood that completely.\n\nðŸ’¡ I can help with:\nâ€¢ ðŸ’° Budget recommendations\nâ€¢ ðŸ”§ Component selection (CPU, GPU, RAM, etc.)\nâ€¢ ðŸŽ® Gaming performance estimates\nâ€¢ âœ… Compatibility checking\nâ€¢ â¬†ï¸ Upgrade suggestions\nâ€¢ ðŸ’» Laptop recommendations\n\nTry asking:\nâ€¢ \"What GPU for â‚¹50k?\"\nâ€¢ \"Is my build compatible?\"\nâ€¢ \"Can it run Cyberpunk?\"\nâ€¢ \"Should I upgrade my CPU?\"";
         }
 
         function addTypingIndicator() {
@@ -2902,9 +2991,9 @@
                     const build = state.currentBuild;
                     if (build.type === 'desktop') {
                         const data = build.data;
-                        return `Alright, let me take a look at your build...\n\nOkay so you've got the ${data.gpu.name} — solid pick for ${state.usage}. Pairs nicely with the ${data.cpu.name}.\n\nHonest thoughts:\n• This combo won't bottleneck each other, which is good\n• PSU should handle it fine\n• I'd maybe add a couple extra fans down the line\n\nOverall? You're in good shape. 👍 Any specific concerns?`;
+                        return `Alright, let me take a look at your build...\n\nOkay so you've got the ${data.gpu.name} â€” solid pick for ${state.usage}. Pairs nicely with the ${data.cpu.name}.\n\nHonest thoughts:\nâ€¢ This combo won't bottleneck each other, which is good\nâ€¢ PSU should handle it fine\nâ€¢ I'd maybe add a couple extra fans down the line\n\nOverall? You're in good shape. ðŸ‘ Any specific concerns?`;
                     } else {
-                        return `Let me check this laptop out...\n\n${build.data.name} at ₹${build.data.price.toLocaleString('en-IN')}\n\nFor ${state.usage}, this should work well. A few things I'd look into:\n• Check YouTube reviews for real-world thermals\n• Make sure you're getting at least 1 year warranty\n• See if RAM is upgradeable (some laptops solder it in)\n\nAnything specific bugging you about this choice?`;
+                        return `Let me check this laptop out...\n\n${build.data.name} at â‚¹${build.data.price.toLocaleString('en-IN')}\n\nFor ${state.usage}, this should work well. A few things I'd look into:\nâ€¢ Check YouTube reviews for real-world thermals\nâ€¢ Make sure you're getting at least 1 year warranty\nâ€¢ See if RAM is upgradeable (some laptops solder it in)\n\nAnything specific bugging you about this choice?`;
                     }
                 }
             }
@@ -2912,24 +3001,24 @@
             // Troubleshooting - conversational
             if (/problem|issue|error|crash|not.*work|fail|blue.*screen|bsod/i.test(txt)) {
                 if (/boot|start|turn.*on|power/i.test(txt)) {
-                    return `Oof, no boot is stressful. Let's figure this out.\n\nFirst, the basics:\n1. Is the PSU switch on? (Back of the power supply)\n2. Check the 24-pin motherboard cable and 8-pin CPU cable\n3. Try reseating your RAM — pull them out, put them back\n4. If you have 2 RAM sticks, try just one\n\nDoes the motherboard light up at all? Any beeps or LED codes? That'll tell us a lot.`;
+                    return `Oof, no boot is stressful. Let's figure this out.\n\nFirst, the basics:\n1. Is the PSU switch on? (Back of the power supply)\n2. Check the 24-pin motherboard cable and 8-pin CPU cable\n3. Try reseating your RAM â€” pull them out, put them back\n4. If you have 2 RAM sticks, try just one\n\nDoes the motherboard light up at all? Any beeps or LED codes? That'll tell us a lot.`;
                 } else if (/overheat|hot|temp|thermal/i.test(txt)) {
-                    return `Overheating sucks. Let's cool things down.\n\nQuick wins:\n• Clean out dust (seriously, grab some compressed air)\n• Check if all fans are spinning\n• Make sure your cooler is mounted properly\n\nIf it's a new build, you might need to reapply thermal paste. Use a pea-sized amount.\n\nWhat temps are you seeing? And is it CPU, GPU, or both running hot?`;
+                    return `Overheating sucks. Let's cool things down.\n\nQuick wins:\nâ€¢ Clean out dust (seriously, grab some compressed air)\nâ€¢ Check if all fans are spinning\nâ€¢ Make sure your cooler is mounted properly\n\nIf it's a new build, you might need to reapply thermal paste. Use a pea-sized amount.\n\nWhat temps are you seeing? And is it CPU, GPU, or both running hot?`;
                 } else if (/fps|stutter|lag|performance/i.test(txt)) {
-                    return `Performance issues can be tricky. Let's narrow it down.\n\nFirst things first:\n1. Update your GPU drivers (use DDU for a clean install)\n2. Check if XMP is enabled in BIOS — big difference for RAM speed\n3. Open Task Manager while gaming — is CPU or GPU at 100%?\n\nAlso, what game and what settings? Sometimes just turning down shadows makes a huge difference.`;
+                    return `Performance issues can be tricky. Let's narrow it down.\n\nFirst things first:\n1. Update your GPU drivers (use DDU for a clean install)\n2. Check if XMP is enabled in BIOS â€” big difference for RAM speed\n3. Open Task Manager while gaming â€” is CPU or GPU at 100%?\n\nAlso, what game and what settings? Sometimes just turning down shadows makes a huge difference.`;
                 } else {
-                    return `Hmm, let me help you troubleshoot this.\n\nCan you tell me:\n• What exactly is happening?\n• When did it start?\n• Did you change anything recently?\n• What are your specs?\n\nThe more details the better — even small things can be clues!`;
+                    return `Hmm, let me help you troubleshoot this.\n\nCan you tell me:\nâ€¢ What exactly is happening?\nâ€¢ When did it start?\nâ€¢ Did you change anything recently?\nâ€¢ What are your specs?\n\nThe more details the better â€” even small things can be clues!`;
                 }
             }
 
             // Upgrade advice - more conversational
             if (/upgrade|improve|better|should.*i/i.test(txt)) {
                 if (/gpu|graphics/i.test(txt)) {
-                    return `GPU upgrade, nice! That's usually the biggest performance jump.\n\nBefore we pick one, I need to know:\n• What's your current GPU?\n• What resolution/FPS are you targeting?\n• What's your PSU wattage?\n• And your CPU (to check for bottlenecks)?\n\nIn general right now:\n• ₹35K: RTX 4060 (great 1080p card)\n• ₹55-65K: RTX 4070 (1440p sweet spot)\n• ₹80K+: RTX 4070 Ti Super\n\nWhat's your setup looking like?`;
+                    return `GPU upgrade, nice! That's usually the biggest performance jump.\n\nBefore we pick one, I need to know:\nâ€¢ What's your current GPU?\nâ€¢ What resolution/FPS are you targeting?\nâ€¢ What's your PSU wattage?\nâ€¢ And your CPU (to check for bottlenecks)?\n\nIn general right now:\nâ€¢ â‚¹35K: RTX 4060 (great 1080p card)\nâ€¢ â‚¹55-65K: RTX 4070 (1440p sweet spot)\nâ€¢ â‚¹80K+: RTX 4070 Ti Super\n\nWhat's your setup looking like?`;
                 } else if (/cpu|processor/i.test(txt)) {
                     return `CPU upgrade can be tricky because it might need a new motherboard too.\n\nWhat CPU and motherboard do you have now? That'll tell us if you can just drop in a newer chip or need a whole platform change.\n\nIf you're on AM4 (older Ryzen), a 5600X or 5800X3D is a solid upgrade.\nOn LGA1700 (Intel 12th-14th gen), you have options within the same board.\n\nWhat games/apps are feeling slow?`;
                 } else if (/ram|memory/i.test(txt)) {
-                    return `RAM upgrade is usually pretty easy!\n\nQuick questions:\n• How much do you have now? (16GB is fine for most people)\n• DDR4 or DDR5?\n• What speed is it running at?\n\nHonest take: If you're at 16GB and just gaming, you probably don't need more. But if you do video editing, run VMs, or have tons of Chrome tabs open... 32GB helps.\n\nAnd make sure XMP is enabled in BIOS — free performance!`;
+                    return `RAM upgrade is usually pretty easy!\n\nQuick questions:\nâ€¢ How much do you have now? (16GB is fine for most people)\nâ€¢ DDR4 or DDR5?\nâ€¢ What speed is it running at?\n\nHonest take: If you're at 16GB and just gaming, you probably don't need more. But if you do video editing, run VMs, or have tons of Chrome tabs open... 32GB helps.\n\nAnd make sure XMP is enabled in BIOS â€” free performance!`;
                 } else {
                     return `Upgrade advice really depends on what you're trying to improve.\n\nFor gaming: GPU first, always. That's your biggest FPS boost.\nFor editing/streaming: More RAM and a better CPU help a lot.\nFor general speed: An SSD if you're still on hard drive (game changer).\n\nWhat's feeling slow for you right now?`;
                 }
@@ -2938,42 +3027,42 @@
             // Component recommendations - more natural
             if (/recommend|suggest|best|good|which/i.test(txt)) {
                 if (/motherboard|mobo/i.test(txt)) {
-                    return `Motherboard recs depend on your CPU, but here's the gist:\n\nFor AMD Ryzen 7000:\n• Budget: B650M DS3H (~₹12K)\n• Mid: MSI B650 Tomahawk (~₹20K)\n• High-end: X670E boards (~₹35K+)\n\nFor Intel 13th/14th Gen:\n• Budget: B760M (~₹12K)\n• Mid: Z790 Gaming Plus (~₹22K)\n\nWhat CPU are you going with? That'll narrow it down.`;
+                    return `Motherboard recs depend on your CPU, but here's the gist:\n\nFor AMD Ryzen 7000:\nâ€¢ Budget: B650M DS3H (~â‚¹12K)\nâ€¢ Mid: MSI B650 Tomahawk (~â‚¹20K)\nâ€¢ High-end: X670E boards (~â‚¹35K+)\n\nFor Intel 13th/14th Gen:\nâ€¢ Budget: B760M (~â‚¹12K)\nâ€¢ Mid: Z790 Gaming Plus (~â‚¹22K)\n\nWhat CPU are you going with? That'll narrow it down.`;
                 } else if (/psu|power.*supply/i.test(txt)) {
-                    return `PSU is important — don't cheap out here!\n\nBrands I trust: Corsair RM/RMx, Seasonic, MSI MPG, EVGA G6.\n\nWattage guide:\n• RTX 4060 builds: 550-650W is fine\n• RTX 4070 builds: 650-750W\n• RTX 4080/4090: 850W minimum\n\nAlways go 80+ Gold or better, and fully modular makes building way easier.\n\nWhat GPU are you running?`;
+                    return `PSU is important â€” don't cheap out here!\n\nBrands I trust: Corsair RM/RMx, Seasonic, MSI MPG, EVGA G6.\n\nWattage guide:\nâ€¢ RTX 4060 builds: 550-650W is fine\nâ€¢ RTX 4070 builds: 650-750W\nâ€¢ RTX 4080/4090: 850W minimum\n\nAlways go 80+ Gold or better, and fully modular makes building way easier.\n\nWhat GPU are you running?`;
                 } else if (/case/i.test(txt)) {
-                    return `Cases are honestly down to preference, but I'll share my favorites:\n\nBest airflow:\n• Lian Li Lancool 216 (~₹9K) — my go-to recommendation\n• Corsair 4000D Airflow (~₹8K)\n\nGood looking + functional:\n• NZXT H510 Flow (~₹8K)\n• Lian Li O11 Dynamic (~₹15K) if you want that showcase build\n\nJust make sure it has a mesh front panel. Solid fronts = hot components.\n\nATX or smaller build?`;
+                    return `Cases are honestly down to preference, but I'll share my favorites:\n\nBest airflow:\nâ€¢ Lian Li Lancool 216 (~â‚¹9K) â€” my go-to recommendation\nâ€¢ Corsair 4000D Airflow (~â‚¹8K)\n\nGood looking + functional:\nâ€¢ NZXT H510 Flow (~â‚¹8K)\nâ€¢ Lian Li O11 Dynamic (~â‚¹15K) if you want that showcase build\n\nJust make sure it has a mesh front panel. Solid fronts = hot components.\n\nATX or smaller build?`;
                 } else if (/cooler|cooling/i.test(txt)) {
-                    return `Cooler depends on your CPU's heat output.\n\nFor 65W CPUs (most Ryzen, i5): Stock cooler is fine, or grab a DeepCool AK400 (~₹2K) for quieter operation.\n\nFor 105W+ CPUs: You want something beefier:\n• Air: Noctua NH-U12S (~₹6K) or Thermalright Peerless Assassin\n• AIO: Arctic Liquid Freezer II or DeepCool LT520\n\nWhat CPU are you cooling?`;
+                    return `Cooler depends on your CPU's heat output.\n\nFor 65W CPUs (most Ryzen, i5): Stock cooler is fine, or grab a DeepCool AK400 (~â‚¹2K) for quieter operation.\n\nFor 105W+ CPUs: You want something beefier:\nâ€¢ Air: Noctua NH-U12S (~â‚¹6K) or Thermalright Peerless Assassin\nâ€¢ AIO: Arctic Liquid Freezer II or DeepCool LT520\n\nWhat CPU are you cooling?`;
                 }
             }
 
             // Compatibility checks
             if (/fit|compatible|work.*with|support/i.test(txt)) {
-                return `🔍 Compatibility Check Service:\n\n📝 To help you, I need:\n1️⃣ CPU model\n2️⃣ Motherboard model\n3️⃣ RAM type & speed\n4️⃣ GPU model\n5️⃣ PSU wattage\n6️⃣ Case size\n\n✅ I'll verify:\n✓ CPU socket match\n✓ RAM compatibility\n✓ PCIe slot availability\n✓ PSU power adequacy\n✓ Physical clearances\n✓ BIOS update needs\n\nList your components!`;
+                return `ðŸ” Compatibility Check Service:\n\nðŸ“ To help you, I need:\n1ï¸âƒ£ CPU model\n2ï¸âƒ£ Motherboard model\n3ï¸âƒ£ RAM type & speed\n4ï¸âƒ£ GPU model\n5ï¸âƒ£ PSU wattage\n6ï¸âƒ£ Case size\n\nâœ… I'll verify:\nâœ“ CPU socket match\nâœ“ RAM compatibility\nâœ“ PCIe slot availability\nâœ“ PSU power adequacy\nâœ“ Physical clearances\nâœ“ BIOS update needs\n\nList your components!`;
             }
 
             // Price/value questions
             if (/worth|price|cost|value|deal|should.*buy/i.test(txt)) {
-                return `💰 Value Assessment Expert:\n\n🎯 Current Market (Dec 2024):\n\n✅ Good Deals:\n• RTX 4070: ₹55-60k\n• Ryzen 7 7800X3D: ₹36-38k\n• RTX 4060: ₹30-33k\n\n⚠️ Wait/Overpriced:\n• RTX 3000 series (outdated)\n• Intel 12th gen (13th/14th better value)\n\n💡 Value Tips:\n• Check launch vs current price\n• Compare to next tier up\n• Consider used market (GPUs)\n• Wait for sales (holidays)\n\nWhat component are you eyeing?`;
+                return `ðŸ’° Value Assessment Expert:\n\nðŸŽ¯ Current Market (Dec 2024):\n\nâœ… Good Deals:\nâ€¢ RTX 4070: â‚¹55-60k\nâ€¢ Ryzen 7 7800X3D: â‚¹36-38k\nâ€¢ RTX 4060: â‚¹30-33k\n\nâš ï¸ Wait/Overpriced:\nâ€¢ RTX 3000 series (outdated)\nâ€¢ Intel 12th gen (13th/14th better value)\n\nðŸ’¡ Value Tips:\nâ€¢ Check launch vs current price\nâ€¢ Compare to next tier up\nâ€¢ Consider used market (GPUs)\nâ€¢ Wait for sales (holidays)\n\nWhat component are you eyeing?`;
             }
 
             // Building help
             if (/build|assemble|install|how.*to|guide|tutorial/i.test(txt)) {
                 if (/first.*time|beginner|never/i.test(txt)) {
-                    return `👷 First Build? You got this!\n\n📺 Watch:\n1. Linus Tech Tips build guide\n2. JayzTwoCents beginners guide\n\n⚠️ Common Mistakes:\n❌ Forgetting I/O shield\n❌ Not using motherboard standoffs\n❌ Forgetting to flip PSU switch\n❌ Not connecting CPU power (8-pin)\n❌ Overtightening screws\n\n💡 Pro Tips:\n✓ Build on table first (test boot)\n✓ Install RAM in slots 2&4\n✓ Apply pea-sized thermal paste\n✓ Cable management = better airflow\n\nTake your time! Any specific step?`;
+                    return `ðŸ‘· First Build? You got this!\n\nðŸ“º Watch:\n1. Linus Tech Tips build guide\n2. JayzTwoCents beginners guide\n\nâš ï¸ Common Mistakes:\nâŒ Forgetting I/O shield\nâŒ Not using motherboard standoffs\nâŒ Forgetting to flip PSU switch\nâŒ Not connecting CPU power (8-pin)\nâŒ Overtightening screws\n\nðŸ’¡ Pro Tips:\nâœ“ Build on table first (test boot)\nâœ“ Install RAM in slots 2&4\nâœ“ Apply pea-sized thermal paste\nâœ“ Cable management = better airflow\n\nTake your time! Any specific step?`;
                 } else {
-                    return `🔧 Build Assembly Order:\n\n1️⃣ Install I/O shield in case\n2️⃣ Mount motherboard standoffs\n3️⃣ Install CPU on motherboard\n4️⃣ Apply thermal paste\n5️⃣ Mount CPU cooler\n6️⃣ Install RAM\n7️⃣ Mount motherboard in case\n8️⃣ Install PSU\n9️⃣ Install storage drives\n🔟 Install GPU\n1️⃣1️⃣ Connect all cables\n1️⃣2️⃣ Cable management\n1️⃣3️⃣ Test boot!\n\nWhich step needs help?`;
+                    return `ðŸ”§ Build Assembly Order:\n\n1ï¸âƒ£ Install I/O shield in case\n2ï¸âƒ£ Mount motherboard standoffs\n3ï¸âƒ£ Install CPU on motherboard\n4ï¸âƒ£ Apply thermal paste\n5ï¸âƒ£ Mount CPU cooler\n6ï¸âƒ£ Install RAM\n7ï¸âƒ£ Mount motherboard in case\n8ï¸âƒ£ Install PSU\n9ï¸âƒ£ Install storage drives\nðŸ”Ÿ Install GPU\n1ï¸âƒ£1ï¸âƒ£ Connect all cables\n1ï¸âƒ£2ï¸âƒ£ Cable management\n1ï¸âƒ£3ï¸âƒ£ Test boot!\n\nWhich step needs help?`;
                 }
             }
 
             // Default expert responses
             const expertResponses = [
-                `👨‍💻 I'm here to help with expert advice!\n\nI can assist with:\n🔧 Troubleshooting\n💡 Component selection\n⚡ Performance optimization\n🎮 Gaming builds\n💼 Workstation setups\n🔍 Compatibility checks\n\nWhat specific question do you have?`,
+                `ðŸ‘¨â€ðŸ’» I'm here to help with expert advice!\n\nI can assist with:\nðŸ”§ Troubleshooting\nðŸ’¡ Component selection\nâš¡ Performance optimization\nðŸŽ® Gaming builds\nðŸ’¼ Workstation setups\nðŸ” Compatibility checks\n\nWhat specific question do you have?`,
                 
-                `💬 Let me help you with that!\n\nFor the best advice, tell me:\n• Your budget\n• Your use case (gaming/work/both)\n• Current components (if upgrading)\n• Specific concerns\n\nThe more details, the better I can help!`,
+                `ðŸ’¬ Let me help you with that!\n\nFor the best advice, tell me:\nâ€¢ Your budget\nâ€¢ Your use case (gaming/work/both)\nâ€¢ Current components (if upgrading)\nâ€¢ Specific concerns\n\nThe more details, the better I can help!`,
                 
-                `🎯 Expert tip: Always verify component compatibility before buying!\n\nKey checks:\n✓ CPU socket matches motherboard\n✓ RAM type (DDR4/DDR5)\n✓ PSU wattage for your GPU\n✓ Case size fits your motherboard\n✓ Cooler height clearance\n\nNeed a compatibility check?`
+                `ðŸŽ¯ Expert tip: Always verify component compatibility before buying!\n\nKey checks:\nâœ“ CPU socket matches motherboard\nâœ“ RAM type (DDR4/DDR5)\nâœ“ PSU wattage for your GPU\nâœ“ Case size fits your motherboard\nâœ“ Cooler height clearance\n\nNeed a compatibility check?`
             ];
 
             return expertResponses[Math.floor(Math.random() * expertResponses.length)];
@@ -2996,6 +3085,9 @@
             history.appendChild(div);
             history.scrollTop = history.scrollHeight;
         }
+
+        initLazyAds();
     </script>
 </body>
 </html>
+

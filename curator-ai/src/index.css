@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface font-body text-on-surface antialiased selection:bg-emerald-500/30 selection:text-emerald-100;
+  }
+}
+
+.editorial-shadow {
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.4);
+}
+.ghost-border {
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .toggle-icon {
+  transform: rotate(180deg);
+}

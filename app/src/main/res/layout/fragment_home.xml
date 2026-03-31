@@ -1,92 +1,413 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="@drawable/bg_hero_animated"
+    tools:context=".ui.home.HomeFragment">
 
-    <LinearLayout
+    <View
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="-70dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/bg_blur_orb_blue" />
+
+    <View
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="-90dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/bg_blur_orb_purple" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="24dp">
 
-        <!-- Logo/Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🖥️ PCSensei"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="AI-Powered PC Building Assistant"
-            android:textSize="16sp"
-            android:textColor="?android:textColorSecondary"
-            android:layout_marginBottom="32dp" />
-
-        <!-- Status Text -->
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp">
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="24dp">
 
-            <TextView
-                android:id="@+id/status_text"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Loading components..."
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:gravity="center" />
-        </com.google.android.material.card.MaterialCardView>
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/glass_card_fill"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="14dp"
+                app:strokeColor="@color/glass_card_stroke"
+                app:strokeWidth="1dp">
 
-        <!-- PC Builder Button -->
-        <Button
-            android:id="@+id/pc_builder_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Build Desktop PC"
-            android:textSize="16sp"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp"
-            android:enabled="false" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_glass_card"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="24dp">
 
-        <!-- Laptop Finder Button -->
-        <Button
-            android:id="@+id/laptop_finder_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Find Laptop"
-            android:textSize="16sp"
-            android:padding="16dp"
-            android:layout_marginBottom="24dp"
-            android:enabled="false" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bg_trust_badge"
+                        android:fontFamily="@font/poppins_medium"
+                        android:paddingStart="14dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="8dp"
+                        android:text="Trusted by 10,000+ PC Builders in India"
+                        android:textColor="@color/trust_badge_text"
+                        android:textSize="12sp" />
 
-        <!-- Features -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Features"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp" />
+                    <TextView
+                        android:id="@+id/hero_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Stop Overpaying for PCs.&#10;Build Smarter, Save More."
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="34sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="• Smart budget allocation\n• Component compatibility checking\n• Usage-based recommendations\n• Real-time price monitoring\n• Shop link integration"
-            android:textSize="14sp"
-            android:lineSpacingMultiplier="1.5" />
+                    <TextView
+                        android:id="@+id/hero_subtext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="22dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="4dp"
+                        android:text="Whether you're a gamer chasing 144 FPS, a creator rendering 4K videos, or a student on a tight budget - we've helped thousands find their perfect setup."
+                        android:textColor="@color/text_secondary_on_dark"
+                        android:textSize="16sp" />
 
-    </LinearLayout>
-</ScrollView>
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/home_loading_shimmer"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="12dp"
+                        android:visibility="gone"
+                        shimmer:shimmer_auto_start="true"
+                        shimmer:shimmer_base_alpha="0.35"
+                        shimmer:shimmer_duration="1100"
+                        shimmer:shimmer_highlight_alpha="0.9">
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="@drawable/bg_secondary_button_glass" />
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/pc_builder_button"
+                        style="@style/Widget.PCSensei.PrimaryButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/bg_primary_button_gradient"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Get Started"
+                        android:textAllCaps="false"
+                        android:contentDescription="Get started with PC builder"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp"
+                        app:icon="@drawable/ic_rocket"
+                        app:iconGravity="textStart"
+                        app:iconPadding="10dp"
+                        app:iconTint="@android:color/white" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/laptop_finder_button"
+                        style="@style/Widget.PCSensei.SecondaryButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/bg_secondary_button_glass"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Chat with Expert"
+                        android:textAllCaps="false"
+                        android:contentDescription="Open chat with expert"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="17sp"
+                        app:icon="@drawable/ic_chat"
+                        app:iconGravity="textStart"
+                        app:iconPadding="10dp"
+                        app:iconTint="@color/text_on_dark" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:contentDescription="@null"
+                                app:srcCompat="@drawable/ic_trust_check" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="No signup required"
+                                android:textColor="@color/text_secondary_on_dark"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:contentDescription="@null"
+                                app:srcCompat="@drawable/ic_trust_check" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="100% free"
+                                android:textColor="@color/text_secondary_on_dark"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:contentDescription="@null"
+                                app:srcCompat="@drawable/ic_trust_check" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="Works in 30 seconds"
+                                android:textColor="@color/text_secondary_on_dark"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/status_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
+                        android:text="Loading components..."
+                        android:textColor="@color/text_muted_on_dark"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="What You Get"
+                android:textColor="@color/text_on_dark"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="The same intelligence behind the PCSensei landing page, optimized for mobile."
+                android:textColor="@color/text_secondary_on_dark"
+                android:textSize="14sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.PCSensei.FeatureCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_feature_dot" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Smart budget allocation"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.PCSensei.FeatureCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_feature_dot" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Component compatibility checking"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.PCSensei.FeatureCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_feature_dot" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Usage-based recommendations"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.PCSensei.FeatureCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_feature_dot" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Real-time price monitoring"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.PCSensei.FeatureCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="12dp"
+                        android:contentDescription="@null"
+                        app:srcCompat="@drawable/ic_feature_dot" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="Shop link integration"
+                        android:textColor="@color/text_on_dark"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>

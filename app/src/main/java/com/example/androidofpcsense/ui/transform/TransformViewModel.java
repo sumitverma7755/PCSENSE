@@ -1,26 +1,32 @@
 package com.example.androidofpcsense.ui.transform;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.androidofpcsense.data.ComponentRepository;
+import com.example.androidofpcsense.models.ComponentDatabase;
+import com.example.androidofpcsense.ui.common.UiState;
 
-public class TransformViewModel extends ViewModel {
+public class TransformViewModel extends AndroidViewModel {
 
-    private final MutableLiveData<List<String>> mTexts;
+    private final ComponentRepository repository;
+    private final MutableLiveData<UiState<ComponentDatabase>> componentsState;
 
-    public TransformViewModel() {
-        mTexts = new MutableLiveData<>();
-        List<String> texts = new ArrayList<>();
-        for (int i = 1; i <= 16; i++) {
-            texts.add("This is item # " + i);
-        }
-        mTexts.setValue(texts);
+    public TransformViewModel(@NonNull Application application) {
+        super(application);
+        repository = ComponentRepository.getInstance(application);
+        componentsState = new MutableLiveData<>(UiState.idle());
     }
 
-    public LiveData<List<String>> getTexts() {
-        return mTexts;
+    public LiveData<UiState<ComponentDatabase>> getComponentsState() {
+        return componentsState;
+    }
+
+    public void loadComponents() {
+        repository.fetchComponents(componentsState::setValue);
     }
 }

@@ -297,7 +297,9 @@ public class DesktopBuildEngine {
         // Try to find PSU with correct wattage and tier
         for (Component psu : psus) {
             int wattage = extractWattage(psu);
-            if (wattage >= requiredWattage && tierPattern.matcher(psu.getSpec()).find()) {
+            String tierText = ((psu != null && psu.getName() != null) ? psu.getName() : "") + " " +
+                    ((psu != null && psu.getSpec() != null) ? psu.getSpec() : "");
+            if (wattage >= requiredWattage && tierPattern.matcher(tierText).find()) {
                 return psu;
             }
         }

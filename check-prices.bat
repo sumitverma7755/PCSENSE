@@ -1,9 +1,0 @@
-@echo off
-echo ==========================================
-echo   PCSensei - One-time Price Check
-echo ==========================================
-echo.
-pushd "%~dp0backend"
-node price-monitor.js --once
-popd
-pause

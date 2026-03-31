@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuratorAI — High-End Editorial SaaS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#064e3b",
+              "surface-container-highest": "#065f46",
+              "on-tertiary-fixed": "#022c22",
+              "on-secondary": "#ecfdf5",
+              "secondary-dim": "#059669",
+              "error-container": "#f74b6d",
+              "on-primary-container": "#ecfdf5",
+              "error": "#b41340",
+              "tertiary-container": "#10b981",
+              "primary-fixed-dim": "#34d399",
+              "surface-container-lowest": "#022c22",
+              "on-secondary-fixed": "#064e3b",
+              "on-surface": "#ecfdf5",
+              "tertiary-fixed-dim": "#6ee7b7",
+              "on-error-container": "#510017",
+              "tertiary": "#10b981",
+              "surface-bright": "#022c22",
+              "on-secondary-fixed-variant": "#10b981",
+              "on-primary-fixed-variant": "#059669",
+              "on-primary-fixed": "#022c22",
+              "on-primary": "#022c22",
+              "secondary-fixed": "#6ee7b7",
+              "outline": "#065f46",
+              "inverse-on-surface": "#022c22",
+              "primary-fixed": "#10b981",
+              "outline-variant": "#064e3b",
+              "on-tertiary": "#022c22",
+              "error-dim": "#a70138",
+              "secondary-container": "#065f46",
+              "on-secondary-container": "#ecfdf5",
+              "inverse-primary": "#10b981",
+              "tertiary-dim": "#059669",
+              "background": "#020617",
+              "inverse-surface": "#ecfdf5",
+              "primary": "#10b981",
+              "on-tertiary-container": "#ecfdf5",
+              "on-background": "#ecfdf5",
+              "secondary": "#34d399",
+              "surface": "#020617",
+              "surface-variant": "#0f172a",
+              "secondary-fixed-dim": "#059669",
+              "on-tertiary-fixed-variant": "#059669",
+              "tertiary-fixed": "#10b981",
+              "surface-container": "#0f172a",
+              "surface-tint": "#10b981",
+              "on-error": "#ffefef",
+              "primary-container": "#065f46",
+              "surface-container-low": "#020617",
+              "primary-dim": "#059669",
+              "surface-dim": "#020617",
+              "on-surface-variant": "#94a3b8"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .editorial-shadow {
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.4);
+        }
+        .ghost-border {
+            border: 1px solid rgba(16, 185, 129, 0.15);
+        }
+        /* Custom Accordion Styling */
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] .toggle-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-emerald-950/70 backdrop-blur-xl border-b border-emerald-500/10 shadow-2xl shadow-emerald-950/20">
+<div class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-br from-emerald-400 to-emerald-600 font-headline tracking-tighter" href="#">CuratorAI</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-manrope tracking-tight font-semibold text-emerald-100/60 hover:text-emerald-400 transition-colors" href="#features">Features</a>
+<a class="font-manrope tracking-tight font-semibold text-emerald-100/60 hover:text-emerald-400 transition-colors" href="#solutions">Solutions</a>
+<a class="font-manrope tracking-tight font-semibold text-emerald-100/60 hover:text-emerald-400 transition-colors" href="#methodology">Methodology</a>
+<a class="font-manrope tracking-tight font-semibold text-emerald-100/60 hover:text-emerald-400 transition-colors" href="#pricing">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="hidden sm:block text-emerald-400 font-manrope font-semibold hover:opacity-90 transition-all duration-300">Sign In</button>
+<button class="bg-emerald-600 text-white px-6 py-2.5 rounded-full font-manrope font-semibold hover:opacity-90 transition-all duration-300 active:scale-95">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="grid lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-6 space-y-8">
+<span class="inline-block text-primary font-label text-[0.6875rem] font-bold tracking-[0.1em] uppercase bg-primary/10 px-3 py-1 rounded-full">The New Standard of Curation</span>
+<h1 class="text-7xl font-headline font-extrabold tracking-tight text-white leading-[1.05]">
+                        Command the <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">infinite flow.</span>
+</h1>
+<p class="text-2xl text-slate-300 leading-relaxed max-w-xl">
+                        Stop drowning in data. Start architecting wisdom. CuratorAI is the premier editorial engine for the world's most demanding thinkers.
+                    </p>
+<div class="flex flex-wrap gap-5 pt-4">
+<button class="bg-emerald-600 text-white px-10 py-5 rounded-full font-headline font-bold text-lg hover:scale-[1.05] transition-transform duration-300 shadow-xl shadow-emerald-900/40">Start Your Ascent</button>
+<button class="bg-slate-800 text-emerald-400 px-10 py-5 rounded-full font-headline font-bold text-lg hover:bg-slate-700 transition-colors flex items-center gap-2 border border-emerald-500/20">
+<span class="material-symbols-outlined" data-icon="play_circle">play_circle</span>
+                            Watch the Vision
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-6 relative">
+<div class="relative z-10 rounded-2xl overflow-hidden ghost-border editorial-shadow bg-slate-900">
+<img alt="Dashboard Mockup" class="w-full aspect-[4/3] object-cover opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvc06tKuHQ_tPFdLJScP7e_1jyUvajx8PEksKCwjyA9H3CG7Kd5ZcmTawXS5kMTYvmTEibVGqiFacQ79zsusD0YX2LsZHTvX3hGNjGmw5YoV_bs0Air8Ao5jAkgkJq-7SVL22fUQUiupDo9NKD-SJYpSOOc1lKgMdc-VyP3z4CSlMQMBw6XcEs8VmOM_hselxZFI6zai_IDqLQkuuyRIpq8jHj05qGQB5mkOadQFDD9gCSaccWZ6iEXnsguFXVtDzAWbK9al8Hvk4"/>
+</div>
+<!-- Decorative accents -->
+<div class="absolute -top-12 -right-12 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -z-10"></div>
+<div class="absolute -bottom-12 -left-12 w-64 h-64 bg-emerald-700/10 rounded-full blur-3xl -z-10"></div>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="bg-emerald-950/30 border-y border-emerald-900/20 py-20 mb-32">
+<div class="max-w-7xl mx-auto px-8">
+<p class="text-center font-label text-[0.6875rem] font-bold tracking-widest text-emerald-500/60 uppercase mb-12">Trusted by the Digital Elite</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 text-emerald-100">
+<span class="font-headline font-extrabold text-2xl tracking-tighter">METRIC</span>
+<span class="font-headline font-extrabold text-2xl tracking-tighter">PRISM</span>
+<span class="font-headline font-extrabold text-2xl tracking-tighter">AETHER</span>
+<span class="font-headline font-extrabold text-2xl tracking-tighter">ZENITH</span>
+<span class="font-headline font-extrabold text-2xl tracking-tighter">NEXUS</span>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="max-w-7xl mx-auto px-8 mb-32" id="methodology">
+<div class="text-center mb-20">
+<h2 class="text-4xl font-headline font-extrabold mb-4 text-white">Methodical Mastery</h2>
+<p class="text-slate-400 max-w-2xl mx-auto text-lg">Precision engineering meets editorial intuition. Here is how CuratorAI orchestrates your data.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-12">
+<div class="space-y-6">
+<div class="w-14 h-14 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+<span class="material-symbols-outlined text-3xl" data-icon="hub">hub</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-white">1. Aggregate</h3>
+<p class="text-slate-400 leading-relaxed">Connect disparate streams of information into one unified, ultra-low latency intelligence hub.</p>
+</div>
+<div class="space-y-6">
+<div class="w-14 h-14 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+<span class="material-symbols-outlined text-3xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-white">2. Synthesize</h3>
+<p class="text-slate-400 leading-relaxed">Our curation engine identifies non-obvious patterns and highlights critical strategic insights.</p>
+</div>
+<div class="space-y-6">
+<div class="w-14 h-14 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+<span class="material-symbols-outlined text-3xl" data-icon="diamond">diamond</span>
+</div>
+<h3 class="text-2xl font-headline font-bold text-white">3. Execute</h3>
+<p class="text-slate-400 leading-relaxed">Transform synthesized wisdom into high-impact decisions with built-in editorial publishing tools.</p>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="max-w-7xl mx-auto px-8 mb-32" id="pricing">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-headline font-extrabold mb-4 text-white">Investment Plans</h2>
+<p class="text-slate-400 text-lg">Choose the tier that fits your intellectual velocity.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Essence -->
+<div class="bg-slate-900 border border-slate-800 p-10 rounded-2xl flex flex-col">
+<h4 class="text-xl font-bold mb-2 text-white">Essence</h4>
+<div class="mb-6">
+<span class="text-4xl font-extrabold text-white">Free</span>
+</div>
+<ul class="space-y-4 mb-10 text-slate-400 flex-grow">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Up to 5 projects</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Basic synthesis</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Community access</li>
+</ul>
+<button class="w-full py-4 border border-emerald-500/30 text-emerald-400 font-bold rounded-full hover:bg-emerald-500/5 transition-colors">Start for Free</button>
+</div>
+<!-- Core -->
+<div class="bg-emerald-950 border-2 border-emerald-500/30 p-10 rounded-2xl flex flex-col relative transform scale-105 shadow-2xl shadow-emerald-500/10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-emerald-950 px-4 py-1 rounded-full text-[0.6875rem] font-bold uppercase tracking-widest">Most Popular</div>
+<h4 class="text-xl font-bold mb-2 text-white">Core</h4>
+<div class="mb-6">
+<span class="text-4xl font-extrabold text-white">$29</span>
+<span class="text-emerald-400/60 ml-1">/mo</span>
+</div>
+<ul class="space-y-4 mb-10 text-emerald-100/80 flex-grow">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Unlimited projects</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Pro synthesis engine</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Advanced mapping</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Priority support</li>
+</ul>
+<button class="w-full py-4 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-500 transition-colors">Upgrade to Core</button>
+</div>
+<!-- Zenith -->
+<div class="bg-slate-900 border border-slate-800 p-10 rounded-2xl flex flex-col">
+<h4 class="text-xl font-bold mb-2 text-white">Zenith</h4>
+<div class="mb-6">
+<span class="text-4xl font-extrabold text-white">$99</span>
+<span class="text-slate-500 ml-1">/mo</span>
+</div>
+<ul class="space-y-4 mb-10 text-slate-400 flex-grow">
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Everything in Core</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Dedicated strategist</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> White-glove setup</li>
+<li class="flex items-center gap-3"><span class="material-symbols-outlined text-emerald-400 text-sm" data-icon="check_circle">check_circle</span> Early beta access</li>
+</ul>
+<button class="w-full py-4 border border-slate-700 text-white font-bold rounded-full hover:bg-slate-800 transition-colors">Go Zenith</button>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="max-w-7xl mx-auto px-8 mb-32" id="features">
+<div class="grid lg:grid-cols-12 gap-6">
+<div class="lg:col-span-8 bg-slate-900 rounded-2xl p-12 relative overflow-hidden group border border-slate-800">
+<div class="relative z-10 max-w-md">
+<span class="text-emerald-500 font-bold text-[0.6875rem] uppercase tracking-widest block mb-4">The Engine</span>
+<h3 class="text-3xl font-headline font-extrabold mb-4 text-white">Contextual Mapping Engine</h3>
+<p class="text-slate-400 leading-relaxed mb-8">Move beyond folders. Map your thoughts in a multi-dimensional graph that evolves with your projects.</p>
+<a class="text-emerald-400 font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform" href="#">Explore the mapping <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span></a>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 translate-y-12 translate-x-12 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[15rem] text-emerald-400" data-icon="bubble_chart">bubble_chart</span>
+</div>
+</div>
+<div class="lg:col-span-4 bg-emerald-700 text-white rounded-2xl p-12 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl mb-6 text-emerald-100" data-icon="encrypted">encrypted</span>
+<h3 class="text-2xl font-headline font-bold mb-4">Fortress-Grade Privacy</h3>
+<p class="text-emerald-50/80 leading-relaxed">End-to-end encryption for every byte of your intellectual property. Your data never leaves your control.</p>
+</div>
+<div class="pt-8 flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-emerald-700 bg-slate-800 overflow-hidden">
+<img alt="User" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD516Ak-VwctArIg1O3iTuszt2S5ncwAsOA_nEloF9BuI_Pjj8bIRqZpB1peJzjdnkN26Amw57vw6cNRPHdRNHCg8lqWOcFaOZURC-HNAabkOqUncnIp82p_fi9tprWFCaP1u0QwCwUJVafI9jd6rH9YO8F7olKlyOZz4ONUkFasXzx1Jihs6S39VIhGW-iUa_jDwpCgqVEgMHYgbrOGXmhuQ6O0rqseAhgK6wGYKSh871rSQSo4kvRzVId-85kDTF1FZ1tDBCw-nE"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-emerald-700 bg-slate-800 overflow-hidden">
+<img alt="User" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSlmsHLVgectE5YQo2inqbfIkADbdgVPimHeHqE1WBYYqtc5tU9EW86oaXAE2Szs_8pawOYyXZR_Wqpwsp85G_Nmp6uHTqGGbVFpvRHTV70rOndWAOlicdn6GSCTqZhs4cN-9rhlywdkuyWPefHGGGeseRDnFq2VEUdhXLbyExXtFCZNBn9Fj1nYpmm-OJcPjHpnmd_tnjpYPtslTUUqKF_dzxYgt0vqkbqsxRLnaMGeNae-PNqgXB6oJRj6ax6SwBBw6QbgEKz4Y"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-emerald-700 bg-slate-800 overflow-hidden">
+<img alt="User" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8feckptqqEVY4ceKDWtT_SHEJyMpv2fP51-UD_xnsxRZDjMPIjDRSz1xTZLJYj0FzGOGm21IH1PmdqTwpFLHmyj-IJcpKHl_CjSvesCHe7VUT_b6KGsTLHbjesb5RuSHcUCX6nMiG49Y6mI7xEhekHoJaFT9SSDOzhDNIAOmEGBoMqRgfuC_AiOoEnl7lOHBUqNMhUWaZF1sj8xv9lCHE52OXGZASRskR2_d02PH5Asfwi19n5SCpCUxwEvgKunZ_12TiB-wp7Hs"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-emerald-700 bg-slate-900 flex items-center justify-center text-[10px] font-bold text-emerald-400">+12k</div>
+</div>
+</div>
+<div class="lg:col-span-4 bg-slate-900 rounded-2xl p-12 border border-slate-800">
+<span class="material-symbols-outlined text-4xl mb-6 text-emerald-500" data-icon="speed">speed</span>
+<h3 class="text-2xl font-headline font-bold mb-4 text-white">Infinite Speed</h3>
+<p class="text-slate-400 leading-relaxed">Search across millions of data points in milliseconds. Designed for high-frequency thinkers.</p>
+</div>
+<div class="lg:col-span-8 bg-slate-900 ghost-border rounded-2xl p-12 flex flex-col md:flex-row gap-12 items-center overflow-hidden border border-slate-800">
+<div class="flex-1">
+<h3 class="text-3xl font-headline font-extrabold mb-4 text-white">Editorial Command Center</h3>
+<p class="text-slate-400 leading-relaxed">A workspace that feels like a premium digital magazine. Distraction-free, typography-focused, and incredibly powerful.</p>
+</div>
+<div class="flex-1 w-full h-48 bg-slate-800 rounded-lg overflow-hidden shadow-inner">
+<img alt="Workspace" class="w-full h-full object-cover grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-x5o7Tf8XLNcMAxrd2SsF7_ticHBetYFMlftuRZo6ZIRy1UKeMFggX08rYudBxS2xCwPmYkRORT23PXzYrdnnXJyY7Yxw-t9XBIizZbXhZgDzh-9UzH02s0bjQqX9mR1gcamczJK6lYHvYkOcDIMhStq8bthppcKx3Q2OFREjAGUp04ciMmbeuZi5IqJk2yj_DNkk4KsctXgRVhZfhTcg4N08EgvRfeeKWSBcz1cM1psRDtuuVZFevwudMsYneZpUomnJGAyx5Dg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h2 class="text-5xl font-headline font-extrabold tracking-tight text-white">Voices of the <span class="text-emerald-400 italic">Visionaries.</span></h2>
+<p class="text-xl text-slate-400">We don't just build software; we build the future of how teams think and collaborate.</p>
+</div>
+<div class="space-y-6">
+<div class="bg-slate-900 p-10 rounded-2xl relative border border-slate-800 shadow-xl">
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-emerald-950 rounded-full flex items-center justify-center ghost-border text-emerald-400">
+<span class="material-symbols-outlined" data-icon="format_quote">format_quote</span>
+</div>
+<div class="flex gap-1 mb-6">
+<span class="material-symbols-outlined text-sm text-emerald-400" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-emerald-400" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-emerald-400" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-emerald-400" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm text-emerald-400" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-lg font-headline font-semibold mb-8 italic text-emerald-50/90">"CuratorAI has completely redefined how our strategy team synthesizes market trends. It is the first tool that actually feels like it understands human nuance."</p>
+<div class="flex items-center gap-4">
+<img alt="Sarah Chen" class="w-12 h-12 rounded-full object-cover border border-emerald-500/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxmNmUkXKakSLEI6vJ_qx2kt6MPknAcEV35WcrIOvTl4x61l84H0I29fbCQdKKM4bAA2_dYonB3Qn-JzjwXOB1e34e66xwnNnQsKYsQtwyHd2VsU-Ec9h1vDw_wRmHYxDwGmr-K7SuU0QB4YZzUwEc6oSJUkcJAE5aJu_a3g4oOMTgXN5CUhxB69Yfgl_0IOJRd7yWbA5lEtmYnnY6GbQ-qt8j8syUISzdqGmfz6iF_7kncpGNOQDTNUpEe8R2XoOCZpao5te21b4"/>
+<div>
+<p class="font-bold text-white">Sarah Chen</p>
+<p class="text-xs text-emerald-400 uppercase tracking-widest font-bold">VP Product @ Aether</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-4xl mx-auto px-8 mb-32" id="faq">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-headline font-extrabold mb-4 text-white">Platform Intelligence FAQ</h2>
+<p class="text-slate-400 text-lg">Everything you need to know about the CuratorAI ecosystem.</p>
+</div>
+<div class="space-y-4">
+<details class="group bg-slate-900 border border-slate-800 rounded-2xl p-6 cursor-pointer transition-all hover:border-emerald-500/30">
+<summary class="flex justify-between items-center list-none font-headline font-bold text-lg text-white">
+                        How does the AI synthesis engine work?
+                        <span class="material-symbols-outlined transition-transform duration-300 toggle-icon text-emerald-500" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="mt-4 text-slate-400 leading-relaxed group-open:animate-fadeIn">
+                        Our engine uses multi-agent neural architectures to cross-reference your data points against 40+ strategic frameworks. It doesn't just summarize; it identifies structural gaps and emergent opportunities in your research.
+                    </div>
+</details>
+<details class="group bg-slate-900 border border-slate-800 rounded-2xl p-6 cursor-pointer transition-all hover:border-emerald-500/30">
+<summary class="flex justify-between items-center list-none font-headline font-bold text-lg text-white">
+                        Can I export my curated intelligence?
+                        <span class="material-symbols-outlined transition-transform duration-300 toggle-icon text-emerald-500" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="mt-4 text-slate-400 leading-relaxed group-open:animate-fadeIn">
+                        Absolutely. We support high-fidelity exports to PDF, Markdown, JSON, and direct integrations with Notion, Slack, and professional CMS platforms. Your wisdom remains portable and sovereign.
+                    </div>
+</details>
+<details class="group bg-slate-900 border border-slate-800 rounded-2xl p-6 cursor-pointer transition-all hover:border-emerald-500/30">
+<summary class="flex justify-between items-center list-none font-headline font-bold text-lg text-white">
+                        How secure is my proprietary data?
+                        <span class="material-symbols-outlined transition-transform duration-300 toggle-icon text-emerald-500" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="mt-4 text-slate-400 leading-relaxed group-open:animate-fadeIn">
+                        We employ zero-knowledge architecture. All synthesis happens in isolated environments with end-to-end encryption. CuratorAI is SOC2 Type II compliant and never trains base models on user data.
+                    </div>
+</details>
+<details class="group bg-slate-900 border border-slate-800 rounded-2xl p-6 cursor-pointer transition-all hover:border-emerald-500/30">
+<summary class="flex justify-between items-center list-none font-headline font-bold text-lg text-white">
+                        Is there a collaborative mode for teams?
+                        <span class="material-symbols-outlined transition-transform duration-300 toggle-icon text-emerald-500" data-icon="expand_more">expand_more</span>
+</summary>
+<div class="mt-4 text-slate-400 leading-relaxed group-open:animate-fadeIn">
+                        The Core and Zenith plans include advanced multiplayer functionality, allowing teams to build shared intelligence graphs, leave contextual feedback, and co-curate high-impact strategic reports in real-time.
+                    </div>
+</details>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="max-w-7xl mx-auto px-8 mb-32">
+<div class="bg-emerald-950 text-emerald-50 rounded-2xl p-16 text-center relative overflow-hidden border border-emerald-500/20 shadow-2xl">
+<div class="relative z-10">
+<h2 class="text-4xl md:text-5xl font-headline font-extrabold mb-6">Ready to transcend the noise?</h2>
+<p class="text-xl text-emerald-100/60 mb-10 max-w-2xl mx-auto">Join the exclusive community of digital curators today. Limited beta access available.</p>
+<div class="flex flex-wrap justify-center gap-5">
+<button class="bg-emerald-600 text-white px-12 py-5 rounded-full font-headline font-bold text-lg hover:bg-emerald-500 transition-colors shadow-lg">Apply for Access</button>
+<button class="bg-transparent border border-emerald-500/30 text-emerald-400 px-12 py-5 rounded-full font-headline font-bold text-lg hover:bg-emerald-500/10 transition-colors">View Pricing</button>
+</div>
+</div>
+<div class="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+<div class="absolute top-[-20%] left-[-10%] w-[60%] h-[140%] bg-gradient-to-br from-emerald-500/40 to-transparent blur-[100px] rotate-12"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[60%] h-[140%] bg-gradient-to-tl from-emerald-400/40 to-transparent blur-[100px] -rotate-12"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-emerald-950 w-full pt-24 pb-12 border-t border-emerald-900/50 font-manrope text-sm antialiased">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 px-8 max-w-7xl mx-auto">
+<div class="col-span-2">
+<p class="text-xl font-bold text-emerald-50 mb-6">CuratorAI</p>
+<p class="text-emerald-100/40 max-w-xs leading-relaxed">Building the digital infrastructure for the next generation of knowledge workers.</p>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-emerald-50">Product</p>
+<ul class="space-y-2">
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Features</a></li>
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Pricing</a></li>
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-emerald-50">Company</p>
+<ul class="space-y-2">
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">About</a></li>
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Careers</a></li>
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Company</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-bold text-emerald-50">Legal</p>
+<ul class="space-y-2">
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Privacy</a></li>
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Terms</a></li>
+<li><a class="text-emerald-100/40 hover:text-emerald-300 transition-colors" href="#">Legal</a></li>
+</ul>
+</div>
+<div class="col-span-2 md:col-span-1 lg:col-span-1 flex flex-col justify-end items-start md:items-end lg:items-end">
+<div class="flex gap-4 mb-4">
+<span class="material-symbols-outlined text-emerald-100/40 hover:text-emerald-400 cursor-pointer transition-colors" data-icon="share">share</span>
+<span class="material-symbols-outlined text-emerald-100/40 hover:text-emerald-400 cursor-pointer transition-colors" data-icon="public">public</span>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-emerald-900/50 text-center">
+<p class="text-emerald-100/40">© 2024 CuratorAI. Built for the digital elite.</p>
+</div>
+</footer>
+</body></html>
