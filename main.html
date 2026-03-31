@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,14 @@
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="description" content="PCSensei helps you build the right PC or choose the best laptop for your budget with compatibility checks, live pricing insights, and expert guidance.">
+    <meta name="theme-color" content="#0f172a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PCSensei | Intelligent PC and Laptop Consultant">
+    <meta property="og:description" content="Smart PC and laptop recommendations with compatibility checks and live market pricing.">
+    <meta property="og:url" content="/main.html">
+    <link rel="canonical" href="/main.html">
+    <link rel="icon" href="/frontend/assets/icons/favicon.svg" type="image/svg+xml">
     <title>PCSensei | Intelligent PC & Laptop Consultant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -191,6 +199,9 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans selection:bg-blue-200">
+    <a href="#primary-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-white text-slate-900 px-4 py-2 rounded-md shadow">
+        Skip to main content
+    </a>
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 glass-panel shadow-sm">
@@ -204,8 +215,8 @@
                 </div>
                 
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#" onclick="goHome()" class="text-slate-600 hover:text-blue-600 transition font-medium">Home</a>
-                    <a href="#builder" onclick="startWizard()" class="text-slate-600 hover:text-blue-600 transition font-medium">Builder</a>
+                    <a href="/home.html" onclick="event.preventDefault(); goHome();" class="text-slate-600 hover:text-blue-600 transition font-medium">Home</a>
+                    <a href="/mode-selection.html" onclick="event.preventDefault(); showModeSelection();" class="text-slate-600 hover:text-blue-600 transition font-medium">Builder</a>
                     <a href="admin.html" class="text-slate-600 hover:text-blue-600 transition font-medium flex items-center gap-1">
                         <i class="fa-solid fa-user-shield"></i> Admin
                     </a>
@@ -223,13 +234,13 @@
     </nav>
 
     <!-- Main Content Area -->
-    <main class="pt-16 min-h-screen relative">
+    <main id="primary-content" class="pt-16 min-h-screen relative">
         
         <!-- View: Landing Page -->
         <div id="view-landing" class="block">
             <div class="relative bg-slate-900 h-[600px] overflow-hidden">
                 <div class="absolute inset-0">
-                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-20">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80" alt="" aria-hidden="true" class="w-full h-full object-cover opacity-20">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
                 </div>
                 
@@ -859,27 +870,27 @@
                         </div>
                         <p class="text-slate-400 text-sm mb-4">Your trusted PC building companion for the Indian market. We help you find the best components at the best prices.</p>
                         <div class="flex gap-3">
-                            <a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
-                            <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-discord"></i></a>
+                            <a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener noreferrer" aria-label="PCSensei GitHub repository" title="PCSensei GitHub repository" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
+                            <a href="/help.html" aria-label="Help and guide" title="Help and guide" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-solid fa-circle-question"></i></a>
+                            <a href="/about.html" aria-label="About PCSensei" title="About PCSensei" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition"><i class="fa-solid fa-circle-info"></i></a>
                         </div>
                     </div>
                     <div>
                         <h4 class="font-bold mb-4">Build Tools</h4>
                         <ul class="space-y-2 text-slate-400 text-sm">
-                            <li><a href="#" onclick="startWizard()" class="hover:text-white transition">PC Builder Wizard</a></li>
-                            <li><a href="#" onclick="startWizard()" class="hover:text-white transition">Laptop Finder</a></li>
+                            <li><a href="/guided-builder.html" onclick="event.preventDefault(); startWizard();" class="hover:text-white transition">PC Builder Wizard</a></li>
+                            <li><a href="/laptop-finder.html" class="hover:text-white transition">Laptop Finder</a></li>
                             <li><a href="price-dashboard.html" class="hover:text-white transition">Price Tracker</a></li>
-                            <li><a href="#" onclick="toggleAI()" class="hover:text-white transition">Ask an Expert</a></li>
+                            <li><a href="/main.html#chat-support" onclick="event.preventDefault(); toggleAI();" class="hover:text-white transition">Ask an Expert</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="font-bold mb-4">Resources</h4>
                         <ul class="space-y-2 text-slate-400 text-sm">
-                            <li><a href="#" class="hover:text-white transition">Beginner's Guide</a></li>
-                            <li><a href="#" class="hover:text-white transition">Component Glossary</a></li>
-                            <li><a href="#" class="hover:text-white transition">Best Builds 2025</a></li>
-                            <li><a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener" class="hover:text-white transition">GitHub (Open Source)</a></li>
+                            <li><a href="/help.html#quick-start" class="hover:text-white transition">Beginner's Guide</a></li>
+                            <li><a href="/help.html#faq" class="hover:text-white transition">Component FAQ</a></li>
+                            <li><a href="/mode-selection.html" class="hover:text-white transition">Best Build Modes</a></li>
+                            <li><a href="https://github.com/sumitverma0008/PCSENSE" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">GitHub (Open Source)</a></li>
                         </ul>
                     </div>
                     <div>
@@ -894,9 +905,9 @@
                     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p class="text-slate-400 text-sm">© 2025 PCSensei. Made in India 🇮🇳 for Indian PC builders.</p>
                         <div class="flex gap-6 text-slate-400 text-sm">
-                            <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                            <a href="#" class="hover:text-white transition">Terms of Use</a>
-                            <a href="#" class="hover:text-white transition">Contact</a>
+                            <a href="/about.html#privacy-notice" class="hover:text-white transition">Privacy Policy</a>
+                            <a href="/about.html#terms-of-use" class="hover:text-white transition">Terms of Use</a>
+                            <a href="https://github.com/sumitverma0008/PCSENSE/issues" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Contact</a>
                         </div>
                     </div>
                 </div>
@@ -1000,7 +1011,7 @@
     </div>
 
     <!-- Floating Buttons -->
-    <button onclick="toggleAI()" class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white shadow-lg hover:shadow-xl hover:scale-105 transition flex items-center justify-center text-2xl z-30" title="Chat with PC Expert">
+    <button id="chat-support" onclick="toggleAI()" class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full text-white shadow-lg hover:shadow-xl hover:scale-105 transition flex items-center justify-center text-2xl z-30" title="Chat with PC Expert">
         <i class="fa-solid fa-comments"></i>
     </button>
 
@@ -1064,10 +1075,18 @@
             if (dbLoaded && db) return db;
             
             try {
+                const cacheBuster = Date.now();
+                const configuredApiBase = (localStorage.getItem('pcsenseiApiBaseUrl') || '').trim().replace(/\/+$/, '');
                 const sources = [
-                    `data/components.json?v=${Date.now()}`,
-                    `http://localhost:3001/api/components?v=${Date.now()}`
+                    `data/components.json?v=${cacheBuster}`,
+                    `/data/components.json?v=${cacheBuster}`
                 ];
+                if (configuredApiBase) {
+                    sources.push(`${configuredApiBase}/api/components?v=${cacheBuster}`);
+                }
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    sources.push(`http://localhost:3001/api/components?v=${cacheBuster}`);
+                }
 
                 let data = null;
                 let lastError = null;
@@ -1256,6 +1275,56 @@
             document.getElementById('view-results').classList.add('hidden');
             document.getElementById('view-mode-selection').classList.remove('hidden');
             document.getElementById('view-custom-builder').classList.add('hidden');
+        }
+
+        function applyPageRouteFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const requestedType = params.get('type');
+            const requestedPage = params.get('page');
+
+            if (requestedType === 'laptop' || requestedType === 'desktop') {
+                state.formFactor = requestedType;
+                document.getElementById('budget-type-text').innerText = requestedType === 'laptop' ? 'Laptop' : 'PC';
+                document.title = requestedType === 'laptop'
+                    ? 'PCSensei | Laptop Finder'
+                    : 'PCSensei | PC Builder';
+                startWizard();
+                navWizard(2);
+                return;
+            }
+
+            if (!requestedPage) {
+                goHome();
+                return;
+            }
+
+            if (requestedPage === 'home') {
+                document.title = 'PCSensei | Home';
+                goHome();
+                return;
+            }
+            if (requestedPage === 'mode') {
+                document.title = 'PCSensei | Build Mode Selection';
+                showModeSelection();
+                return;
+            }
+            if (requestedPage === 'wizard') {
+                document.title = 'PCSensei | Guided Builder';
+                startWizard();
+                return;
+            }
+            if (requestedPage === 'custom') {
+                document.title = 'PCSensei | Manual Builder';
+                startCustomBuilder();
+                return;
+            }
+            if (requestedPage === 'results') {
+                document.title = 'PCSensei | Results';
+                startWizard();
+                return;
+            }
+
+            goHome();
         }
 
         // Custom Builder State
@@ -3020,6 +3089,8 @@
             history.appendChild(div);
             history.scrollTop = history.scrollHeight;
         }
+
+        applyPageRouteFromUrl();
     </script>
 </body>
 </html>

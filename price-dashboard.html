@@ -1,8 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Operational dashboard for PCSensei component price updates and daily price-change monitoring.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PCSensei Price Update Dashboard">
+    <meta property="og:description" content="Track total updates, direction of price movement, and recent component changes.">
+    <meta property="og:url" content="/price-dashboard.html">
+    <link rel="canonical" href="/price-dashboard.html">
+    <link rel="icon" href="/frontend/assets/icons/favicon.svg" type="image/svg+xml">
     <title>PCSensei - Price Update Dashboard</title>
     <style>
         * {
@@ -167,7 +175,8 @@
     </div>
 
     <script>
-        const API_BASE_URL = localStorage.getItem('pcsenseiApiBaseUrl') || 'http://localhost:3001';
+        const configuredApiBase = (localStorage.getItem('pcsenseiApiBaseUrl') || '').trim().replace(/\/+$/, '');
+        const API_BASE_URL = configuredApiBase || window.location.origin;
 
         async function fetchSummaryText() {
             const sources = [

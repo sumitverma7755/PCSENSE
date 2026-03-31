@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Administrative control panel for PCSensei inventory, pricing, and operational data management.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PCSensei Admin Panel">
+    <meta property="og:description" content="Manage catalog data, run pricing updates, and monitor dashboard metrics.">
+    <meta property="og:url" content="/admin.html">
+    <link rel="canonical" href="/admin.html">
+    <link rel="icon" href="/frontend/assets/icons/favicon.svg" type="image/svg+xml">
     <title>PCSensei Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -885,7 +894,7 @@
     <!-- Login Container -->
     <div class="login-container" id="loginContainer">
         <div class="logo">
-            <h1>ðŸ” PCSensei</h1>
+            <h1>PCSensei Admin Access</h1>
             <p>Admin Panel</p>
         </div>
         
@@ -912,7 +921,7 @@
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-header">
-                    <h2>ðŸ–¥ï¸ PCSensei</h2>
+                    <h2>PCSensei Console</h2>
                     <p>Admin Control Panel</p>
                 </div>
 
@@ -1001,7 +1010,7 @@
                 <div id="view-dashboard" class="view-content">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ“Š Dashboard Overview</h1>
+                            <h1>Dashboard Overview</h1>
                             <p>Monitor your inventory and system performance</p>
                         </div>
                         <div class="header-actions">
@@ -1016,32 +1025,32 @@
 
                     <!-- Activity Log -->
                     <div class="activity-log">
-                        <h4>ðŸ“ Recent Activity</h4>
+                        <h4>Recent Activity</h4>
                         <div id="activityLog"></div>
                     </div>
 
                     <!-- Visitor Analytics -->
                     <div style="margin-top: 30px; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                        <h4 style="margin-bottom: 20px; color: #667eea; font-size: 18px;">ðŸ‘¥ Visitor Analytics</h4>
+                        <h4 style="margin-bottom: 20px; color: #667eea; font-size: 18px;">Visitor Analytics</h4>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                             <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 25px; border-radius: 15px; color: white; text-align: center;">
-                                <h3 style="font-size: 14px; margin-bottom: 10px; opacity: 0.9;">ðŸ• Last 24 Hours</h3>
+                                <h3 style="font-size: 14px; margin-bottom: 10px; opacity: 0.9;">Last 24 Hours</h3>
                                 <p id="visitors24h" style="font-size: 42px; font-weight: bold; animation: countUp 0.5s ease;">0</p>
                                 <p style="font-size: 12px; opacity: 0.8; margin-top: 5px;">unique visitors</p>
                             </div>
                             <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 25px; border-radius: 15px; color: white; text-align: center;">
-                                <h3 style="font-size: 14px; margin-bottom: 10px; opacity: 0.9;">ðŸ“… Last 30 Days</h3>
+                                <h3 style="font-size: 14px; margin-bottom: 10px; opacity: 0.9;">Last 30 Days</h3>
                                 <p id="visitors30d" style="font-size: 42px; font-weight: bold; animation: countUp 0.5s ease;">0</p>
                                 <p style="font-size: 12px; opacity: 0.8; margin-top: 5px;">total visits</p>
                             </div>
                             <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 25px; border-radius: 15px; color: white; text-align: center;">
-                                <h3 style="font-size: 14px; margin-bottom: 10px; opacity: 0.9;">ðŸ“Š Daily Average</h3>
+                                <h3 style="font-size: 14px; margin-bottom: 10px; opacity: 0.9;">Daily Average</h3>
                                 <p id="visitorsAvg" style="font-size: 42px; font-weight: bold; animation: countUp 0.5s ease;">0</p>
                                 <p style="font-size: 12px; opacity: 0.8; margin-top: 5px;">visits/day</p>
                             </div>
                         </div>
                         <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-                            <h5 style="font-size: 14px; color: #667eea; margin-bottom: 10px;">ðŸ“ˆ Visit Trend (Last 7 Days)</h5>
+                            <h5 style="font-size: 14px; color: #667eea; margin-bottom: 10px;">Visit Trend (Last 7 Days)</h5>
                             <div id="visitChart" style="display: flex; align-items: flex-end; gap: 8px; height: 100px;"></div>
                         </div>
                         <p style="font-size: 11px; color: #999; margin-top: 15px; text-align: center;"><i class="fa-solid fa-info-circle"></i> Data stored in browser localStorage. Clears when browser data is cleared.</p>
@@ -1050,15 +1059,15 @@
                     <!-- Quick Stats -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px;">
                         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; color: white;">
-                            <h3 style="font-size: 18px; margin-bottom: 10px;">ðŸ’° Total Inventory Value</h3>
+                            <h3 style="font-size: 18px; margin-bottom: 10px;">Total Inventory Value</h3>
                             <p id="totalValue" style="font-size: 32px; font-weight: bold;">Calculating...</p>
                         </div>
                         <div style="background: linear-gradient(135deg, #2ed573 0%, #7bed9f 100%); padding: 25px; border-radius: 15px; color: white;">
-                            <h3 style="font-size: 18px; margin-bottom: 10px;">ðŸ“¦ Total Components</h3>
+                            <h3 style="font-size: 18px; margin-bottom: 10px;">Total Components</h3>
                             <p id="totalComponents" style="font-size: 32px; font-weight: bold;">Loading...</p>
                         </div>
                         <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); padding: 25px; border-radius: 15px; color: white;">
-                            <h3 style="font-size: 18px; margin-bottom: 10px;">ðŸ”¥ Most Expensive</h3>
+                            <h3 style="font-size: 18px; margin-bottom: 10px;">Most Expensive</h3>
                             <p id="mostExpensive" style="font-size: 18px; font-weight: bold;">Loading...</p>
                         </div>
                     </div>
@@ -1068,7 +1077,7 @@
                 <div id="view-laptops" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ’» Laptops Management</h1>
+                            <h1>Laptops Management</h1>
                             <p>Manage laptop inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1092,7 +1101,7 @@
                 <div id="view-cpus" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ”§ CPUs Management</h1>
+                            <h1>CPUs Management</h1>
                             <p>Manage CPU inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1116,7 +1125,7 @@
                 <div id="view-gpus" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸŽ® GPUs Management</h1>
+                            <h1>GPUs Management</h1>
                             <p>Manage GPU inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1140,7 +1149,7 @@
                 <div id="view-mobos" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ“Ÿ Motherboards Management</h1>
+                            <h1>Motherboards Management</h1>
                             <p>Manage motherboard inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1164,7 +1173,7 @@
                 <div id="view-ram" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ§  RAM Management</h1>
+                            <h1>RAM Management</h1>
                             <p>Manage RAM inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1188,7 +1197,7 @@
                 <div id="view-storage" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ’¾ Storage Management</h1>
+                            <h1>Storage Management</h1>
                             <p>Manage storage inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1212,7 +1221,7 @@
                 <div id="view-psu" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>âš¡ PSU Management</h1>
+                            <h1>PSU Management</h1>
                             <p>Manage power supply inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1236,7 +1245,7 @@
                 <div id="view-case" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>ðŸ“¦ Cases Management</h1>
+                            <h1>Cases Management</h1>
                             <p>Manage case inventory</p>
                         </div>
                         <div class="header-actions">
@@ -1260,7 +1269,7 @@
                 <div id="view-settings" class="view-content" style="display: none;">
                     <div class="content-header">
                         <div class="content-title">
-                            <h1>âš™ï¸ Settings</h1>
+                            <h1>Settings</h1>
                             <p>Configure admin panel preferences</p>
                         </div>
                     </div>
@@ -1277,10 +1286,10 @@
                             <p style="margin: 15px 0;">Export, import, or backup your component database</p>
                             <div style="display: flex; gap: 10px;">
                                 <button class="btn" onclick="exportData()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                    ðŸ’¾ Export Data
+                                    Export Data
                                 </button>
                                 <button class="btn" onclick="document.getElementById('importFile').click()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                    ðŸ“¤ Import Data
+                                    Import Data
                                 </button>
                             </div>
                         </div>
@@ -1306,17 +1315,17 @@
 
         <!-- Action Buttons -->
         <div class="bulk-actions">
-            <button class="export-btn" onclick="exportData()" title="Download database backup">ðŸ’¾ Export All Data</button>
-            <button class="import-btn" onclick="document.getElementById('importFile').click()" title="Import JSON database">ðŸ“¤ Import Data</button>
+            <button class="export-btn" onclick="exportData()" title="Download database backup">Export All Data</button>
+            <button class="import-btn" onclick="document.getElementById('importFile').click()" title="Import JSON database">Import Data</button>
             <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-            <button class="bulk-btn" onclick="bulkDelete()" title="Delete all selected items">ðŸ—‘ï¸ Delete Selected</button>
-            <button class="bulk-btn" onclick="selectAll()" title="Select all items in current category">â˜‘ï¸ Select All</button>
-            <button class="bulk-btn" onclick="deselectAll()" title="Clear selection">â˜ Deselect All</button>
+            <button class="bulk-btn" onclick="bulkDelete()" title="Delete all selected items">Delete Selected</button>
+            <button class="bulk-btn" onclick="selectAll()" title="Select all items in current category">Select All</button>
+            <button class="bulk-btn" onclick="deselectAll()" title="Clear selection">Deselect All</button>
         </div>
 
         <!-- Search and Filter -->
         <div class="search-bar">
-            <span class="search-icon">ðŸ”</span>
+            <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
             <input type="text" id="searchInput" placeholder="Search items..." oninput="filterTable()">
         </div>
 
@@ -1376,7 +1385,8 @@
         let sessionToken = null;
         let lastActivity = Date.now();
         const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
-        const API_BASE_URL = localStorage.getItem('pcsenseiApiBaseUrl') || 'http://localhost:3001';
+        const configuredApiBase = (localStorage.getItem('pcsenseiApiBaseUrl') || '').trim().replace(/\/+$/, '');
+        const API_BASE_URL = configuredApiBase || window.location.origin;
         const REQUIRED_DB_KEYS = ['laptops', 'cpus', 'gpus', 'mobos', 'ram', 'storage', 'psu', 'case'];
 
         // Security utilities
@@ -1637,7 +1647,7 @@
                     `<i class="fa-solid fa-sync" style="color: #2ed573;"></i> Last price update: <strong>${timestamp}</strong>`;
             } catch (_) {
                 document.getElementById('lastPriceUpdate').innerHTML =
-                    `<i class="fa-solid fa-robot"></i> AI Price Monitor: <a href="#" onclick="showMonitorHelp()" style="color: #667eea;">Setup Instructions</a>`;
+                    `<i class="fa-solid fa-robot"></i> AI Price Monitor: <button type="button" onclick="showMonitorHelp()" style="color: #667eea; background: transparent; border: 0; padding: 0; cursor: pointer; font: inherit;">Setup Instructions</button>`;
             }
         }
 
@@ -1763,15 +1773,15 @@
         function renderStats() {
             const totalItems = Object.values(db).reduce((sum, arr) => sum + arr.length, 0);
             const stats = [
-                { label: 'Total Items', count: totalItems, icon: 'ðŸ“¦' },
-                { label: 'Laptops', count: db.laptops.length, icon: 'ðŸ’»' },
-                { label: 'CPUs', count: db.cpus.length, icon: 'âš™ï¸' },
-                { label: 'GPUs', count: db.gpus.length, icon: 'ðŸŽ®' },
-                { label: 'Motherboards', count: db.mobos.length, icon: 'ðŸ”Œ' },
-                { label: 'RAM', count: db.ram.length, icon: 'ðŸ§ ' },
-                { label: 'Storage', count: db.storage.length, icon: 'ðŸ’¾' },
-                { label: 'PSU', count: db.psu.length, icon: 'âš¡' },
-                { label: 'Cases', count: db.case.length, icon: 'ðŸ—„ï¸' }
+                { label: 'Total Items', count: totalItems, icon: 'ALL' },
+                { label: 'Laptops', count: db.laptops.length, icon: 'LAP' },
+                { label: 'CPUs', count: db.cpus.length, icon: 'CPU' },
+                { label: 'GPUs', count: db.gpus.length, icon: 'GPU' },
+                { label: 'Motherboards', count: db.mobos.length, icon: 'MBD' },
+                { label: 'RAM', count: db.ram.length, icon: 'RAM' },
+                { label: 'Storage', count: db.storage.length, icon: 'SSD' },
+                { label: 'PSU', count: db.psu.length, icon: 'PSU' },
+                { label: 'Cases', count: db.case.length, icon: 'CAS' }
             ];
 
             document.getElementById('statsContainer').innerHTML = stats.map((stat, index) => `
@@ -1815,19 +1825,19 @@
             
             document.getElementById('priceRange').style.display = 'block';
             document.getElementById('priceRange').innerHTML = `
-                <h4>ðŸ’° Price Statistics (${currentCategory})</h4>
+                <h4>Price Statistics (${currentCategory})</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                     <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
                         <div style="font-size: 12px; color: #999; margin-bottom: 5px;">Minimum</div>
-                        <div style="font-size: 18px; font-weight: 600; color: #2ed573;"><span style="font-size: 14px;">â‚¹</span>${min.toLocaleString('en-IN')}</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #2ed573;"><span style="font-size: 14px;">Rs </span>${min.toLocaleString('en-IN')}</div>
                     </div>
                     <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
                         <div style="font-size: 12px; color: #999; margin-bottom: 5px;">Average</div>
-                        <div style="font-size: 18px; font-weight: 600; color: #667eea;"><span style="font-size: 14px;">â‚¹</span>${Math.round(avg).toLocaleString('en-IN')}</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #667eea;"><span style="font-size: 14px;">Rs </span>${Math.round(avg).toLocaleString('en-IN')}</div>
                     </div>
                     <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
                         <div style="font-size: 12px; color: #999; margin-bottom: 5px;">Maximum</div>
-                        <div style="font-size: 18px; font-weight: 600; color: #ff4757;"><span style="font-size: 14px;">â‚¹</span>${max.toLocaleString('en-IN')}</div>
+                        <div style="font-size: 18px; font-weight: 600; color: #ff4757;"><span style="font-size: 14px;">Rs </span>${max.toLocaleString('en-IN')}</div>
                     </div>
                 </div>
             `;
@@ -1896,10 +1906,10 @@
                 });
             });
 
-            document.getElementById('totalValue').textContent = 'â‚¹' + totalValue.toLocaleString('en-IN');
+            document.getElementById('totalValue').textContent = 'Rs ' + totalValue.toLocaleString('en-IN');
             document.getElementById('totalComponents').textContent = totalItems.toLocaleString();
             document.getElementById('mostExpensive').textContent = 
-                `${mostExpensiveItem.name} - â‚¹${mostExpensiveItem.price.toLocaleString('en-IN')}`;
+                `${mostExpensiveItem.name} - Rs ${mostExpensiveItem.price.toLocaleString('en-IN')}`;
             
             // Update visitor analytics
             updateVisitorAnalytics();
@@ -2088,21 +2098,21 @@
                                         
                                         if (h === 'price' && typeof val === 'number') {
                                             cellClass = 'price-cell';
-                                            val = `<span class="currency">â‚¹</span>${val.toLocaleString('en-IN')}`;
+                                            val = `<span class="currency">Rs </span>${val.toLocaleString('en-IN')}`;
                                         } else if (h === 'brand' && val) {
                                             val = `<span class="brand-badge">${val}</span>`;
                                         } else if (h === 'id') {
                                             val = `<code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 12px;">${val}</code>`;
                                         } else if (typeof val === 'boolean') {
-                                            val = val ? '<span style="color: #2ed573; font-weight: 600;">âœ“ Yes</span>' : '<span style="color: #ff4757;">âœ— No</span>';
+                                            val = val ? '<span style="color: #2ed573; font-weight: 600;">Yes</span>' : '<span style="color: #ff4757;">No</span>';
                                         }
                                         
                                         return `<td class="${cellClass}">${val}</td>`;
                                     }).join('')}
                                     <td>
                                         <div class="action-btns">
-                                            <button class="edit-btn" onclick="openEditModal('${category}', ${actualIndex})" title="Edit item">âœï¸ Edit</button>
-                                            <button class="delete-btn" onclick="deleteItem('${category}', ${actualIndex})" title="Delete item">ðŸ—‘ï¸ Delete</button>
+                                            <button class="edit-btn" onclick="openEditModal('${category}', ${actualIndex})" title="Edit item">Edit</button>
+                                            <button class="delete-btn" onclick="deleteItem('${category}', ${actualIndex})" title="Delete item">Delete</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -2131,8 +2141,8 @@
             }
 
             let html = `
-                <button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(1)">â®ï¸ First</button>
-                <button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">â—€ï¸ Prev</button>
+                <button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(1)">First</button>
+                <button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Prev</button>
             `;
 
             for (let i = start; i <= end; i++) {
@@ -2140,8 +2150,8 @@
             }
 
             html += `
-                <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next â–¶ï¸</button>
-                <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${totalPages})">Last â­ï¸</button>
+                <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>
+                <button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${totalPages})">Last</button>
                 <span>Page ${currentPage} of ${totalPages}</span>
             `;
 
