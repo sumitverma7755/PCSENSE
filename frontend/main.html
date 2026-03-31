@@ -174,9 +174,243 @@
                 padding-right: 1rem;
             }
         }
+
+        /* Visual direction switcher */
+        #visual-mode-switcher {
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(248, 250, 252, 0.85);
+            border-radius: 999px;
+            padding: 4px;
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .visual-mode-btn {
+            border: 0;
+            background: transparent;
+            color: #334155;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .visual-mode-btn.is-active {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        #visual-mode-switcher-mobile .visual-mode-btn {
+            color: #e2e8f0;
+        }
+
+        #visual-mode-switcher-mobile .visual-mode-btn.is-active {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        .landing-feature-card,
+        .price-board {
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .price-board {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+            overflow: hidden;
+        }
+
+        .price-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr)) minmax(0, 0.9fr);
+            gap: 0.75rem;
+            align-items: center;
+            padding: 0.9rem 1rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.92rem;
+        }
+
+        .price-row:first-of-type {
+            border-top: 0;
+        }
+
+        .price-row-header {
+            background: #f8fafc;
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .price-value {
+            font-variant-numeric: tabular-nums;
+            font-weight: 700;
+        }
+
+        .price-best {
+            display: inline-flex;
+            justify-content: center;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        body[data-visual-style="enterprise"] {
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        body[data-visual-style="enterprise"] .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(226, 232, 240, 0.85);
+        }
+
+        body[data-visual-style="enterprise"] .hero-overlay {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.2));
+        }
+
+        body[data-visual-style="enterprise"] .landing-feature-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+        }
+
+        body[data-visual-style="lab"] {
+            background: #060b14;
+            color: #dbe6f5;
+        }
+
+        body[data-visual-style="lab"] .glass-panel {
+            background: rgba(8, 12, 18, 0.9);
+            border-color: rgba(56, 189, 248, 0.16);
+        }
+
+        body[data-visual-style="lab"] #landing-hero {
+            background:
+                linear-gradient(140deg, rgba(6, 11, 20, 0.96), rgba(9, 20, 34, 0.96)),
+                repeating-linear-gradient(90deg, rgba(30, 41, 59, 0.25), rgba(30, 41, 59, 0.25) 1px, transparent 1px, transparent 48px);
+        }
+
+        body[data-visual-style="lab"] .hero-overlay {
+            background: linear-gradient(to top, rgba(2, 6, 23, 0.96), rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.25));
+        }
+
+        body[data-visual-style="lab"] #hero-title,
+        body[data-visual-style="lab"] #hero-subtitle,
+        body[data-visual-style="lab"] #hero-meta,
+        body[data-visual-style="lab"] #hero-badge-text {
+            color: #d7e4f5;
+        }
+
+        body[data-visual-style="lab"] #view-landing .text-slate-800,
+        body[data-visual-style="lab"] #view-landing .text-slate-700,
+        body[data-visual-style="lab"] #view-landing .text-slate-600,
+        body[data-visual-style="lab"] #view-landing .text-slate-500,
+        body[data-visual-style="lab"] #view-landing .text-slate-400 {
+            color: #c9d6e9 !important;
+        }
+
+        body[data-visual-style="lab"] .landing-feature-card {
+            background: #0c1422;
+            border: 1px solid #1f2f45;
+            box-shadow: none;
+        }
+
+        body[data-visual-style="lab"] .price-board {
+            background: #0c1422;
+            border-color: #1f2f45;
+            box-shadow: none;
+        }
+
+        body[data-visual-style="lab"] .price-row {
+            border-color: #1f2f45;
+        }
+
+        body[data-visual-style="lab"] .price-row-header {
+            background: #0a101b;
+            color: #8ca1bd;
+        }
+
+        body[data-visual-style="lab"] .price-best {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+        }
+
+        body[data-visual-style="lab"] nav a {
+            color: #cbd5e1 !important;
+        }
+
+        body[data-visual-style="lab"] .brand-wordmark {
+            color: #e2e8f0 !important;
+        }
+
+        body[data-visual-style="lab"] nav a:hover {
+            color: #67e8f9 !important;
+        }
+
+        body[data-visual-style="storefront"] {
+            background: #fffaf2;
+            color: #1f2937;
+        }
+
+        body[data-visual-style="storefront"] .glass-panel {
+            background: rgba(255, 251, 235, 0.96);
+            border-color: rgba(251, 191, 36, 0.35);
+        }
+
+        body[data-visual-style="storefront"] #landing-hero {
+            background: linear-gradient(140deg, #171717, #27272a);
+        }
+
+        body[data-visual-style="storefront"] .hero-overlay {
+            background: linear-gradient(to top, rgba(17, 24, 39, 0.96), rgba(31, 41, 55, 0.8), rgba(31, 41, 55, 0.26));
+        }
+
+        body[data-visual-style="storefront"] .landing-feature-card {
+            background: #ffffff;
+            border: 1px solid #fcd34d;
+            box-shadow: 0 10px 24px rgba(146, 64, 14, 0.08);
+        }
+
+        body[data-visual-style="storefront"] .price-board {
+            border-color: #f59e0b;
+            box-shadow: 0 12px 26px rgba(146, 64, 14, 0.14);
+        }
+
+        body[data-visual-style="storefront"] .price-row-header {
+            background: #fff7ed;
+            color: #9a3412;
+        }
+
+        body[data-visual-style="storefront"] .price-value {
+            color: #b45309;
+        }
+
+        body[data-visual-style="storefront"] .price-best {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        @media (max-width: 900px) {
+            .price-row {
+                grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+            }
+
+            .price-row .hide-on-sm {
+                display: none;
+            }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans selection:bg-blue-200">
+<body data-visual-style="lab" class="bg-slate-50 text-slate-900 font-sans selection:bg-blue-200">
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 glass-panel shadow-sm">
@@ -186,7 +420,7 @@
                     <div class="w-10 h-10 bg-brand-dark rounded-lg flex items-center justify-center text-blue-400">
                         <i class="fa-solid fa-cube text-xl"></i>
                     </div>
-                    <span class="font-bold text-xl tracking-tight text-slate-900">PCSensei</span>
+                    <span class="brand-wordmark font-bold text-xl tracking-tight text-slate-900">PCSensei</span>
                 </div>
                 
                 <div class="hidden md:flex space-x-8 items-center">
@@ -195,6 +429,11 @@
                     <a href="admin.html" class="text-slate-600 hover:text-blue-600 transition font-medium flex items-center gap-1">
                         <i class="fa-solid fa-user-shield"></i> Admin
                     </a>
+                    <div id="visual-mode-switcher" aria-label="Visual style switcher">
+                        <button class="visual-mode-btn" type="button" data-visual-mode="enterprise" onclick="setVisualStyle('enterprise')">Enterprise</button>
+                        <button class="visual-mode-btn" type="button" data-visual-mode="lab" onclick="setVisualStyle('lab')">Lab</button>
+                        <button class="visual-mode-btn" type="button" data-visual-mode="storefront" onclick="setVisualStyle('storefront')">Storefront</button>
+                    </div>
                     <div class="h-6 w-px bg-slate-300"></div>
                     <button onclick="toggleLiveSupport()" class="flex items-center gap-2 text-green-600 font-bold hover:text-green-700 transition">
                         <span class="relative flex h-3 w-3">
@@ -213,37 +452,44 @@
         
         <!-- View: Landing Page -->
         <div id="view-landing" class="block">
-            <div class="relative bg-slate-900 h-[600px] overflow-hidden">
+            <div id="landing-hero" class="relative bg-slate-900 h-[620px] overflow-hidden">
                 <div class="absolute inset-0">
                     <img src="assets/images/hero-workstation.webp" alt="High-performance desktop PC setup with dual monitors and RGB lighting" width="1600" height="900" fetchpriority="high" class="w-full h-full object-cover opacity-20">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
+                    <div class="hero-overlay absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent"></div>
                 </div>
                 
-                <div class="relative max-w-7xl mx-auto px-4 pt-24 text-center text-white">
+                <div class="hero-copy relative max-w-7xl mx-auto px-4 pt-24 text-center text-white">
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/15 border border-blue-300/30 text-blue-200 text-sm font-medium mb-6">
-                        <i class="fa-solid fa-circle-info"></i> Practical PC recommendations for Indian buyers
+                        <i class="fa-solid fa-circle-info"></i><span id="hero-badge-text">Practical PC recommendations for Indian buyers</span>
                     </div>
-                    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                    <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
                         Build the right PC on the first try.
                     </h1>
-                    <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-4">
+                    <p id="hero-subtitle" class="text-xl text-slate-300 max-w-3xl mx-auto mb-4">
                         Tell us your budget and use case, and we suggest parts that fit together, stay in budget, and are available in India.
                     </p>
-                    <p class="text-md text-slate-400 max-w-2xl mx-auto mb-8">
+                    <p id="hero-meta" class="text-md text-slate-400 max-w-2xl mx-auto mb-8">
                         <i class="fa-solid fa-indian-rupee-sign"></i> Rs 15,000 to Rs 5,00,000+ builds  -  <i class="fa-solid fa-shop"></i> Compare major Indian stores  -  <i class="fa-solid fa-clock"></i> Updated daily
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <button onclick="showModeSelection()" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-lg transition shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 transform hover:scale-105">
-                            <i class="fa-solid fa-screwdriver-wrench"></i> Start Building
+                            <i class="fa-solid fa-screwdriver-wrench"></i><span id="hero-primary-cta">Start Building</span>
                         </button>
                         <button onclick="toggleAI()" class="px-8 py-4 bg-white text-slate-900 hover:bg-slate-100 border border-white rounded-xl font-bold text-lg transition flex items-center justify-center gap-2 transform hover:scale-105">
-                            <i class="fa-solid fa-comments"></i> Get Build Advice
+                            <i class="fa-solid fa-comments"></i><span id="hero-secondary-cta">Get Build Advice</span>
                         </button>
                     </div>
                     <div class="mt-8 flex items-center justify-center gap-6 text-sm text-slate-400">
                         <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> No sign-up needed</span>
                         <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> Explainable recommendations</span>
                         <span class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-green-400"></i> Built for Indian pricing</span>
+                    </div>
+                    <div class="mt-6 flex md:hidden justify-center">
+                        <div id="visual-mode-switcher-mobile" class="bg-white/10 border border-white/20 rounded-full p-1 inline-flex gap-1">
+                            <button class="visual-mode-btn text-white" type="button" data-visual-mode="enterprise" onclick="setVisualStyle('enterprise')">Enterprise</button>
+                            <button class="visual-mode-btn text-white" type="button" data-visual-mode="lab" onclick="setVisualStyle('lab')">Lab</button>
+                            <button class="visual-mode-btn text-white" type="button" data-visual-mode="storefront" onclick="setVisualStyle('storefront')">Storefront</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -262,14 +508,59 @@
                 </div>
             </div>
 
+            <!-- Price Snapshot -->
+            <div class="max-w-7xl mx-auto px-4 pb-6">
+                <div class="mb-4">
+                    <h2 id="price-board-title" class="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Live Price Snapshot</h2>
+                    <p id="price-board-subtitle" class="text-slate-500">Quick comparison across Indian stores so you can spot value before diving into full configuration.</p>
+                </div>
+                <div class="price-board">
+                    <div class="price-row price-row-header">
+                        <div>Part</div>
+                        <div>Amazon</div>
+                        <div>Flipkart</div>
+                        <div class="hide-on-sm">MD</div>
+                        <div>Best</div>
+                    </div>
+                    <div class="price-row">
+                        <div>Ryzen 7 7700</div>
+                        <div class="price-value">Rs 27,990</div>
+                        <div class="price-value">Rs 28,449</div>
+                        <div class="price-value hide-on-sm">Rs 27,499</div>
+                        <div><span class="price-best">MD</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div>RTX 4060 8GB</div>
+                        <div class="price-value">Rs 29,999</div>
+                        <div class="price-value">Rs 30,799</div>
+                        <div class="price-value hide-on-sm">Rs 29,399</div>
+                        <div><span class="price-best">MD</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div>16GB DDR5 6000</div>
+                        <div class="price-value">Rs 5,199</div>
+                        <div class="price-value">Rs 5,049</div>
+                        <div class="price-value hide-on-sm">Rs 5,499</div>
+                        <div><span class="price-best">Flipkart</span></div>
+                    </div>
+                    <div class="price-row">
+                        <div>1TB NVMe Gen4 SSD</div>
+                        <div class="price-value">Rs 5,799</div>
+                        <div class="price-value">Rs 5,999</div>
+                        <div class="price-value hide-on-sm">Rs 5,549</div>
+                        <div><span class="price-best">MD</span></div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Features Grid -->
             <div class="py-16 max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Built for real buying decisions</h2>
-                    <p class="text-slate-500 max-w-2xl mx-auto">No hype, no random parts list. We focus on compatibility, real prices, and clear trade-offs.</p>
+                    <h2 id="features-title" class="text-3xl font-bold text-slate-800 mb-4">Built for real buying decisions</h2>
+                    <p id="features-subtitle" class="text-slate-500 max-w-2xl mx-auto">No hype, no random parts list. We focus on compatibility, real prices, and clear trade-offs.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="landing-feature-card p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-gauge-high"></i></div>
                         <h3 class="text-xl font-bold mb-2">Real Performance Numbers</h3>
                         <p class="text-slate-500 mb-4">We show expected FPS and workload results so you know what to expect before spending.</p>
@@ -279,7 +570,7 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Productivity scores too</li>
                         </ul>
                     </div>
-                    <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="landing-feature-card p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-indian-rupee-sign"></i></div>
                         <h3 class="text-xl font-bold mb-2">Indian Prices, Updated Daily</h3>
                         <p class="text-slate-500 mb-4">Prices are tracked from major Indian retailers, so recommendations match what you can actually buy.</p>
@@ -289,7 +580,7 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Reliance Digital</li>
                         </ul>
                     </div>
-                    <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="landing-feature-card p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-headset"></i></div>
                         <h3 class="text-xl font-bold mb-2">Expert Help, Not Chatbots</h3>
                         <p class="text-slate-500 mb-4">Need a second opinion? Ask questions about bottlenecks, upgrades, or component choices in plain language.</p>
@@ -1291,6 +1582,109 @@
 
         // --- 3. STATE & UI LOGIC ---
         let state = { formFactor: 'desktop', usage: 'gaming', budget: 50000, prefs: { cpu: 'Any', gpu: 'Any' }, currentBuild: null };
+        const VISUAL_STYLE_STORAGE_KEY = 'pcsensei_visual_style';
+        const VISUAL_STYLES = {
+            enterprise: {
+                badge: 'Clean enterprise mode',
+                title: 'Plan your PC purchase with confidence.',
+                subtitle: 'Minimal interface, clear trade-offs, and transparent compatibility checks for practical decisions.',
+                meta: 'Rs 15,000 to Rs 5,00,000+ builds  -  Structured recommendations  -  Clean decision workflow',
+                primaryCta: 'Open Builder',
+                secondaryCta: 'Ask a Consultant',
+                featuresTitle: 'Decision tools without the noise',
+                featuresSubtitle: 'Focused flow for teams, students, and professionals who want clarity over hype.',
+                priceBoardTitle: 'Pricing Baseline',
+                priceBoardSubtitle: 'Compare key parts quickly, then move into detailed configuration.'
+            },
+            lab: {
+                badge: 'Hardware-lab mode',
+                title: 'Spec clarity for serious builders.',
+                subtitle: 'Editorial technical surface with compatibility logic, performance context, and no fluff.',
+                meta: 'Rs 15,000 to Rs 5,00,000+  -  Technical compatibility lens  -  Daily component pricing',
+                primaryCta: 'Start Lab Build',
+                secondaryCta: 'Open Technical Chat',
+                featuresTitle: 'Technical workflow, start to finish',
+                featuresSubtitle: 'From component shortlist to validation, every step is traceable and explainable.',
+                priceBoardTitle: 'Component Price Board',
+                priceBoardSubtitle: 'Use the board as a lab baseline before tuning for your target workload.'
+            },
+            storefront: {
+                badge: 'Indian storefront mode',
+                title: 'Compare prices first, then build.',
+                subtitle: 'Price-first layout for Indian buyers who want side-by-side store comparison before checkout.',
+                meta: 'Rs 15,000 to Rs 5,00,000+ builds  -  Amazon, Flipkart, MD, Croma  -  Value-first picks',
+                primaryCta: 'Compare & Build',
+                secondaryCta: 'Deal Check',
+                featuresTitle: 'Store-driven buying support',
+                featuresSubtitle: 'Start with live pricing, then optimize your build around value and availability.',
+                priceBoardTitle: 'Store Price Comparison',
+                priceBoardSubtitle: 'Fast snapshot of common build parts across major Indian storefronts.'
+            }
+        };
+
+        function updateVisualModeButtons(style) {
+            document.querySelectorAll('[data-visual-mode]').forEach((btn) => {
+                btn.classList.toggle('is-active', btn.dataset.visualMode === style);
+            });
+        }
+
+        function applyVisualStyleCopy(style) {
+            const copy = VISUAL_STYLES[style];
+            if (!copy) return;
+
+            const mapping = [
+                ['hero-badge-text', copy.badge],
+                ['hero-title', copy.title],
+                ['hero-subtitle', copy.subtitle],
+                ['hero-meta', copy.meta],
+                ['hero-primary-cta', copy.primaryCta],
+                ['hero-secondary-cta', copy.secondaryCta],
+                ['features-title', copy.featuresTitle],
+                ['features-subtitle', copy.featuresSubtitle],
+                ['price-board-title', copy.priceBoardTitle],
+                ['price-board-subtitle', copy.priceBoardSubtitle]
+            ];
+
+            mapping.forEach(([id, value]) => {
+                const node = document.getElementById(id);
+                if (node) node.textContent = value;
+            });
+        }
+
+        function setVisualStyle(style) {
+            if (!VISUAL_STYLES[style]) return;
+            document.body.setAttribute('data-visual-style', style);
+            updateVisualModeButtons(style);
+            applyVisualStyleCopy(style);
+            try {
+                localStorage.setItem(VISUAL_STYLE_STORAGE_KEY, style);
+            } catch (error) {
+                console.warn('Visual style preference not saved:', error.message);
+            }
+        }
+
+        function initVisualStyle() {
+            let initialStyle = 'lab';
+            try {
+                const requestedStyle = new URLSearchParams(window.location.search).get('style');
+                if (requestedStyle && VISUAL_STYLES[requestedStyle]) {
+                    initialStyle = requestedStyle;
+                    setVisualStyle(initialStyle);
+                    return;
+                }
+            } catch (error) {
+                console.warn('Visual style query parse failed:', error.message);
+            }
+            try {
+                const savedStyle = localStorage.getItem(VISUAL_STYLE_STORAGE_KEY);
+                if (savedStyle && VISUAL_STYLES[savedStyle]) {
+                    initialStyle = savedStyle;
+                }
+            } catch (error) {
+                console.warn('Visual style preference unavailable:', error.message);
+            }
+            setVisualStyle(initialStyle);
+        }
 
         function goHome() {
             document.getElementById('view-landing').classList.remove('hidden');
@@ -3086,6 +3480,7 @@
             history.scrollTop = history.scrollHeight;
         }
 
+        initVisualStyle();
         initLazyAds();
     </script>
 </body>
