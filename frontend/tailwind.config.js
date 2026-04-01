@@ -1,25 +1,14 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./main.html"],
-  safelist: ["translate-y-[120%]"],
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
-      colors: {
-        brand: {
-          dark: "#0f172a",
-          accent: "#3b82f6",
-          glass: "rgba(15, 23, 42, 0.8)"
-        }
+      boxShadow: {
+        glow: '0 0 0 1px rgba(99, 102, 241, 0.4), 0 18px 40px rgba(59, 130, 246, 0.25)'
       },
-      animation: {
-        "slide-up": "slideUp 0.5s ease-out",
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite"
-      },
-      keyframes: {
-        slideUp: {
-          "0%": { transform: "translateY(20px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" }
-        }
+      backgroundImage: {
+        'accent-gradient': 'linear-gradient(135deg, #4f8cff, #7c3aed)',
+        'grid-pattern': 'linear-gradient(rgba(148,163,184,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.08) 1px, transparent 1px)'
       }
     }
   },
