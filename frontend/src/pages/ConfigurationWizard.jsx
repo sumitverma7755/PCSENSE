@@ -14,13 +14,13 @@ const STEP_CONFIG = [
         value: 'desktop',
         title: 'Desktop',
         description: 'Best for performance & gaming',
-        icon: '???'
+        icon: 'PC'
       },
       {
         value: 'laptop',
         title: 'Laptop',
         description: 'Portable & convenient',
-        icon: '??'
+        icon: 'LT'
       }
     ]
   },
@@ -33,19 +33,19 @@ const STEP_CONFIG = [
         value: 'gaming',
         title: 'Gaming',
         description: 'High FPS, AAA-ready configurations',
-        icon: '??'
+        icon: 'GM'
       },
       {
         value: 'work',
         title: 'Work',
         description: 'Reliable daily productivity and coding',
-        icon: '??'
+        icon: 'WK'
       },
       {
         value: 'editing',
         title: 'Editing',
         description: 'Balanced CPU/GPU for creator workflows',
-        icon: '??'
+        icon: 'ED'
       }
     ]
   },
@@ -69,7 +69,7 @@ function formatINR(value) {
   return `Rs ${Number(value || 0).toLocaleString('en-IN')}`;
 }
 
-export default function ConfigurationWizard() {
+export default function ConfigurationWizard({ onGoHome }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [focusedOption, setFocusedOption] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -254,13 +254,24 @@ export default function ConfigurationWizard() {
       <WizardLayout
         stepKey={activeStep.key}
         header={
-          <StepHeader
-            title="Build Your Perfect PC"
-            subtitle="Answer a few quick questions to get started"
-            steps={STEP_CONFIG}
-            currentStep={currentStep}
-            progress={progress}
-          />
+          <div className="space-y-4">
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={onGoHome}
+                className="rounded-xl border border-white/15 bg-white/[0.04] px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-white/[0.08]"
+              >
+                Home
+              </button>
+            </div>
+            <StepHeader
+              title="Build Your Perfect PC"
+              subtitle="Answer a few quick questions to get started"
+              steps={STEP_CONFIG}
+              currentStep={currentStep}
+              progress={progress}
+            />
+          </div>
         }
       >
         <div className="space-y-6">
