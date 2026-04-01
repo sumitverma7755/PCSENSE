@@ -14,13 +14,15 @@ const STEP_CONFIG = [
         value: 'desktop',
         title: 'Desktop',
         description: 'Best for performance and upgradability',
-        icon: 'PC'
+        icon: 'desktop',
+        helper: 'Tower setup'
       },
       {
         value: 'laptop',
         title: 'Laptop',
         description: 'Portable and convenient',
-        icon: 'LT'
+        icon: 'laptop',
+        helper: 'Carry anywhere'
       }
     ]
   },
@@ -33,19 +35,22 @@ const STEP_CONFIG = [
         value: 'gaming',
         title: 'Gaming',
         description: 'High FPS and AAA-ready performance',
-        icon: 'GM'
+        icon: 'gaming',
+        helper: 'GPU-first'
       },
       {
         value: 'work',
         title: 'Work',
         description: 'Reliable daily productivity and coding',
-        icon: 'WK'
+        icon: 'work',
+        helper: 'Balanced'
       },
       {
         value: 'editing',
         title: 'Editing',
         description: 'Balanced CPU/GPU for creator workflows',
-        icon: 'ED'
+        icon: 'editing',
+        helper: 'Creator tuned'
       }
     ]
   },
@@ -64,6 +69,58 @@ const STEP_CONFIG = [
 const BUDGET_MIN = 30000;
 const BUDGET_MAX = 300000;
 const BUDGET_STEP = 5000;
+
+function StepIcon({ type }) {
+  const commonClass = 'h-5 w-5';
+
+  if (type === 'desktop') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={commonClass}>
+        <rect x="3" y="4" width="18" height="12" rx="2" />
+        <path d="M8 20h8" />
+        <path d="M12 16v4" />
+      </svg>
+    );
+  }
+
+  if (type === 'laptop') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={commonClass}>
+        <rect x="4" y="5" width="16" height="10" rx="2" />
+        <path d="M2 18h20" />
+      </svg>
+    );
+  }
+
+  if (type === 'gaming') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={commonClass}>
+        <path d="M6.5 9h11a3 3 0 0 1 2.8 4.1l-1.1 2.8a2.5 2.5 0 0 1-4.5.4L13.7 15h-3.4l-1 1.3a2.5 2.5 0 0 1-4.5-.4l-1.1-2.8A3 3 0 0 1 6.5 9Z" />
+        <path d="M8 12h2" />
+        <path d="M9 11v2" />
+        <circle cx="15.5" cy="12.5" r="0.6" />
+        <circle cx="17.5" cy="13.5" r="0.6" />
+      </svg>
+    );
+  }
+
+  if (type === 'work') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={commonClass}>
+        <rect x="3" y="6" width="18" height="14" rx="2" />
+        <path d="M9 6V4h6v2" />
+        <path d="M3 12h18" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={commonClass}>
+      <path d="M4 5h16v14H4z" />
+      <path d="M9 9h6M8 13h8M10 17h4" />
+    </svg>
+  );
+}
 
 function formatINR(value) {
   return `Rs ${Number(value || 0).toLocaleString('en-IN')}`;
@@ -470,7 +527,7 @@ export default function ConfigurationWizard({ onGoHome }) {
         <div className="rounded-2xl border border-blue-300/30 bg-blue-500/10 p-5">
           <div className="flex items-center gap-3">
             <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-200 border-t-transparent" />
-            <p className="text-sm font-semibold text-blue-100">Generating recommendation from live component catalog...</p>
+            <p className="text-sm font-semibold text-blue-100">Scoring parts and validating compatibility from live catalog...</p>
           </div>
         </div>
       );
@@ -487,7 +544,7 @@ export default function ConfigurationWizard({ onGoHome }) {
     if (!recommendation) {
       return (
         <div className="rounded-2xl border border-emerald-300/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">
-          Click "Suggest My PC" to generate recommendations.
+          Ready to generate. Click \"Suggest My PC\" for a complete recommendation card set.
         </div>
       );
     }
@@ -495,11 +552,11 @@ export default function ConfigurationWizard({ onGoHome }) {
     if (recommendation.kind === 'laptop') {
       return (
         <div className="space-y-4">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Top Pick</p>
+          <div className="rounded-2xl border border-blue-300/30 bg-gradient-to-br from-blue-500/12 to-violet-500/12 p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">Top Pick</p>
             <p className="mt-1 text-xl font-bold text-white">{recommendation.options[0]?.name}</p>
-            <p className="mt-2 text-sm text-slate-300">{recommendation.options[0]?.spec}</p>
-            <p className="mt-3 text-lg font-bold text-blue-200">{formatINR(recommendation.options[0]?.price)}</p>
+            <p className="mt-2 text-sm text-slate-200">{recommendation.options[0]?.spec}</p>
+            <p className="mt-3 text-lg font-bold text-blue-100">{formatINR(recommendation.options[0]?.price)}</p>
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -513,7 +570,7 @@ export default function ConfigurationWizard({ onGoHome }) {
             ))}
           </div>
 
-          <p className="text-sm text-slate-300">{recommendation.reasoning}</p>
+          <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm text-slate-300">{recommendation.reasoning}</p>
         </div>
       );
     }
@@ -522,7 +579,7 @@ export default function ConfigurationWizard({ onGoHome }) {
 
     return (
       <div className="space-y-4">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+        <div className="rounded-2xl border border-blue-300/25 bg-gradient-to-br from-blue-500/12 to-indigo-500/10 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Estimated Total</p>
           <p className="mt-1 text-2xl font-extrabold text-white">{formatINR(recommendation.totalPrice)}</p>
           <p className="mt-2 text-sm text-slate-300">
@@ -540,7 +597,7 @@ export default function ConfigurationWizard({ onGoHome }) {
           ))}
         </div>
 
-        <p className="text-sm text-slate-300">{recommendation.reasoning}</p>
+        <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm text-slate-300">{recommendation.reasoning}</p>
       </div>
     );
   };
@@ -548,13 +605,18 @@ export default function ConfigurationWizard({ onGoHome }) {
   const renderStepBody = () => {
     if (activeStep.options) {
       return (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className={`grid grid-cols-1 gap-4 ${
+            activeStep.key === 'usage' ? 'sm:grid-cols-3' : 'sm:grid-cols-2 sm:max-w-4xl sm:mx-auto'
+          }`}
+        >
           {activeStep.options.map((option, idx) => (
             <SelectionCard
               key={option.value}
               title={option.title}
               description={option.description}
-              icon={option.icon}
+              icon={<StepIcon type={option.icon} />}
+              helper={option.helper}
               selected={selections[activeStep.key] === option.value}
               focused={focusedOption === idx}
               onFocus={() => setFocusedOption(idx)}
@@ -578,6 +640,10 @@ export default function ConfigurationWizard({ onGoHome }) {
               onChange={(event) => setSelections((prev) => ({ ...prev, budget: Number(event.target.value) }))}
               className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-700 accent-blue-500"
             />
+            <div className="mt-2 flex justify-between text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+              <span>{formatINR(BUDGET_MIN)}</span>
+              <span>{formatINR(BUDGET_MAX)}</span>
+            </div>
             <div className="mt-5 text-center">
               <div className="text-3xl font-extrabold text-white sm:text-5xl">{formatINR(selections.budget)}</div>
               <p className="mt-2 text-sm text-slate-300">Use arrow keys for fine tuning.</p>
@@ -592,13 +658,28 @@ export default function ConfigurationWizard({ onGoHome }) {
                 onClick={() => setSelections((prev) => ({ ...prev, budget: preset }))}
                 className={`rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
                   selections.budget === preset
-                    ? 'border-blue-300/60 bg-accent-gradient text-white shadow-glow'
+                    ? 'border-blue-300/60 btn-gradient text-white shadow-glow'
                     : 'border-white/10 bg-white/[0.04] text-slate-200 hover:border-white/30'
                 }`}
               >
                 {formatINR(preset)}
               </button>
             ))}
+          </div>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">GPU Budget</p>
+              <p className="mt-1 font-bold text-white">{formatINR(Math.round(selections.budget * 0.4))}</p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">CPU Budget</p>
+              <p className="mt-1 font-bold text-white">{formatINR(Math.round(selections.budget * 0.24))}</p>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Platform + Other</p>
+              <p className="mt-1 font-bold text-white">{formatINR(Math.round(selections.budget * 0.36))}</p>
+            </div>
           </div>
         </div>
       );
@@ -661,10 +742,10 @@ export default function ConfigurationWizard({ onGoHome }) {
         }
       >
         <div className="space-y-6">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <h2 className="text-xl font-bold text-white sm:text-2xl">{activeStep.prompt}</h2>
-              <p className="mt-1 text-sm text-slate-300">Use keyboard: arrows to navigate, Enter to select/continue.</p>
+              <p className="mt-1 text-sm text-slate-300">Keyboard support: arrows move focus, Enter selects and continues.</p>
             </div>
             <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">
               Step {currentStep + 1} of {totalSteps}
