@@ -399,6 +399,357 @@
             color: #9a3412;
         }
 
+        /* Premium visual refresh across all routed pages */
+        :root {
+            --premium-bg-0: #020617;
+            --premium-bg-1: #0a1020;
+            --premium-bg-2: #17213a;
+            --premium-surface: rgba(9, 16, 32, 0.72);
+            --premium-surface-strong: rgba(12, 20, 38, 0.9);
+            --premium-border: rgba(148, 163, 184, 0.24);
+            --premium-border-strong: rgba(99, 102, 241, 0.52);
+            --premium-text: #e2e8f0;
+            --premium-muted: #97a9c7;
+            --premium-subtle: #71829e;
+            --premium-accent-gradient: linear-gradient(135deg, #4f8cff, #7c3aed);
+            --premium-shadow: 0 18px 46px rgba(2, 6, 23, 0.52);
+            --premium-glow: 0 0 0 1px rgba(99, 102, 241, 0.24), 0 18px 46px rgba(56, 189, 248, 0.14);
+        }
+
+        body[data-visual-style],
+        body[data-visual-style="enterprise"],
+        body[data-visual-style="lab"],
+        body[data-visual-style="storefront"] {
+            color: var(--premium-text) !important;
+            background:
+                radial-gradient(circle at 14% 10%, rgba(79, 140, 255, 0.22), transparent 34%),
+                radial-gradient(circle at 84% 8%, rgba(124, 58, 237, 0.24), transparent 34%),
+                radial-gradient(circle at 48% 115%, rgba(14, 165, 233, 0.14), transparent 48%),
+                repeating-linear-gradient(90deg, rgba(148, 163, 184, 0.08) 0, rgba(148, 163, 184, 0.08) 1px, transparent 1px, transparent 64px),
+                repeating-linear-gradient(0deg, rgba(148, 163, 184, 0.06) 0, rgba(148, 163, 184, 0.06) 1px, transparent 1px, transparent 64px),
+                var(--premium-bg-0) !important;
+            min-height: 100vh;
+        }
+
+        body[data-visual-style] .glass-panel {
+            background: rgba(2, 6, 23, 0.74) !important;
+            border-color: var(--premium-border) !important;
+            backdrop-filter: blur(16px) saturate(140%);
+            box-shadow: var(--premium-shadow);
+        }
+
+        body[data-visual-style] nav a,
+        body[data-visual-style] nav button,
+        body[data-visual-style] .brand-wordmark {
+            color: #dbe4f6 !important;
+        }
+
+        body[data-visual-style] nav a:hover,
+        body[data-visual-style] nav button:hover {
+            color: #ffffff !important;
+        }
+
+        .premium-view {
+            animation: premium-view-reveal 0.42s ease both;
+        }
+
+        @keyframes premium-view-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #visual-mode-switcher {
+            background: rgba(15, 23, 42, 0.72);
+            border-color: rgba(148, 163, 184, 0.34);
+        }
+
+        .visual-mode-btn {
+            color: #b8c6de;
+        }
+
+        .visual-mode-btn.is-active {
+            background: var(--premium-accent-gradient);
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(79, 140, 255, 0.34);
+        }
+
+        #landing-hero {
+            margin: 0.9rem 0.9rem 0;
+            border-radius: 1.6rem;
+            border: 1px solid var(--premium-border);
+            box-shadow: var(--premium-shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        #landing-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(79, 140, 255, 0.28), transparent 34%),
+                radial-gradient(circle at 82% 16%, rgba(124, 58, 237, 0.32), transparent 36%);
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        body[data-visual-style] #view-landing .landing-feature-card,
+        body[data-visual-style] .price-board,
+        .premium-view .bg-white,
+        #shop-modal .shop-modal-content,
+        #live-support-panel,
+        #ai-chat-panel {
+            background: var(--premium-surface) !important;
+            border: 1px solid var(--premium-border) !important;
+            box-shadow: var(--premium-shadow);
+            backdrop-filter: blur(16px);
+        }
+
+        #view-mode-selection,
+        #view-custom-builder,
+        #view-results,
+        #view-wizard {
+            background: transparent !important;
+        }
+
+        #view-results > .bg-slate-900,
+        #view-results .bg-blue-50,
+        #view-results .bg-slate-50,
+        #view-custom-builder .bg-blue-50,
+        #view-wizard .bg-white {
+            background: var(--premium-surface-strong) !important;
+            border-color: var(--premium-border) !important;
+        }
+
+        #view-results .border-slate-200,
+        #view-results .border-slate-100,
+        #view-custom-builder .border-slate-300,
+        #view-custom-builder .border-slate-200,
+        #view-custom-builder .border-slate-100,
+        #view-custom-builder .border-blue-200,
+        #view-custom-builder .border-blue-100,
+        #view-wizard .border-slate-200,
+        #view-wizard .border-slate-100 {
+            border-color: var(--premium-border) !important;
+        }
+
+        #view-landing .text-slate-900,
+        #view-landing .text-slate-800,
+        #view-mode-selection .text-slate-900,
+        #view-mode-selection .text-slate-800,
+        #view-custom-builder .text-slate-900,
+        #view-custom-builder .text-slate-800,
+        #view-results .text-slate-900,
+        #view-results .text-slate-800,
+        #view-wizard .text-slate-900,
+        #view-wizard .text-slate-800 {
+            color: var(--premium-text) !important;
+        }
+
+        #view-landing .text-slate-700,
+        #view-landing .text-slate-600,
+        #view-landing .text-slate-500,
+        #view-landing .text-slate-400,
+        #view-mode-selection .text-slate-700,
+        #view-mode-selection .text-slate-600,
+        #view-custom-builder .text-slate-700,
+        #view-custom-builder .text-slate-600,
+        #view-custom-builder .text-slate-500,
+        #view-results .text-slate-700,
+        #view-results .text-slate-600,
+        #view-results .text-slate-500,
+        #view-results .text-slate-400,
+        #view-wizard .text-slate-700,
+        #view-wizard .text-slate-600,
+        #view-wizard .text-slate-500,
+        #view-wizard .text-slate-400 {
+            color: var(--premium-muted) !important;
+        }
+
+        #view-mode-selection .group.relative {
+            background: var(--premium-surface) !important;
+            border: 1px solid var(--premium-border) !important;
+            box-shadow: var(--premium-shadow);
+        }
+
+        #view-mode-selection .group.relative:hover,
+        #view-custom-builder .lg\:col-span-2 > div:hover,
+        #view-results #parts-container > div:hover,
+        #view-results #benchmark-cards > div:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--premium-glow);
+            border-color: var(--premium-border-strong) !important;
+        }
+
+        #view-custom-builder select,
+        #view-custom-builder input[type="text"],
+        #ai-chat-panel input,
+        #live-support-panel input {
+            background: rgba(15, 23, 42, 0.76) !important;
+            color: #e2e8f0 !important;
+            border: 1px solid var(--premium-border) !important;
+        }
+
+        #view-custom-builder option {
+            background: #0b1220;
+            color: #e2e8f0;
+        }
+
+        #view-custom-builder select:focus,
+        #view-custom-builder input[type="text"]:focus,
+        #ai-chat-panel input:focus,
+        #live-support-panel input:focus {
+            outline: none;
+            border-color: rgba(99, 102, 241, 0.84) !important;
+            box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.2) !important;
+        }
+
+        .filter-btn-inactive {
+            background: rgba(15, 23, 42, 0.66);
+            color: #c0d1eb;
+            border-color: rgba(148, 163, 184, 0.32);
+        }
+
+        .filter-btn-inactive:hover {
+            background: rgba(30, 41, 59, 0.72);
+            color: #ffffff;
+            border-color: var(--premium-border-strong);
+        }
+
+        .filter-btn-active,
+        button[class*="bg-blue-600"],
+        a[class*="bg-blue-600"],
+        #wiz-progress {
+            background-image: var(--premium-accent-gradient) !important;
+            border-color: transparent !important;
+            color: #ffffff !important;
+            box-shadow: 0 10px 30px rgba(79, 140, 255, 0.34);
+        }
+
+        button[class*="bg-slate-900"],
+        a[class*="bg-slate-900"] {
+            background: rgba(15, 23, 42, 0.95) !important;
+            border: 1px solid var(--premium-border) !important;
+            color: #e2e8f0 !important;
+        }
+
+        #view-landing button[onclick="toggleAI()"] {
+            background: rgba(15, 23, 42, 0.72) !important;
+            border-color: rgba(148, 163, 184, 0.35) !important;
+            color: #e2e8f0 !important;
+        }
+
+        .ad-container {
+            background: rgba(15, 23, 42, 0.48);
+            border: 1px dashed rgba(148, 163, 184, 0.3);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            color: var(--premium-muted);
+        }
+
+        .ad-label {
+            color: #9fb2cf;
+        }
+
+        body[data-visual-style] .price-board {
+            border-color: var(--premium-border) !important;
+            box-shadow: var(--premium-shadow) !important;
+        }
+
+        body[data-visual-style] .price-row-header {
+            background: rgba(15, 23, 42, 0.82) !important;
+            color: #b7cae4 !important;
+        }
+
+        body[data-visual-style] .price-row {
+            border-color: rgba(148, 163, 184, 0.22) !important;
+        }
+
+        body[data-visual-style] .price-best {
+            background: rgba(79, 140, 255, 0.18) !important;
+            color: #c8ddff !important;
+            border: 1px solid rgba(79, 140, 255, 0.35);
+        }
+
+        footer {
+            background: rgba(2, 6, 23, 0.86) !important;
+            border-top: 1px solid var(--premium-border);
+            backdrop-filter: blur(14px);
+        }
+
+        #shop-modal {
+            backdrop-filter: blur(6px);
+        }
+
+        .shop-modal-content {
+            color: #dce7fa;
+        }
+
+        .store-btn {
+            background: rgba(15, 23, 42, 0.68);
+            border-color: var(--premium-border);
+            color: #dce7fa;
+        }
+
+        .store-btn:hover {
+            border-color: var(--premium-border-strong);
+            background: rgba(30, 41, 59, 0.72);
+            transform: translateX(6px);
+        }
+
+        .ripple-surface {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .button-ripple {
+            position: absolute;
+            border-radius: 999px;
+            pointer-events: none;
+            transform: scale(0);
+            background: rgba(255, 255, 255, 0.38);
+            animation: button-ripple 0.55s ease-out forwards;
+            z-index: 1;
+        }
+
+        @keyframes button-ripple {
+            to {
+                transform: scale(2.8);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #landing-hero {
+                margin: 0.5rem;
+                border-radius: 1.2rem;
+                height: auto;
+                min-height: 540px;
+            }
+
+            #view-mode-selection .group.relative {
+                padding: 1.35rem;
+            }
+
+            #ai-chat-panel,
+            #live-support-panel {
+                width: calc(100vw - 24px);
+                right: 12px;
+                left: 12px;
+            }
+        }
+
         @media (max-width: 900px) {
             .price-row {
                 grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
@@ -451,7 +802,7 @@
     <main class="pt-16 min-h-screen relative">
         
         <!-- View: Landing Page -->
-        <div id="view-landing" class="block">
+        <div id="view-landing" class="block premium-view">
             <div id="landing-hero" class="relative bg-slate-900 h-[620px] overflow-hidden">
                 <div class="absolute inset-0">
                     <img src="assets/images/hero-workstation.webp" alt="High-performance desktop PC setup with dual monitors and RGB lighting" width="1600" height="900" fetchpriority="high" class="w-full h-full object-cover opacity-20">
@@ -656,7 +1007,7 @@
         </div>
 
         <!-- View: Mode Selection -->
-        <div id="view-mode-selection" class="hidden min-h-screen bg-slate-900 flex items-center justify-center py-20 px-4">
+        <div id="view-mode-selection" class="hidden min-h-screen bg-slate-900 flex items-center justify-center py-20 px-4 premium-view">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Choose how you want to build</h2>
@@ -665,7 +1016,7 @@
                 
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Guided Builder Mode -->
-                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="openPremiumWizard()">
+                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-blue-400 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="openPremiumWizard()" role="button" tabindex="0" onkeydown="handleModeCardKey(event, 'guided')">
                         <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-star"></i> Recommended
                         </div>
@@ -686,7 +1037,7 @@
                     </div>
 
                     <!-- Manual Builder Mode -->
-                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-slate-500 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="startCustomBuilder()">
+                    <div class="group relative bg-white border border-slate-200 rounded-3xl p-8 hover:border-slate-500 transition-all duration-300 cursor-pointer transform hover:scale-[1.02] hover:shadow-2xl" onclick="startCustomBuilder()" role="button" tabindex="0" onkeydown="handleModeCardKey(event, 'manual')">
                         <div class="absolute top-4 right-4 bg-slate-700 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                             <i class="fa-solid fa-hammer"></i> Advanced
                         </div>
@@ -716,7 +1067,7 @@
         </div>
 
         <!-- View: Custom Builder -->
-        <div id="view-custom-builder" class="hidden min-h-screen bg-slate-100 py-12">
+        <div id="view-custom-builder" class="hidden min-h-screen bg-slate-100 py-12 premium-view">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="mb-8 flex justify-between items-center">
                     <div>
@@ -894,10 +1245,10 @@
                                     <i class="fa-solid fa-lightbulb"></i> Pro Tips
                                 </div>
                                 <ul class="space-y-1 text-xs">
-                                    <li>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ Match CPU socket with motherboard</li>
-                                    <li>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ PSU wattage = (CPU TDP + GPU TDP) ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â 1.5</li>
-                                    <li>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ 16GB RAM minimum for gaming</li>
-                                    <li>ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ SSD for OS, HDD for storage</li>
+                                    <li>- Match CPU socket with motherboard</li>
+                                    <li>- PSU wattage = (CPU TDP + GPU TDP) x 1.5</li>
+                                    <li>- 16GB RAM minimum for gaming</li>
+                                    <li>- SSD for OS, HDD for storage</li>
                                 </ul>
                             </div>
                         </div>
@@ -907,7 +1258,7 @@
         </div>
 
         <!-- View: Wizard -->
-        <div id="view-wizard" class="hidden min-h-[80vh] bg-slate-100 py-12">
+        <div id="view-wizard" class="hidden min-h-[80vh] bg-slate-100 py-12 premium-view">
             <div class="max-w-3xl mx-auto px-4">
                 <div class="mb-8 flex justify-between items-center">
                     <h2 class="text-2xl font-bold text-slate-800">Configuration Wizard</h2>
@@ -1022,7 +1373,7 @@
         </div>
 
         <!-- View: Results -->
-        <div id="view-results" class="hidden min-h-screen bg-slate-50 pb-20">
+        <div id="view-results" class="hidden min-h-screen bg-slate-50 pb-20 premium-view">
             <div class="bg-slate-900 text-white py-12 px-4">
                 <div class="max-w-7xl mx-auto text-center">
                     <h2 class="text-3xl font-bold mb-2">Your Recommendation</h2>
@@ -1772,8 +2123,54 @@
             document.getElementById('view-custom-builder').classList.add('hidden');
         }
 
+        function handleModeCardKey(event, mode) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            if (mode === 'guided') {
+                openPremiumWizard();
+                return;
+            }
+            startCustomBuilder();
+        }
+
         function openPremiumWizard() {
             window.location.href = '/premium-wizard/index.html';
+        }
+
+        function attachRippleEffects(root = document) {
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+
+            const targets = root.querySelectorAll('button, .store-btn');
+            targets.forEach((el) => {
+                if (el.dataset.rippleReady === '1') return;
+                el.dataset.rippleReady = '1';
+                el.classList.add('ripple-surface');
+                el.addEventListener('click', (event) => {
+                    if (el.disabled) return;
+
+                    const rect = el.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const ripple = document.createElement('span');
+                    ripple.className = 'button-ripple';
+                    ripple.style.width = `${size}px`;
+                    ripple.style.height = `${size}px`;
+
+                    const x = Number.isFinite(event.clientX) && event.clientX > 0
+                        ? event.clientX - rect.left
+                        : rect.width / 2;
+                    const y = Number.isFinite(event.clientY) && event.clientY > 0
+                        ? event.clientY - rect.top
+                        : rect.height / 2;
+
+                    ripple.style.left = `${x - size / 2}px`;
+                    ripple.style.top = `${y - size / 2}px`;
+
+                    el.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
         }
 
         // Custom Builder State
@@ -2371,6 +2768,7 @@
             });
             
             linksContainer.innerHTML = html;
+            attachRippleEffects(linksContainer);
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
@@ -3108,6 +3506,8 @@
                 });
                 container.innerHTML = html;
             }
+
+            attachRippleEffects(document.getElementById('view-results'));
         }
 
         function renderBenchmarks(res) {
@@ -3573,6 +3973,7 @@
 
         initVisualStyle();
         initLazyAds();
+        attachRippleEffects();
         initViewFromPageRoute();
         window.addEventListener('popstate', () => {
             initViewFromPageRoute();
