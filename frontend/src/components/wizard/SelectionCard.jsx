@@ -15,14 +15,14 @@ export default function SelectionCard({
       type="button"
       onClick={onSelect}
       onFocus={onFocus}
-      whileHover={{ scale: 1.025, y: -5 }}
+      whileHover={{ scale: 1.02, y: -4 }}
       whileTap={{ scale: 0.985 }}
-      className={`group relative min-h-44 w-full rounded-2xl border p-5 text-left transition-all focus:outline-none focus:ring-2 focus:ring-blue-400/80 ${
+      className={`group relative min-h-44 w-full rounded-2xl border p-5 text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400/80 ${
         selected
-          ? 'border-blue-300/55 bg-gradient-to-br from-blue-500/16 to-indigo-500/18 shadow-glow'
+          ? 'border-blue-300/55 bg-gradient-to-br from-blue-500/15 to-indigo-500/18 shadow-[0_12px_34px_rgba(79,140,255,0.28)]'
           : focused
-            ? 'border-blue-300/35 bg-white/[0.08]'
-            : 'border-white/18 bg-white/[0.05] hover:border-white/30'
+            ? 'border-blue-300/35 bg-white/[0.07]'
+            : 'border-white/15 bg-white/[0.04] hover:border-white/30 hover:bg-white/[0.06]'
       }`}
     >
       {selected && (
@@ -38,7 +38,7 @@ export default function SelectionCard({
       </div>
 
       <h3 className="text-lg font-bold text-white">{title}</h3>
-      <p className="mt-2 text-sm text-slate-200">{description}</p>
+      <p className="mt-2 text-sm subtle-copy">{description}</p>
 
       {helper ? (
         <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-blue-200/90">{helper}</p>

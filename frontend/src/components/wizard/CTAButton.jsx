@@ -9,10 +9,10 @@ export default function CTAButton({ disabled, onClick, label, isFinalStep = fals
         whileHover={{ scale: disabled ? 1 : 1.02 }}
         disabled={disabled}
         onClick={onClick}
-        className={`w-full rounded-2xl border px-6 py-3 text-sm font-bold text-white transition-all sm:pointer-events-auto sm:min-w-[188px] sm:w-auto sm:px-7 sm:py-4 sm:text-base ${
+        className={`w-full rounded-2xl border px-6 py-3 text-sm font-bold text-white transition-all sm:pointer-events-auto sm:min-w-[196px] sm:w-auto sm:px-7 sm:py-4 sm:text-base ${
           disabled
             ? 'cursor-not-allowed border-white/12 bg-slate-800/70 text-slate-400'
-            : 'border-blue-200/40 btn-gradient btn-glow hover:shadow-glow'
+            : 'border-blue-200/40 btn-gradient btn-glow hover:shadow-[0_12px_36px_rgba(84,124,255,0.42)]'
         }`}
       >
         {label}

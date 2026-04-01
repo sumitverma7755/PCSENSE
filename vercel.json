@@ -127,12 +127,12 @@
     },
     {
       "source": "/admin",
-      "destination": "/frontend?page=home",
+      "destination": "/frontend?page=admin",
       "permanent": true
     },
     {
       "source": "/admin.html",
-      "destination": "/frontend?page=home",
+      "destination": "/frontend?page=admin",
       "permanent": true
     },
     {
@@ -157,12 +157,12 @@
     },
     {
       "source": "/frontend/admin",
-      "destination": "/frontend",
+      "destination": "/frontend?page=admin",
       "permanent": true
     },
     {
       "source": "/frontend/admin.html",
-      "destination": "/frontend",
+      "destination": "/frontend?page=admin",
       "permanent": true
     },
     {

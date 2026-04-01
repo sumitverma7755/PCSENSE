@@ -527,7 +527,7 @@ export default function ConfigurationWizard({ onGoHome }) {
         <div className="rounded-2xl border border-blue-300/30 bg-blue-500/10 p-5">
           <div className="flex items-center gap-3">
             <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-200 border-t-transparent" />
-            <p className="text-sm font-semibold text-blue-100">Scoring parts and validating compatibility from live catalog...</p>
+            <p className="text-sm font-semibold text-blue-100">Evaluating components and validating compatibility from the live catalog...</p>
           </div>
         </div>
       );
@@ -544,7 +544,7 @@ export default function ConfigurationWizard({ onGoHome }) {
     if (!recommendation) {
       return (
         <div className="rounded-2xl border border-emerald-300/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">
-          Ready to generate. Click "Suggest My PC" below to create your recommendation card set.
+          Ready to generate your build. Click "Suggest My PC" to produce a full recommendation summary.
         </div>
       );
     }
@@ -553,9 +553,9 @@ export default function ConfigurationWizard({ onGoHome }) {
       return (
         <div className="space-y-4">
           <div className="rounded-2xl border border-blue-300/30 bg-gradient-to-br from-blue-500/12 to-violet-500/12 p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">Top Pick</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-300">Recommended Option</p>
             <p className="mt-1 text-xl font-bold text-white">{recommendation.options[0]?.name}</p>
-            <p className="mt-2 text-sm text-slate-200">{recommendation.options[0]?.spec}</p>
+            <p className="mt-2 text-sm subtle-copy">{recommendation.options[0]?.spec}</p>
             <p className="mt-3 text-lg font-bold text-blue-100">{formatINR(recommendation.options[0]?.price)}</p>
           </div>
 
@@ -564,13 +564,13 @@ export default function ConfigurationWizard({ onGoHome }) {
               <div key={option.id || option.name || idx} className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Option {idx + 1}</p>
                 <p className="mt-1 font-bold text-white">{option.name}</p>
-                <p className="mt-2 text-xs text-slate-300">{option.spec}</p>
+                <p className="mt-2 text-xs subtle-copy">{option.spec}</p>
                 <p className="mt-3 text-sm font-bold text-blue-200">{formatINR(option.price)}</p>
               </div>
             ))}
           </div>
 
-          <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm text-slate-300">{recommendation.reasoning}</p>
+          <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm subtle-copy">{recommendation.reasoning}</p>
         </div>
       );
     }
@@ -582,7 +582,7 @@ export default function ConfigurationWizard({ onGoHome }) {
         <div className="rounded-2xl border border-blue-300/25 bg-gradient-to-br from-blue-500/12 to-indigo-500/10 p-4">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Estimated Total</p>
           <p className="mt-1 text-2xl font-extrabold text-white">{formatINR(recommendation.totalPrice)}</p>
-          <p className="mt-2 text-sm text-slate-300">
+          <p className="mt-2 text-sm subtle-copy">
             Target budget: {formatINR(recommendation.targetBudget)}
           </p>
         </div>
@@ -597,7 +597,7 @@ export default function ConfigurationWizard({ onGoHome }) {
           ))}
         </div>
 
-        <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm text-slate-300">{recommendation.reasoning}</p>
+        <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm subtle-copy">{recommendation.reasoning}</p>
       </div>
     );
   };
@@ -646,7 +646,7 @@ export default function ConfigurationWizard({ onGoHome }) {
             </div>
             <div className="mt-5 text-center">
               <div className="text-3xl font-extrabold text-white sm:text-5xl">{formatINR(selections.budget)}</div>
-              <p className="mt-2 text-sm text-slate-300">Use arrow keys for fine tuning.</p>
+              <p className="mt-2 text-sm subtle-copy">Use arrow keys for fine tuning.</p>
             </div>
           </div>
 
@@ -659,7 +659,7 @@ export default function ConfigurationWizard({ onGoHome }) {
                 className={`rounded-xl border px-4 py-3 text-sm font-semibold transition-all ${
                   selections.budget === preset
                     ? 'border-blue-300/60 btn-gradient text-white shadow-glow'
-                    : 'border-white/10 bg-white/[0.04] text-slate-200 hover:border-white/30'
+                    : 'border-white/10 bg-white/[0.04] text-slate-200 hover:border-white/30 hover:bg-white/[0.06]'
                 }`}
               >
                 {formatINR(preset)}
@@ -726,7 +726,7 @@ export default function ConfigurationWizard({ onGoHome }) {
               <button
                 type="button"
                 onClick={onGoHome}
-                className="rounded-xl border border-white/15 bg-white/[0.04] px-3 py-2 text-xs font-semibold text-slate-200 hover:bg-white/[0.08]"
+                className="rounded-xl border border-white/15 bg-white/[0.04] px-3 py-2 text-xs font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
               >
                 Home
               </button>
@@ -745,7 +745,7 @@ export default function ConfigurationWizard({ onGoHome }) {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <h2 className="text-xl font-bold text-white sm:text-2xl">{activeStep.prompt}</h2>
-              <p className="mt-1 text-sm text-slate-300">Keyboard support: arrows move focus, Enter selects and continues.</p>
+              <p className="mt-1 text-sm subtle-copy">Keyboard support: arrows move focus, Enter selects and continues.</p>
             </div>
             <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">
               Step {currentStep + 1} of {totalSteps}

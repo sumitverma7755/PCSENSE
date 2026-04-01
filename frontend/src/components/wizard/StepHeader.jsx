@@ -7,12 +7,12 @@ export default function StepHeader({ title, subtitle, steps, currentStep, progre
         <div>
           <p className="section-tag mb-3">Configuration Wizard</p>
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">{title}</h1>
-          <p className="mt-2 max-w-2xl text-sm text-slate-300 sm:text-lg">{subtitle}</p>
+          <p className="mt-2 max-w-2xl text-sm subtle-copy sm:text-lg">{subtitle}</p>
         </div>
         <div className="rounded-2xl border border-white/15 bg-white/[0.04] px-4 py-3 text-right">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Active Step</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Progress</p>
           <p className="mt-1 text-lg font-bold text-white">
-            {currentStep + 1} / {steps.length}
+            {Math.round(progress)}%
           </p>
         </div>
       </div>
@@ -28,7 +28,7 @@ export default function StepHeader({ title, subtitle, steps, currentStep, progre
                 key={step.key}
                 className={`relative overflow-hidden rounded-2xl border px-3 py-3 transition-all sm:px-4 ${
                   active
-                    ? 'border-transparent bg-gradient-to-br from-blue-500/90 to-indigo-500/90 text-white shadow-glow'
+                    ? 'border-transparent bg-gradient-to-br from-blue-500/90 to-indigo-500/90 text-white shadow-lg shadow-blue-500/30'
                     : completed
                       ? 'border-emerald-300/35 bg-emerald-500/10 text-emerald-100'
                       : 'border-white/12 bg-transparent text-slate-300'
@@ -36,6 +36,9 @@ export default function StepHeader({ title, subtitle, steps, currentStep, progre
               >
                 <p className="text-[11px] font-bold uppercase tracking-[0.16em]">Step {idx + 1}</p>
                 <p className="mt-1 text-sm font-semibold">{step.label}</p>
+                <p className="mt-1 text-[11px] font-medium opacity-80">
+                  {completed ? 'Completed' : active ? 'In progress' : 'Upcoming'}
+                </p>
               </div>
             );
           })}
