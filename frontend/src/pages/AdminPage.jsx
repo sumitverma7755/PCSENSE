@@ -8,6 +8,18 @@ function normalizeBaseUrl(value) {
   return String(value || '').trim().replace(/\/+$/, '');
 }
 
+function sanitizeApiBase(value) {
+  const cleaned = normalizeBaseUrl(value);
+  if (!cleaned) return '';
+
+  try {
+    const url = new URL(cleaned);
+    return url.origin;
+  } catch {
+    return cleaned;
+  }
+}
+
 function getDefaultApiBase() {
   if (typeof window === 'undefined') {
     return 'http://localhost:3001';
@@ -22,7 +34,7 @@ function getDefaultApiBase() {
 }
 
 function getInitialApiBase() {
-  const saved = normalizeBaseUrl(window.localStorage.getItem(API_BASE_KEY));
+  const saved = sanitizeApiBase(window.localStorage.getItem(API_BASE_KEY));
   return saved || getDefaultApiBase();
 }
 
@@ -48,6 +60,8 @@ export default function AdminPage({ onGoHome }) {
   const [catalogBreakdown, setCatalogBreakdown] = useState([]);
   const [lastUpdateText, setLastUpdateText] = useState('Not available');
   const [priceSummary, setPriceSummary] = useState('No summary loaded.');
+  const [loadingState, setLoadingState] = useState('idle');
+  const [loadError, setLoadError] = useState('');
 
   useEffect(() => {
     window.localStorage.setItem(API_BASE_KEY, apiBase);
@@ -90,13 +104,38 @@ export default function AdminPage({ onGoHome }) {
   useEffect(() => {
     const controller = new AbortController();
     const loadAdminData = async () => {
-      try {
+      setLoadingState('loading');
+      setLoadError('');
+
+      const tryLoad = async (baseUrl) => {
         const [healthRes, componentsRes, summaryRes, updateRes] = await Promise.allSettled([
-          fetch(`${apiBase}/api/health`, { signal: controller.signal }),
-          fetch(`${apiBase}/api/components`, { signal: controller.signal }),
-          fetch(`${apiBase}/api/price-summary`, { signal: controller.signal }),
-          fetch(`${apiBase}/api/last-update`, { signal: controller.signal })
+          fetch(`${baseUrl}/api/health`, { signal: controller.signal }),
+          fetch(`${baseUrl}/api/components`, { signal: controller.signal }),
+          fetch(`${baseUrl}/api/price-summary`, { signal: controller.signal }),
+          fetch(`${baseUrl}/api/last-update`, { signal: controller.signal })
         ]);
+
+        return { healthRes, componentsRes, summaryRes, updateRes };
+      };
+
+      try {
+        let activeBase = apiBase;
+        let { healthRes, componentsRes, summaryRes, updateRes } = await tryLoad(activeBase);
+
+        const defaultBase = getDefaultApiBase();
+        const firstRoundAllFailed =
+          healthRes.status !== 'fulfilled' &&
+          componentsRes.status !== 'fulfilled' &&
+          summaryRes.status !== 'fulfilled' &&
+          updateRes.status !== 'fulfilled';
+
+        if (firstRoundAllFailed && activeBase !== defaultBase) {
+          activeBase = defaultBase;
+          setApiBase(activeBase);
+          setApiBaseInput(activeBase);
+          ({ healthRes, componentsRes, summaryRes, updateRes } = await tryLoad(activeBase));
+          setAlert(`API endpoint reset to ${activeBase} because saved endpoint was unreachable.`);
+        }
 
         if (healthRes.status === 'fulfilled' && healthRes.value.ok) {
           setHealthStatus('Online');
@@ -129,8 +168,23 @@ export default function AdminPage({ onGoHome }) {
         } else {
           setLastUpdateText('Not available');
         }
+
+        const hasSomeSuccess =
+          (healthRes.status === 'fulfilled' && healthRes.value.ok) ||
+          (componentsRes.status === 'fulfilled' && componentsRes.value.ok) ||
+          (summaryRes.status === 'fulfilled' && summaryRes.value.ok) ||
+          (updateRes.status === 'fulfilled' && updateRes.value.ok);
+
+        if (!hasSomeSuccess) {
+          setLoadError(`Unable to load admin data from ${activeBase}.`);
+          setLoadingState('error');
+        } else {
+          setLoadingState('success');
+        }
       } catch {
         setHealthStatus('Offline');
+        setLoadError(`Unable to load admin data from ${apiBase}.`);
+        setLoadingState('error');
       }
     };
 
@@ -146,7 +200,7 @@ export default function AdminPage({ onGoHome }) {
   }, [priceSummary]);
 
   const saveApiBase = () => {
-    const normalized = normalizeBaseUrl(apiBaseInput);
+    const normalized = sanitizeApiBase(apiBaseInput);
     if (!normalized) {
       setAlert('Enter a valid API base URL.');
       return;
@@ -175,7 +229,14 @@ export default function AdminPage({ onGoHome }) {
 
       if (!response.ok) {
         const body = await readTextSafe(response);
-        throw new Error(body || 'Login failed');
+        let message = body || 'Login failed';
+        try {
+          const parsed = JSON.parse(body);
+          message = parsed?.message || message;
+        } catch {
+          // keep raw response body
+        }
+        throw new Error(message);
       }
 
       const payload = await response.json();
@@ -279,20 +340,42 @@ export default function AdminPage({ onGoHome }) {
               className="mt-2 w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
               placeholder="http://localhost:3001"
             />
+            <p className="mt-2 text-xs subtle-copy">Current endpoint: {apiBase}</p>
           </div>
-          <button
-            type="button"
-            onClick={saveApiBase}
-            className="rounded-xl border border-blue-300/40 btn-gradient px-5 py-3 text-sm font-semibold text-white btn-glow"
-          >
-            Save Endpoint
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                const fallback = getDefaultApiBase();
+                setApiBaseInput(fallback);
+                setApiBase(fallback);
+                setAlert(`Endpoint reset to ${fallback}`);
+              }}
+              className="rounded-xl border border-white/20 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+            >
+              Reset Endpoint
+            </button>
+            <button
+              type="button"
+              onClick={saveApiBase}
+              className="rounded-xl border border-blue-300/40 btn-gradient px-5 py-3 text-sm font-semibold text-white btn-glow"
+            >
+              Save Endpoint
+            </button>
+          </div>
         </section>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="panel-shell p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Backend Health</p>
             <p className={`mt-2 text-2xl font-bold ${statusTone}`}>{healthStatus}</p>
+            <p className="mt-1 text-xs subtle-copy">
+              {loadingState === 'loading'
+                ? 'Refreshing status...'
+                : loadingState === 'error'
+                  ? 'Endpoint unreachable'
+                  : 'Connected'}
+            </p>
           </div>
           <div className="panel-shell p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Catalog Items</p>
@@ -303,6 +386,12 @@ export default function AdminPage({ onGoHome }) {
             <p className="mt-2 text-sm font-semibold text-slate-200">{lastUpdateText}</p>
           </div>
         </section>
+
+        {loadError ? (
+          <section className="panel-shell p-4">
+            <p className="text-sm text-amber-200">{loadError}</p>
+          </section>
+        ) : null}
 
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.2fr]">
           <div className="panel-shell p-5">
