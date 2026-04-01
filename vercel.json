@@ -178,8 +178,16 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/$1"
+      "source": "/frontend/assets/(.*)",
+      "destination": "/frontend/dist/assets/$1"
+    },
+    {
+      "source": "/frontend",
+      "destination": "/frontend/dist/index.html"
+    },
+    {
+      "source": "/frontend/",
+      "destination": "/frontend/dist/index.html"
     }
   ],
   "headers": [

@@ -544,7 +544,7 @@ export default function ConfigurationWizard({ onGoHome }) {
     if (!recommendation) {
       return (
         <div className="rounded-2xl border border-emerald-300/30 bg-emerald-500/10 p-4 text-sm text-emerald-200">
-          Ready to generate. Click \"Suggest My PC\" for a complete recommendation card set.
+          Ready to generate. Click "Suggest My PC" below to create your recommendation card set.
         </div>
       );
     }
