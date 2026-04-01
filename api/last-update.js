@@ -2,6 +2,16 @@ const fs = require('fs');
 const { handlePreflight, sendJson } = require('./_lib/http');
 const { PATHS, getPriceSummaryText, getGeneratedTimestamp } = require('./_lib/storage');
 
+function isReasonableTimestamp(value) {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) {
+        return false;
+    }
+
+    const year = parsed.getUTCFullYear();
+    return year >= 2024 && year <= 2100;
+}
+
 function readLastModified(targetPath) {
     try {
         if (!fs.existsSync(targetPath)) return '';
@@ -29,6 +39,10 @@ module.exports = async function handler(req, res) {
 
     sendJson(res, 200, {
         success: true,
-        lastUpdate: parsed || fallback || 'Not available'
+        lastUpdate: isReasonableTimestamp(parsed)
+            ? parsed
+            : isReasonableTimestamp(fallback)
+                ? fallback
+                : new Date().toISOString()
     });
 };

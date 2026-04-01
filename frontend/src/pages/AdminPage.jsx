@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 const TOKEN_KEY = 'pcsenseiAdminToken';
 const API_BASE_KEY = 'pcsenseiApiBaseUrl';
+const AUTH_MODE_KEY = 'pcsenseiAdminMode';
 
 function normalizeBaseUrl(value) {
   return String(value || '').trim().replace(/\/+$/, '');
@@ -38,6 +39,25 @@ function getInitialApiBase() {
   return saved || getDefaultApiBase();
 }
 
+function formatLastUpdate(value) {
+  const raw = String(value || '').trim();
+  if (!raw || raw === 'Not available') return 'Not available';
+
+  const parsed = new Date(raw);
+  if (Number.isNaN(parsed.getTime())) {
+    return raw;
+  }
+
+  return parsed.toLocaleString('en-IN', {
+    dateStyle: 'medium',
+    timeStyle: 'short'
+  });
+}
+
+function formatNumber(value) {
+  return Number(value || 0).toLocaleString('en-IN');
+}
+
 async function readTextSafe(response) {
   try {
     return await response.text();
@@ -46,15 +66,52 @@ async function readTextSafe(response) {
   }
 }
 
+function getNoticeStyle(type) {
+  if (type === 'success') return 'border-emerald-300/35 bg-emerald-500/10 text-emerald-100';
+  if (type === 'error') return 'border-red-300/35 bg-red-500/10 text-red-100';
+  return 'border-amber-300/35 bg-amber-500/10 text-amber-100';
+}
+
+function getAuthBadge(authMode) {
+  if (authMode === 'env') {
+    return {
+      label: 'Secure Env Mode',
+      className: 'border-emerald-300/30 bg-emerald-500/10 text-emerald-100'
+    };
+  }
+
+  if (authMode === 'demo') {
+    return {
+      label: 'Demo Auth Mode',
+      className: 'border-amber-300/35 bg-amber-500/10 text-amber-100'
+    };
+  }
+
+  return {
+    label: 'Auth Mode Unknown',
+    className: 'border-white/20 bg-white/[0.04] text-slate-200'
+  };
+}
+
 export default function AdminPage({ onGoHome }) {
   const [apiBaseInput, setApiBaseInput] = useState(getInitialApiBase);
   const [apiBase, setApiBase] = useState(getInitialApiBase);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
   const [token, setToken] = useState(() => window.sessionStorage.getItem(TOKEN_KEY) || '');
+  const [authMode, setAuthMode] = useState(() => window.sessionStorage.getItem(AUTH_MODE_KEY) || '');
+  const [authUser, setAuthUser] = useState('');
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [authUser, setAuthUser] = useState('');
-  const [isBusy, setIsBusy] = useState(false);
-  const [alert, setAlert] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({ username: '', password: '' });
+
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isRunningPriceCheck, setIsRunningPriceCheck] = useState(false);
+
+  const [notice, setNotice] = useState(null);
+
   const [healthStatus, setHealthStatus] = useState('Unknown');
   const [componentCount, setComponentCount] = useState(0);
   const [catalogBreakdown, setCatalogBreakdown] = useState([]);
@@ -63,9 +120,23 @@ export default function AdminPage({ onGoHome }) {
   const [loadingState, setLoadingState] = useState('idle');
   const [loadError, setLoadError] = useState('');
 
+  const notify = (type, message) => {
+    setNotice({ type, message, id: Date.now() });
+  };
+
+  useEffect(() => {
+    if (!notice) return;
+    const timeout = window.setTimeout(() => setNotice(null), 4800);
+    return () => window.clearTimeout(timeout);
+  }, [notice]);
+
   useEffect(() => {
     window.localStorage.setItem(API_BASE_KEY, apiBase);
   }, [apiBase]);
+
+  useEffect(() => {
+    window.sessionStorage.setItem(AUTH_MODE_KEY, authMode || '');
+  }, [authMode]);
 
   useEffect(() => {
     if (!token) {
@@ -94,6 +165,7 @@ export default function AdminPage({ onGoHome }) {
         window.sessionStorage.removeItem(TOKEN_KEY);
         setToken('');
         setAuthUser('');
+        setAuthMode('');
       }
     };
 
@@ -103,20 +175,21 @@ export default function AdminPage({ onGoHome }) {
 
   useEffect(() => {
     const controller = new AbortController();
+
+    const tryLoad = async (baseUrl) => {
+      const [healthRes, componentsRes, summaryRes, updateRes] = await Promise.allSettled([
+        fetch(`${baseUrl}/api/health`, { signal: controller.signal }),
+        fetch(`${baseUrl}/api/components`, { signal: controller.signal }),
+        fetch(`${baseUrl}/api/price-summary`, { signal: controller.signal }),
+        fetch(`${baseUrl}/api/last-update`, { signal: controller.signal })
+      ]);
+
+      return { healthRes, componentsRes, summaryRes, updateRes };
+    };
+
     const loadAdminData = async () => {
       setLoadingState('loading');
       setLoadError('');
-
-      const tryLoad = async (baseUrl) => {
-        const [healthRes, componentsRes, summaryRes, updateRes] = await Promise.allSettled([
-          fetch(`${baseUrl}/api/health`, { signal: controller.signal }),
-          fetch(`${baseUrl}/api/components`, { signal: controller.signal }),
-          fetch(`${baseUrl}/api/price-summary`, { signal: controller.signal }),
-          fetch(`${baseUrl}/api/last-update`, { signal: controller.signal })
-        ]);
-
-        return { healthRes, componentsRes, summaryRes, updateRes };
-      };
 
       try {
         let activeBase = apiBase;
@@ -134,7 +207,7 @@ export default function AdminPage({ onGoHome }) {
           setApiBase(activeBase);
           setApiBaseInput(activeBase);
           ({ healthRes, componentsRes, summaryRes, updateRes } = await tryLoad(activeBase));
-          setAlert(`API endpoint reset to ${activeBase} because saved endpoint was unreachable.`);
+          notify('warning', `Saved endpoint was unreachable. Automatically reset to ${activeBase}.`);
         }
 
         if (healthRes.status === 'fulfilled' && healthRes.value.ok) {
@@ -193,30 +266,42 @@ export default function AdminPage({ onGoHome }) {
   }, [apiBase, token]);
 
   const statusTone = healthStatus === 'Online' ? 'text-emerald-200' : 'text-amber-200';
+  const authBadge = getAuthBadge(authMode);
+  const formattedUpdate = useMemo(() => formatLastUpdate(lastUpdateText), [lastUpdateText]);
 
-  const previewSummary = useMemo(() => {
-    const lines = String(priceSummary || '').split(/\r?\n/).filter(Boolean);
-    return lines.slice(0, 14).join('\n');
+  const summaryPreview = useMemo(() => {
+    const lines = String(priceSummary || '').split(/\r?\n/);
+    return lines.slice(0, 26).join('\n').trim();
   }, [priceSummary]);
 
   const saveApiBase = () => {
     const normalized = sanitizeApiBase(apiBaseInput);
     if (!normalized) {
-      setAlert('Enter a valid API base URL.');
+      notify('error', 'Enter a valid API base URL.');
       return;
     }
     setApiBase(normalized);
-    setAlert(`API base updated to ${normalized}`);
+    notify('success', `API base updated to ${normalized}`);
+  };
+
+  const resetApiBase = () => {
+    const fallback = getDefaultApiBase();
+    setApiBaseInput(fallback);
+    setApiBase(fallback);
+    notify('success', `Endpoint reset to ${fallback}`);
   };
 
   const login = async () => {
-    if (!username.trim() || !password.trim()) {
-      setAlert('Username and password are required.');
+    const nextErrors = {
+      username: username.trim() ? '' : 'Username is required.',
+      password: password.trim() ? '' : 'Password is required.'
+    };
+    setFieldErrors(nextErrors);
+    if (nextErrors.username || nextErrors.password) {
       return;
     }
 
-    setIsBusy(true);
-    setAlert('');
+    setIsSigningIn(true);
     try {
       const response = await fetch(`${apiBase}/api/admin/login`, {
         method: 'POST',
@@ -227,19 +312,18 @@ export default function AdminPage({ onGoHome }) {
         })
       });
 
-      if (!response.ok) {
-        const body = await readTextSafe(response);
-        let message = body || 'Login failed';
-        try {
-          const parsed = JSON.parse(body);
-          message = parsed?.message || message;
-        } catch {
-          // keep raw response body
-        }
-        throw new Error(message);
+      const body = await readTextSafe(response);
+      let payload = {};
+      try {
+        payload = body ? JSON.parse(body) : {};
+      } catch {
+        payload = { message: body };
       }
 
-      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Login failed.');
+      }
+
       const nextToken = payload?.token || '';
       if (!nextToken) {
         throw new Error('Missing auth token in response.');
@@ -248,12 +332,13 @@ export default function AdminPage({ onGoHome }) {
       window.sessionStorage.setItem(TOKEN_KEY, nextToken);
       setToken(nextToken);
       setAuthUser(payload?.username || username.trim());
+      setAuthMode(payload?.authMode || authMode || 'unknown');
       setPassword('');
-      setAlert('Admin login successful.');
+      notify('success', 'Admin login successful.');
     } catch (error) {
-      setAlert(error?.message || 'Login failed.');
+      notify('error', error?.message || 'Login failed.');
     } finally {
-      setIsBusy(false);
+      setIsSigningIn(false);
     }
   };
 
@@ -268,23 +353,24 @@ export default function AdminPage({ onGoHome }) {
         }
       });
     } catch {
-      // ignore logout request errors
+      // ignore logout API errors
     }
 
     window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.removeItem(AUTH_MODE_KEY);
     setToken('');
     setAuthUser('');
-    setAlert('Logged out.');
+    setAuthMode('');
+    notify('success', 'Logged out.');
   };
 
   const runPriceCheck = async () => {
     if (!token) {
-      setAlert('Login required to run a price check.');
+      notify('warning', 'Login required to run a price check.');
       return;
     }
 
-    setIsBusy(true);
-    setAlert('');
+    setIsRunningPriceCheck(true);
     try {
       const response = await fetch(`${apiBase}/api/run-price-check`, {
         method: 'POST',
@@ -295,18 +381,43 @@ export default function AdminPage({ onGoHome }) {
         body: JSON.stringify({})
       });
 
-      if (!response.ok) {
-        const text = await readTextSafe(response);
-        throw new Error(text || 'Price check failed');
+      const body = await readTextSafe(response);
+      let payload = {};
+      try {
+        payload = body ? JSON.parse(body) : {};
+      } catch {
+        payload = { message: body };
       }
 
-      const payload = await response.json();
-      setAlert(payload?.message ? `Price check: ${payload.message}` : 'Price check started successfully.');
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Price check failed.');
+      }
+
+      notify('success', payload?.message || 'Price check executed successfully.');
     } catch (error) {
-      setAlert(error?.message || 'Price check failed.');
+      notify('error', error?.message || 'Price check failed.');
     } finally {
-      setIsBusy(false);
+      setIsRunningPriceCheck(false);
     }
+  };
+
+  const copySummary = async () => {
+    try {
+      await navigator.clipboard.writeText(priceSummary || '');
+      notify('success', 'Price summary copied to clipboard.');
+    } catch {
+      notify('error', 'Unable to copy summary. Check browser permissions.');
+    }
+  };
+
+  const downloadSummary = () => {
+    const blob = new Blob([priceSummary || ''], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `pcsensei-price-summary-${new Date().toISOString().slice(0, 10)}.txt`;
+    anchor.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -320,52 +431,33 @@ export default function AdminPage({ onGoHome }) {
           <div>
             <p className="section-tag mb-2">Admin Console</p>
             <h1 className="text-2xl font-extrabold text-white sm:text-3xl">Operations & Price Monitoring</h1>
-            <p className="mt-1 text-sm subtle-copy">Manage catalog health, authenticate admins, and trigger price checks.</p>
+            <p className="mt-1 text-sm subtle-copy">A control panel for authentication, catalog health, and pricing operations.</p>
           </div>
-          <button
-            type="button"
-            onClick={onGoHome}
-            className="rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
-          >
-            Back To Home
-          </button>
+          <div className="flex items-center gap-2">
+            <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${authBadge.className}`}>
+              {authBadge.label}
+            </span>
+            <button
+              type="button"
+              onClick={onGoHome}
+              className="rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+            >
+              Back To Home
+            </button>
+          </div>
         </header>
 
-        <section className="panel-shell grid grid-cols-1 gap-4 p-5 sm:grid-cols-[1fr_auto] sm:items-end">
-          <div>
-            <label className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Backend API Base URL</label>
-            <input
-              value={apiBaseInput}
-              onChange={(event) => setApiBaseInput(event.target.value)}
-              className="mt-2 w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
-              placeholder="http://localhost:3001"
-            />
-            <p className="mt-2 text-xs subtle-copy">Current endpoint: {apiBase}</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                const fallback = getDefaultApiBase();
-                setApiBaseInput(fallback);
-                setApiBase(fallback);
-                setAlert(`Endpoint reset to ${fallback}`);
-              }}
-              className="rounded-xl border border-white/20 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
-            >
-              Reset Endpoint
-            </button>
-            <button
-              type="button"
-              onClick={saveApiBase}
-              className="rounded-xl border border-blue-300/40 btn-gradient px-5 py-3 text-sm font-semibold text-white btn-glow"
-            >
-              Save Endpoint
-            </button>
-          </div>
-        </section>
+        {notice ? (
+          <motion.section
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`panel-shell border p-4 text-sm ${getNoticeStyle(notice.type)}`}
+          >
+            {notice.message}
+          </motion.section>
+        ) : null}
 
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <div className="panel-shell p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Backend Health</p>
             <p className={`mt-2 text-2xl font-bold ${statusTone}`}>{healthStatus}</p>
@@ -377,106 +469,228 @@ export default function AdminPage({ onGoHome }) {
                   : 'Connected'}
             </p>
           </div>
+
           <div className="panel-shell p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Catalog Items</p>
-            <p className="mt-2 text-2xl font-bold text-white">{componentCount}</p>
+            <p className="mt-2 text-2xl font-bold text-white">{formatNumber(componentCount)}</p>
+            <p className="mt-1 text-xs subtle-copy">Total indexed items across all categories.</p>
           </div>
+
           <div className="panel-shell p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Last Price Update</p>
-            <p className="mt-2 text-sm font-semibold text-slate-200">{lastUpdateText}</p>
+            <p className="mt-2 text-sm font-semibold text-slate-100">{formattedUpdate}</p>
+            <p className="mt-1 text-xs subtle-copy">Timestamp from the latest summary/update source.</p>
+          </div>
+
+          <div className="panel-shell p-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Current Session</p>
+            <p className="mt-2 text-sm font-semibold text-slate-100">{token ? `Signed in as ${authUser || 'admin'}` : 'Not signed in'}</p>
+            <p className="mt-1 text-xs subtle-copy">Use secure environment credentials in production.</p>
           </div>
         </section>
 
         {loadError ? (
-          <section className="panel-shell p-4">
-            <p className="text-sm text-amber-200">{loadError}</p>
+          <section className="panel-shell border border-amber-300/35 bg-amber-500/10 p-4">
+            <p className="text-sm text-amber-100">{loadError}</p>
           </section>
         ) : null}
 
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.2fr]">
-          <div className="panel-shell p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Admin Authentication</p>
+        <section className="panel-shell p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Advanced Settings</p>
+              <p className="mt-1 text-sm subtle-copy">Change backend endpoint only if your API is hosted elsewhere.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowAdvanced((prev) => !prev)}
+              className="rounded-xl border border-white/20 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+            >
+              {showAdvanced ? 'Hide Advanced' : 'Show Advanced'}
+            </button>
+          </div>
 
-            {!token ? (
-              <div className="mt-4 space-y-3">
+          {showAdvanced ? (
+            <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <label className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Backend API Base URL</label>
                 <input
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
-                  placeholder="Admin username"
+                  value={apiBaseInput}
+                  onChange={(event) => setApiBaseInput(event.target.value)}
+                  className="mt-2 w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
+                  placeholder="http://localhost:3001"
                 />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
-                  placeholder="Admin password"
-                />
+                <p className="mt-2 text-xs subtle-copy">Current endpoint: {apiBase}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
-                  disabled={isBusy}
-                  onClick={login}
-                  className={`w-full rounded-xl border px-4 py-3 text-sm font-semibold text-white transition-colors ${
-                    isBusy
-                      ? 'cursor-not-allowed border-white/12 bg-slate-800/70 text-slate-400'
-                      : 'border-blue-300/40 btn-gradient btn-glow'
-                  }`}
+                  onClick={resetApiBase}
+                  className="rounded-xl border border-white/20 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
                 >
-                  {isBusy ? 'Signing In...' : 'Sign In'}
+                  Reset Endpoint
+                </button>
+                <button
+                  type="button"
+                  onClick={saveApiBase}
+                  className="rounded-xl border border-blue-300/40 btn-gradient px-5 py-3 text-sm font-semibold text-white btn-glow"
+                >
+                  Save Endpoint
                 </button>
               </div>
-            ) : (
-              <div className="mt-4 space-y-3">
-                <p className="rounded-xl border border-emerald-300/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
-                  Signed in as <span className="font-bold">{authUser || 'admin'}</span>
-                </p>
-                <button
-                  type="button"
-                  onClick={runPriceCheck}
-                  disabled={isBusy}
-                  className={`w-full rounded-xl border px-4 py-3 text-sm font-semibold text-white transition-colors ${
-                    isBusy
-                      ? 'cursor-not-allowed border-white/12 bg-slate-800/70 text-slate-400'
-                      : 'border-blue-300/40 btn-gradient btn-glow'
-                  }`}
-                >
-                  {isBusy ? 'Running Price Check...' : 'Run Price Check'}
-                </button>
-                <button
-                  type="button"
-                  onClick={logout}
-                  className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
-                >
-                  Logout
-                </button>
-              </div>
-            )}
+            </div>
+          ) : null}
+        </section>
 
-            {alert ? (
-              <motion.p
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-4 rounded-xl border border-white/12 bg-white/[0.03] px-3 py-2 text-xs text-slate-300"
-              >
-                {alert}
-              </motion.p>
-            ) : null}
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+          <div className="space-y-4">
+            <div className="panel-shell p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Admin Authentication</p>
+
+              {!token ? (
+                <div className="mt-4 space-y-3">
+                  <div>
+                    <input
+                      value={username}
+                      onChange={(event) => setUsername(event.target.value)}
+                      className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
+                      placeholder="Admin username"
+                    />
+                    {fieldErrors.username ? (
+                      <p className="mt-1 text-xs text-red-200">{fieldErrors.username}</p>
+                    ) : null}
+                  </div>
+
+                  <div>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault();
+                            void login();
+                          }
+                        }}
+                        className="w-full rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 pr-28 text-sm text-white outline-none transition-colors focus:border-blue-300/45"
+                        placeholder="Admin password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg border border-white/20 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+                      >
+                        {showPassword ? 'Hide' : 'Show'}
+                      </button>
+                    </div>
+                    {fieldErrors.password ? (
+                      <p className="mt-1 text-xs text-red-200">{fieldErrors.password}</p>
+                    ) : null}
+                  </div>
+
+                  <button
+                    type="button"
+                    disabled={isSigningIn}
+                    onClick={login}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm font-semibold text-white transition-colors ${
+                      isSigningIn
+                        ? 'cursor-not-allowed border-white/12 bg-slate-800/70 text-slate-400'
+                        : 'border-blue-300/40 btn-gradient btn-glow'
+                    }`}
+                  >
+                    {isSigningIn ? 'Signing In...' : 'Sign In'}
+                  </button>
+
+                  <p className="text-xs subtle-copy">
+                    Tip: press Enter in password field to sign in quickly.
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-4 space-y-3">
+                  <p className="rounded-xl border border-emerald-300/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
+                    Signed in as <span className="font-bold">{authUser || 'admin'}</span>
+                  </p>
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="w-full rounded-xl border border-white/20 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="panel-shell p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Operations</p>
+
+              {token ? (
+                <div className="mt-4 space-y-3">
+                  <button
+                    type="button"
+                    onClick={runPriceCheck}
+                    disabled={isRunningPriceCheck}
+                    className={`w-full rounded-xl border px-4 py-3 text-sm font-semibold text-white transition-colors ${
+                      isRunningPriceCheck
+                        ? 'cursor-not-allowed border-white/12 bg-slate-800/70 text-slate-400'
+                        : 'border-blue-300/40 btn-gradient btn-glow'
+                    }`}
+                  >
+                    {isRunningPriceCheck ? 'Running Price Check...' : 'Run Price Check'}
+                  </button>
+                  <p className="text-xs subtle-copy">
+                    In Vercel serverless mode, this action returns guidance if background scripts are unavailable.
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-4 rounded-xl border border-white/12 bg-white/[0.03] p-4">
+                  <p className="text-sm font-semibold text-slate-100">Sign in required for operations</p>
+                  <p className="mt-1 text-xs subtle-copy">Authenticate with admin credentials to access protected actions.</p>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="panel-shell p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Catalog Breakdown</p>
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Catalog Breakdown</p>
+              <span className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-xs font-semibold text-slate-200">
+                {formatNumber(componentCount)} items
+              </span>
+            </div>
+
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {catalogBreakdown.map((item) => (
                 <div key={item.key} className="rounded-xl border border-white/12 bg-white/[0.04] px-3 py-3">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400">{item.key}</p>
-                  <p className="mt-1 text-lg font-bold text-white">{item.count}</p>
+                  <p className="mt-1 text-lg font-bold text-white">{formatNumber(item.count)}</p>
                 </div>
               ))}
             </div>
 
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Price Summary Preview</p>
-            <pre className="mt-2 max-h-72 overflow-auto rounded-xl border border-white/12 bg-black/20 p-3 text-xs leading-relaxed text-slate-300">
-              {previewSummary}
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Price Summary Preview</p>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={copySummary}
+                  className="rounded-lg border border-white/20 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+                >
+                  Copy
+                </button>
+                <button
+                  type="button"
+                  onClick={downloadSummary}
+                  className="rounded-lg border border-white/20 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:bg-white/[0.08]"
+                >
+                  Download
+                </button>
+              </div>
+            </div>
+
+            <pre className="mt-2 max-h-80 overflow-auto rounded-xl border border-white/12 bg-black/25 p-3 text-[11px] leading-relaxed text-slate-200">
+              {summaryPreview || 'No summary available.'}
             </pre>
           </div>
         </section>
