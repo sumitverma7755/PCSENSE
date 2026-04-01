@@ -4,36 +4,31 @@ PCSensei is a PC and laptop recommendation platform focused on budget-aware buil
 
 ## What is in this repo
 
-- `main.html`: Primary web app shell (landing, guided builder, manual builder, results)
-- Route wrappers:
-  - `home.html`
-  - `mode-selection.html`
-  - `guided-builder.html`
-  - `manual-builder.html`
-  - `results.html`
-  - `pc-builder.html`
-  - `laptop-finder.html`
-- Utility pages:
-  - `about.html`
-  - `help.html`
-  - `price-dashboard.html`
-  - `admin.html`
+- `frontend/`: React + Tailwind app (Vite)
+  - `frontend/src/pages/HomePage.jsx`
+  - `frontend/src/pages/ConfigurationWizard.jsx`
+  - `frontend/src/components/wizard/*`
 - `data/components.json`: Component catalog consumed by the frontend
 - `backend/`: API and operational scripts
 
 ## Quick start
 
-1. Open `index.html` or `main.html` for the frontend flow.
-2. If you use backend APIs, configure `localStorage.pcsenseiApiBaseUrl` to your API base URL.
-3. Keep `data/components.json` updated for local/offline catalog fallback.
+1. Install frontend dependencies:
+   - `cd frontend`
+   - `npm install`
+2. Start React frontend:
+   - `npm run dev`
+3. Open:
+   - `http://localhost:5173/?page=home`
+   - `http://localhost:5173/?page=wizard`
+4. If you use backend APIs, configure `localStorage.pcsenseiApiBaseUrl` to your API base URL.
+5. Keep `data/components.json` updated for local/offline catalog fallback.
 
 ## Admin and operations
 
-- Admin panel: `admin.html`
-- Price dashboard: `price-dashboard.html`
 - Backend scripts and API server are in `backend/`.
 
 ## Notes
 
-- Root website pages have production hardening for metadata, redirects, and link consistency.
-- Route pages are intentionally thin wrappers that redirect into `main.html` views.
+- Legacy static HTML website pages were removed.
+- Vercel redirects old HTML routes to the React app at `/frontend`.

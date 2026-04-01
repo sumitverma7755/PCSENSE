@@ -1,4 +1,181 @@
 {
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/main",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/main.html",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/home.html",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/mode-selection",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/mode-selection.html",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/guided-builder",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/guided-builder.html",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/manual-builder",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/manual-builder.html",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/results",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/results.html",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/pc-builder",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/pc-builder.html",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/laptop-finder",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/laptop-finder.html",
+      "destination": "/frontend?page=wizard",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/help",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/help.html",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/admin",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/admin.html",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/price-dashboard",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/price-dashboard.html",
+      "destination": "/frontend?page=home",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/main",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/main.html",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/admin",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/admin.html",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/platform",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/platform.html",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/price-dashboard",
+      "destination": "/frontend",
+      "permanent": true
+    },
+    {
+      "source": "/frontend/price-dashboard.html",
+      "destination": "/frontend",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
