@@ -2,7 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = process.cwd();
+const RUNTIME_DIR = path.join('/tmp', 'pcsensei-runtime');
 const PATHS = {
+    runtimeDir: RUNTIME_DIR,
+    runtimeComponents: path.join(RUNTIME_DIR, 'components.json'),
+    runtimeSummary: path.join(RUNTIME_DIR, 'price-summary.txt'),
     components: path.join(ROOT_DIR, 'shared', 'data', 'components.json'),
     componentsFallback: path.join(ROOT_DIR, 'data', 'components.json'),
     summary: path.join(ROOT_DIR, 'shared', 'logs', 'price-summary.txt'),
@@ -33,11 +37,20 @@ function readJsonIfExists(targetPath) {
 }
 
 function getComponentsDb() {
-    return readJsonIfExists(PATHS.components) || readJsonIfExists(PATHS.componentsFallback) || {};
+    return (
+        readJsonIfExists(PATHS.runtimeComponents) ||
+        readJsonIfExists(PATHS.components) ||
+        readJsonIfExists(PATHS.componentsFallback) ||
+        {}
+    );
 }
 
 function getPriceSummaryText() {
-    return readTextIfExists(PATHS.summary) || readTextIfExists(PATHS.summaryFallback);
+    return (
+        readTextIfExists(PATHS.runtimeSummary) ||
+        readTextIfExists(PATHS.summary) ||
+        readTextIfExists(PATHS.summaryFallback)
+    );
 }
 
 function getGeneratedTimestamp(summaryText) {
@@ -80,10 +93,26 @@ function formatSnapshotSummary(db) {
     return lines.join('\n');
 }
 
+function writeRuntimeArtifacts(componentsDb, summaryText) {
+    try {
+        fs.mkdirSync(PATHS.runtimeDir, { recursive: true });
+        fs.writeFileSync(
+            PATHS.runtimeComponents,
+            JSON.stringify(componentsDb || {}, null, 2),
+            'utf8'
+        );
+        fs.writeFileSync(PATHS.runtimeSummary, String(summaryText || ''), 'utf8');
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 module.exports = {
     PATHS,
     getComponentsDb,
     getPriceSummaryText,
     getGeneratedTimestamp,
-    formatSnapshotSummary
+    formatSnapshotSummary,
+    writeRuntimeArtifacts
 };

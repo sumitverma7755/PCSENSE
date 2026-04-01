@@ -32,6 +32,8 @@ module.exports = async function handler(req, res) {
     const summary = getPriceSummaryText();
     const parsed = getGeneratedTimestamp(summary);
     const fallback =
+        readLastModified(PATHS.runtimeSummary) ||
+        readLastModified(PATHS.runtimeComponents) ||
         readLastModified(PATHS.summary) ||
         readLastModified(PATHS.summaryFallback) ||
         readLastModified(PATHS.components) ||
